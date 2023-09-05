@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Sound</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Sound</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Sound</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Sound</h2>
+
+            <div class="description">
+                <p>Sound files can be played when required. For cross-platform compatibility, sound files in <strong>WAV</strong> format are best (MP3s will play on some systems, but not all).</p>
+
+                <p>Sound files should be placed into an 'sounds' folder within the <strong>resources</strong> folder inside your project (see <a href="images/sounds-folder.png">here</a>).</p>
+
+                <p><em>(Note that you will need to click somewhere in this page for the audio to play correctly)</em></p>
+
+            </div>
+
+            <window width="300" height="200" title="Sound">
+
+                <column padding="30" fill-max-size vert-center horiz-center hide-highlight>
+                    <button animate-click animate-delay="2000" animate-interval="6000" hide-info>Squeak!</button>
+                </column>
+
+                <sound animate-sound="squeak.wav" animate-delay="2000" animate-interval="6000" hide-info></sound>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                val file = object {}.javaClass.getResource("/sounds/squeak.wav")
+                val stream = AudioSystem.getAudioInputStream(file)
+                val clip = AudioSystem.getClip()
+
+                fun main() = singleWindowApplication( title = "Timer" ) {
+                    LaunchedEffect(Unit) {
+                        clip.open(stream)
+                    }
+
+                    Column() {
+                        Button(
+                            onClick = {
+                                clip.stop()
+                                clip.framePosition = 0
+                                clip.start()
+                             }
+                        ) {
+                            Text(text = "Squeak!")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

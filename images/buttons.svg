@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="500px" height="100px" viewBox="0 0 500 100" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <path d="M5 50L95 50" id="Line" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+
+    <path d="M405 5L495 95" id="Line-2" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+
+    <path d="M405 95L495 5" id="Line-3" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+
+    <path d="M205 5L295 5L295 95L205 95L205 5Z" id="Rectangle" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

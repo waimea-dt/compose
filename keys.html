@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Key Events</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Key Events</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Dialog Key Events</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Key Press Events</h2>
+
+            <div class="description">
+                <p>Key presses can be detected at the window level as well as for individual controls (e.g. TextFields). At the window level the <strong>onPreviewKeyEvent</strong> parameter can be set with some code to be run each time a key is pressed.</p>
+
+                <p>Key events have data attached specifying:</p>
+
+                <ul>
+                    <li>If it was a key <strong>press</strong> or a key <strong>release</strong></li>
+                    <li>What key was pressed, e.g. <strong>Key.A</strong>, <strong>Key.Up</strong> or <strong>Key.Enter</strong></li>
+                    <li>Any <strong>modifier</strong> keys (e.g. CTRL or ALT)</li>
+                </ul>
+
+                <p>More info on key handling can be found <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Keyboard/README.md">here</a> and a full list of key codes can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/ui/input/key/Key">here</a>.</p>
+            </div>
+
+            <window width="400" height="150" title="Key Press Events">
+
+                <column fill-max-size horiz-center vert-center padding="30" hide-highlight>
+
+                    <column fill-max-size vert-center horiz-start hide-highlight animate-swap animate-interval="1000">
+                        <text var="status">Press a key...</text>
+                        <text var="status">You pressed <strong>A</strong></text>
+                        <text var="status">You released <strong>A</strong></text>
+                        <text var="status">You pressed <strong>UP</strong></text>
+                        <text var="status">You released <strong>UP</strong></text>
+                        <text var="status">You pressed <strong>ENTER</strong></text>
+                        <text var="status">You released <strong>ENTER</strong></text>
+                    </column>
+
+                    <key animate-press animate-delay="0700" animate-interval="7000" hide-highlight>A</key>
+                    <key animate-press animate-delay="2700" animate-interval="7000" hide-highlight>↑</key>
+                    <key animate-press animate-delay="4700" animate-interval="7000" hide-highlight>↵ Enter</key>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                var status by mutableStateOf("Press a key...")
+
+                fun main() = singleWindowApplication(
+                    title = "Key Press Events",
+                    onPreviewKeyEvent = { handleKeyEvent(it) }
+                ) {
+                    Column() {
+                        Text(status)
+                    }
+                }
+
+                // Show the key pressed/released as status message
+                // Return true if key event was 'consumed'
+                fun handleKeyEvent(event:KeyEvent): Boolean {
+                    if (event.type == KeyEventType.KeyDown) {
+                        status = "You pressed ${event.key}"
+                        return true
+                    }
+                    if (event.type == KeyEventType.KeyUp) {
+                        status = "You released ${event.key}"
+                        return true
+                    }
+                    return false   // Key event was not consumed
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Keyboard Control of Windows</h2>
+
+            <div class="description">
+                <p>Key presses can be used to open / close <a href="dialog.html">Dialog Windows</a>. </p>
+
+                <p>In this example the I key opens the dialog and the ESC key closes it. The main window handles the I key, but the dialog window handles the ESC key (since it has the focus when it is open).</p>
+            </div>
+
+            <window width="400" height="250" title="Window with Dialog">
+
+                <column fill-max-size horiz-start vert-center padding="30" hide-highlight>
+
+                    <text>For more info, press I</text>
+
+                    <dialog width="300" height="120" title="Dialog Window" animate-open animate-delay="2000" animate-close-after="2000" animate-interval="6000">
+                        <column fill-max-size horiz-center vert-center hide-highlight>
+                            <text>Here is some information</text>
+                        </column>
+                    </dialog>
+
+                    <key animate-press animate-delay="1700" animate-interval="6000" hide-highlight>I</key>
+                    <key animate-press animate-delay="3700" animate-interval="6000" hide-highlight>ESC</key>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                var isDialogOpen by mutableStateOf(false)
+
+                fun main() = singleWindowApplication(
+                    title = "Window with Dialog",
+                    onPreviewKeyEvent = {
+                        if (
+                            it.key == Key.I &&
+                            it.type == KeyEventType.KeyDown
+                        ) {
+                            isDialogOpen = true
+                            true
+                        } else {
+                            false
+                        }
+                    }
+                ) {
+                    Column() {
+                        Text("For more info, press I")
+                    }
+
+                    if (isDialogOpen) {
+                        Dialog(
+                            title = "Dialog Window",
+                            onCloseRequest = { isDialogOpen = false },
+                            onPreviewKeyEvent = {
+                                if (
+                                    it.key == Key.Escape &&
+                                    it.type == KeyEventType.KeyDown
+                                ) {
+                                    isDialogOpen = false
+                                    true
+                                } else {
+                                    false
+                                }
+                            }
+                        ) {
+                            Column() {
+                                Text("Here is some information")
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

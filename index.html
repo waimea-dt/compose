@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body>
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <p>A multi-platform UI framework for Kotlin, based on Jetpack Compose</p>
+    </header>
+
+    <main id="home">
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <article>
+            <img class="logo" src="images/compose-logo.svg" alt="Compose logo">
+
+            <h1>Compose Multi-Platform</h1>
+
+            <p>Compose Multi-Platform is a framework for creating UIs that work across multiple platforms including Windows, MacOS, Linux, Android and iOS.</p>
+
+            <p>Compose MP uses <a target="_blank" href="https://kotlinlang.org/">Kotlin</a> and is based on <a target="_blank" href="https://developer.android.com/jetpack/compose">Jetpack Compose</a>. The library is developed by <a target="_blank" href="https://www.jetbrains.com/">JetBrains</a> and the open-source community.</p>
+
+        </article>
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Guides</h2>
+
+            <nav id="main-nav">
+                <dl>
+                    <dt><a href="app.html">Application Windows</a></dt>
+                    <dd>Creating a Compose MP application main window</dd>
+
+                    <dt><a href="layout.html">Layout Principles</a></dt>
+                    <dd>Using Row and Column containers to group elements</dd>
+
+                    <dt><a href="elements.html">UI Elements</a></dt>
+                    <dd>UI elements and controls that can be added to a window</dd>
+
+                    <dt><a href="position.html">Position &amp; Alignment</a></dt>
+                    <dd>Positioning, spacing and aligning elements within a window</dd>
+
+                    <dt><a href="state.html">Application State</a></dt>
+                    <dd>Connecting variables and lists to UI elements</dd>
+
+                    <dt><a href="dialog.html">Dialog Windows</a></dt>
+                    <dd>Opening temporary, modal dialog windows</dd>
+
+                    <dt><a href="keys.html">Keyboard Events</a></dt>
+                    <dd>Responding to key press and release events</dd>
+
+                    <dt><a href="timer.html">Background Task Timer</a></dt>
+                    <dd>Running background code at regular intervals</dd>
+
+                    <dt><a href="sound.html">Playing Sounds</a></dt>
+                    <dd>Playing audio clips and sound effects</dd>
+
+                    <dt><a href="theming.html">Colours &amp; Fonts</a></dt>
+                    <dd>Altering the colours and fonts used in your UI</dd>
+                </dl>
+            </nav>
+
+        </article>
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Example</h2>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Compose Demo"
+                ) {
+                    Text("Hello World!")
+                }
+            </code></pre>
+
+            <img class="no-resize example" src="images/demo.png" alt="Compose window">
+
+        </article>
+
+        <!-- ----------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Useful Links</h2>
+
+            <p>We will create simple UIs for desktop using some key features of this powerful framework. However, Compose MP can create complex, composable, reactive UIs that run natively across a wide variety of devices and operating systems.</p>
+
+            <ul>
+                <li><a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/README.md">Compose MP Tutorials</a></li>
+                <li><a target="_blank" href="https://developer.android.com/jetpack/compose/layouts/basics">Jetpack Compose Layout Basics</a></li>
+                <li><a target="_blank" href="https://developer.android.com/jetpack/compose/modifiers-list">Jetpack Compose Layout Modifiers</a></li>
+                <li><a target="_blank" href="https://www.jetpackcompose.net/">Jetpack Compose Tutorials (layout, elements, etc.)</a></li>
+                <li><a target="_blank" href="https://www.jetbrains.com/lp/compose-multiplatform/">Compose MP Home</a></li>
+                <li><a target="_blank" href="https://github.com/JetBrains/compose-multiplatform">Compose MP GitHub Repository</a></li>
+            </ul>
+
+        </article>
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

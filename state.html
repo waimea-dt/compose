@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - State</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>App State</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform App State</h1>
+
+        <div class="explanation">
+
+            <p>The state of an application is held by its variables, lists and objects. As the application runs, these chnage. Often we want this change of state to be linked to the UI: inputs that alter the state, or display elements that reflect the state in some way.</p>
+
+            <p>To make this easy, Compose MP provides <em>observable</em> objects - these are essentially variables that are monitored for changes. Any UI elements that they are linked to are <strong>automatically</strong> updated when the objects are changed.</p>
+
+            <p>These observable objects are created using:</p>
+
+            <ul>
+                <li><strong>mutableStateOf(...)</strong> for single items like Strings, Ints, etc.</li>
+                <li><strong>mutableStateListOf&lt;Type&gt;()</strong> for lists of objects</li>
+            </ul>
+        </div>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Text Showing State</h2>
+
+            <div class="description">
+                <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
+
+                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnages to the object will caude the UI to update accordingly.</p>
+            </div>
+
+            <window width="300" height="200" title="System Status">
+
+                <column fill-max-size vert-center horiz-center hide-highlight animate-swap animate-interval="1000">
+                    <text var="status">Please wait...</text>
+                    <text var="status">Setting up system</text>
+                    <text var="status">Connecting to server</text>
+                    <text var="status">System ready</text>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                // Value will be updated elsewhere in the code
+                var status by mutableStateOf("Please wait...")
+
+                fun main() = singleWindowApplication(
+                    title = "System Status"
+                ) {
+                    Column {
+                        Text(status)
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Responding to Buttons</h2>
+
+            <div class="description">
+                <p><strong>Button</strong> elements can trigger a chnage in internal state, which could then be reflected in <strong>Text</strong> elements.</p>
+
+                <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked. Here is where the internal state can be updated.</p>
+            </div>
+
+            <window width="300" height="200" title="Pick an Option">
+
+                <column padding="20" fill-max-size vert-spaced-by="30" vert-center horiz-center hide-highlight>
+                    <div animate-swap animate-interval="2000">
+                        <text var="message">Pick an option...</text>
+                        <text var="message">You picked A</text>
+                        <text var="message">You picked C</text>
+                        <text var="message">You picked B</text>
+                    </div>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <button animate-click animate-delay="2000" animate-interval="8000" hide-info>A</button>
+                        <button animate-click animate-delay="6000" animate-interval="8000" hide-info>B</button>
+                        <button animate-click animate-delay="4000" animate-interval="8000" hide-info>C</button>
+                    </row>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                // Values are linked to the TextField
+                var message by mutableStateOf("Pick an option...")
+
+                fun main() = singleWindowApplication(
+                    title = "Pick an Option"
+                ) {
+                    Column {
+                        Text(message)
+
+                        Row {
+                            Button(onClick = {
+                                message = "You picked A"
+                            }) {
+                                Text("A")
+                            }
+
+                            Button(onClick = {
+                                message = "You picked B"
+                            }) {
+                                Text("B")
+                            }
+
+                            Button(onClick = {
+                                message = "You picked C"
+                            }) {
+                                Text("C")
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+       <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Text Changing State</h2>
+
+            <div class="description">
+                <p>The <strong>OutlinedTextField</strong> element can be used to get text input from the user.</p>
+
+                <p>TextFields require an <strong>onValueChange</strong> parameter with the code to be run when text is typed.</p>
+
+                <p>A TextField will usually update an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong>, so the <strong>value</strong> parameter is set to the object and the <strong>onValueChange</strong> code updates the object.</p>
+            </div>
+
+            <window width="300" height="200" title="Who Are You?">
+
+                <column padding="20" fill-max-size vert-spaced-by="30" vert-center horiz-center hide-highlight>
+                    <div animate-swap animate-interval="3000">
+                        <text var="message">Please enter your name...</text>
+                        <text var="message">Welcome, Jimmy!</text>
+                    </div>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <input var="name" label="Name" value="Jimmy" animate-typing="200" animate-delay="1000" animate-interval="6000" hide-info>
+                        <button animate-click animate-delay="2500" animate-interval="6000" hide-info>Save</button>
+                    </row>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                // Values are linked to the TextField
+                var name by mutableStateOf("")
+                var welcome by mutableStateOf("Please enter your name...")
+
+                fun main() = singleWindowApplication(
+                    title = "Who Are You?",
+                ) {
+                    Column {
+                        Text(welcome)
+
+                        OutlinedTextField(
+                            label = { Text("Name") },
+                            value = name,
+                            onValueChange = { name = it }
+                        )
+
+                        Button(
+                            onClick = {
+                                welcome = "Welcome, $name!"
+                            }
+                        ) {
+                            Text("Save")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>List of Strings</h2>
+
+            <div class="description">
+                <p>Rather than use a <strong>MutableListOf&lt;String&gt;</strong> to store a list of Strings, instead use a <strong>MutableStateListOf&lt;String&gt;</strong>. This is an <em>observable</em> list, meaning that any changes to it will cause the UI to update accordingly. </p>
+
+                <p>A <strong>loop</strong> is used to show UI elements for the list.</p>
+            </div>
+
+            <window width="300" height="280" title="Employee List">
+
+                <column padding="20" fill-max-size vert-spaced-by="20" horiz-center hide-highlight>
+                    <text font-bold hide-highlight>Employees</text>
+
+                    <column vert-spaced-by="8" hide-info animate-show-hide animate-interval="500">
+                        <text var="employees[0]">Rosalind Franklin</text>
+                        <text var="employees[1]">Albert Einstein</text>
+                        <text var="employees[2]">Marie Curie</text>
+                        <text var="employees[3]">Isaac Newton</text>
+                        <text var="employees[4]">Nikola Tesla</text>
+                        <text var="employees[5]">Ada Lovelace</text>
+                    </column>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                // This list will be updated elsewhere in the code
+                val employees = mutableStateListOf<String>()
+
+                fun main() = singleWindowApplication(
+                    title = "Employee List"
+                ) {
+                    Column {
+                        Text("Employees")
+
+                        Column {
+                            // UI elements for each list item
+                            for (employee in employees) {
+                                Text(employee)
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <p><em>Note that these examples have spacing added around elements to help show how the layouts work. The code snippets don't apply the same spacing.</em></p>
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

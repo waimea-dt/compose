@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Timers</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Timers</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Timers</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Timers</h2>
+
+            <div class="description">
+                <p>A timer can be used to run <strong>code at a regular interval</strong>. A timer does not have to relate to a visual UI element as in this example, but can be used to update or monitor the internal state of a system.</p>
+
+                <p>A 'timer' is created using a <strong>LaunchedEffect</strong> element which runs as a seperate process to the main program. To get the effect of a timer we use a <strong>loop</strong> with a <strong>delay</strong>, plus the code to be run each 'tick' of the timer.</p>
+
+                <p>Note that the loop can be an infinite one, or could be contitional, allowing the 'timer' to be stopped.</p>
+            </div>
+
+            <window width="300" height="200" title="Timer">
+
+                <column padding="30" fill-max-size vert-center horiz-center hide-highlight>
+                    <text id="count" font-size="50">0</text>
+                </column>
+
+                <timer interval="500" target="count">TICK</timer>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Timer" ) {
+                    var count by mutableStateOf(0)
+
+                    Text(count)
+
+                    LaunchedEffect(Unit) {
+                        while(true) {
+                            delay(500)
+                            count++  // Any code could run here
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

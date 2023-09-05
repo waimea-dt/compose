@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Layout Principles</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Layout Principles</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Layout Principles</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>No Layout</h2>
+
+            <div class="description">
+                <p>This window contains several <strong>Text</strong> elements.</p>
+
+                <p>Without any indication of how to layout the elements, the window simple stacks them all on top of each other in the top-left corner.</p>
+            </div>
+
+            <window width="300" height="200" title="No Layout">
+
+                <text>Hello</text>
+                <text>World</text>
+                <text>from</text>
+                <text>Kotlin</text>
+                <text>Compose!</text>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "No Layout"
+                ) {
+                    Text("Hello")
+                    Text("World")
+                    Text("from")
+                    Text("Kotlin")
+                    Text("Compose!")
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Row: Horizontal Flow</h2>
+
+            <div class="description">
+                <p>We can specifiy that we want the <strong>Text</strong> elements to sit horizontally, side-by-side by placing them into a <strong>Row</strong> layout container</p>
+            </div>
+
+            <window width="340" height="200" title="Horizontal">
+
+                <row horiz-spaced-by="7" padding="10" hide-info>
+                    <text>Hello</text>
+                    <text>World</text>
+                    <text>from</text>
+                    <text>Kotlin</text>
+                    <text>Compose!</text>
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Horizontal"
+                ) {
+                    Row() {
+                        Text("Hello")
+                        Text("World")
+                        Text("from")
+                        Text("Kotlin")
+                        Text("Compose!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Column: Vertical Stack</h2>
+
+            <div class="description">
+                <p>We can specifiy that we want the <strong>Text</strong> elements to stack up vertically, one above the other by placing them into a <strong>Column</strong> layout container</p>
+            </div>
+
+            <window width="320" height="250" title="Vertical">
+
+                <column vert-spaced-by="10" padding="10" hide-info>
+                    <text>Hello</text>
+                    <text>World</text>
+                    <text>from</text>
+                    <text>Kotlin</text>
+                    <text>Compose!</text>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Vertical"
+                ) {
+                    Column() {
+                        Text("Hello")
+                        Text("World")
+                        Text("from")
+                        Text("Kotlin")
+                        Text("Compose!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Grid: Rows in Columns</h2>
+
+            <div class="description">
+                <p>To layout our <strong>Text</strong> elements in a grid that flows from left-to-right, we can create a <strong>Column</strong> with multiple, nested <strong>Row</strong> layout containers</p>
+            </div>
+
+            <window width="320" height="200" title="Rows in Columns">
+
+                <column vert-spaced-by="15" padding="10" hide-info>
+                    <row horiz-spaced-by="10" padding="10" hide-info>
+                        <text>Hello</text>
+                        <text>World</text>
+                        <text>from</text>
+                    </row>
+
+                    <row horiz-spaced-by="10" padding="10" hide-info>
+                        <text>Kotlin</text>
+                        <text>Compose!</text>
+                    </row>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Rows in Columns"
+                ) {
+                    Column() {
+                        Row() {
+                            Text("Hello")
+                            Text("World")
+                            Text("from")
+                        }
+                        Row() {
+                            Text("Kotlin")
+                            Text("Compose!")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Grid: Columns in Rows</h2>
+
+            <div class="description">
+                <p>Similarly, to layout our <strong>Text</strong> elements in a grid that flows from top-to-bottom, we can create a <strong>Row</strong> with multiple, nested <strong>Column</strong> layout containers</p>
+            </div>
+
+            <window width="320" height="200" title="Columns in Rows">
+
+                <row horiz-spaced-by="15" padding="10" hide-info>
+                    <column vert-spaced-by="10" padding="10" hide-info>
+                        <text>Hello</text>
+                        <text>World</text>
+                        <text>from</text>
+                    </column>
+
+                    <column vert-spaced-by="10" padding="10" hide-info>
+                        <text>Kotlin</text>
+                        <text>Compose!</text>
+                    </column>
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Columns in Rows"
+                ) {
+                    Row() {
+                        Column() {
+                            Text("Hello")
+                            Text("World")
+                            Text("from")
+                        }
+                        Column() {
+                            Text("Kotlin")
+                            Text("Compose!")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Example Layout 1</h2>
+
+            <div class="description">
+                <p>A <strong>Row</strong> with a nested <strong>Column</strong> allows images and text elements to be laid out next to each other.</p>
+            </div>
+
+            <window width="360" height="210" title="User Info">
+
+                <row fill-max-size horiz-center horiz-spaced-by="20" vert-center hide-info>
+                    <img src="images/avatar.png" size="120">
+
+                    <column vert-spaced-by="5" hide-info>
+                        <text><strong>Jean-Paul</strong> Williams</text>
+                        <spacer height="10" hide-highlight></spacer>
+                        <text><em>UX Designer</em></text>
+                        <text><em>Demo Corp.</em></text>
+                    </column>
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "User Info"
+                ) {
+                    Row() {
+                        Image(
+                            painter = painterResource("images/avatar.png"),
+                            contentDescription = "User avatar"
+                        )
+
+                        Column() {
+                            Text("Jean-Paul Williams")
+                            Text("UX Designer")
+                            Text("Demo Corp.")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Example Layout 2</h2>
+
+            <div class="description">
+                <p>An outer <strong>Column</strong> container with nested <strong>Row</strong> and <strong>Column</strong> containers within can produce quite complex layouts.</p>
+            </div>
+
+            <window width="400" height="400" title="Message User">
+
+                <column fill-max-size vert-space-between horiz-center padding="30" hide-info>
+
+                    <row horiz-spaced-by="20" vert-center hide-info>
+                        <img src="images/avatar.png" size="120">
+
+                        <column vert-spaced-by="5" hide-info>
+                            <text><strong>Jean-Paul</strong> Williams</text>
+                            <spacer height="10" hide-highlight></spacer>
+                            <text><em>UX Designer</em></text>
+                            <text><em>Demo Corp.</em></text>
+                        </column>
+                    </row>
+
+                    <input label="Message" value="" hide-info>
+
+                    <button>Send Message</button>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Message User"
+                ) {
+                    Column() {
+                        Row() {
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar"
+                            )
+
+                            Column() {
+                                Text("Jean-Paul Williams")
+                                Text("UX Designer")
+                                Text("Demo Corp.")
+                            }
+                        }
+
+                        OutlinedTextField(
+                            label = { Text("Message") },
+                            value = "",
+                            onValueChange = {}
+                        )
+
+                        Button(
+                            onClick = {...}
+                        ) {
+                            Text("Send Message")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Example Layout 3</h2>
+
+            <div class="description">
+                <p>Several <strong>Row</strong> and <strong>Column</strong> layout containers are nested within each other to position and align the UI elements for this calculator.</p>
+            </div>
+
+            <window width="360" height="420" title="Calculator">
+
+                <column fill-max-size horiz-center vert-space-between padding="30" hide-info>
+
+                    <text style="font-size: 2em;
+                                 width: 100%;
+                                 padding: 0.1em 0.3em;
+                                 text-align: right;
+                                 background-color: #333;
+                                 color: white">9876543210</text>
+
+                    <row horiz-spaced-by="20" bottom hide-info>
+
+                        <column vert-spaced-by="20" hide-info>
+                            <button>7</button>
+                            <button>4</button>
+                            <button>1</button>
+                            <button>0</button>
+                        </column>
+                        <column vert-spaced-by="20" hide-info>
+                            <button>8</button>
+                            <button>5</button>
+                            <button>2</button>
+                            <button>•</button>
+                        </column>
+                        <column vert-spaced-by="20" hide-info>
+                            <button>9</button>
+                            <button>6</button>
+                            <button>3</button>
+                            <button>=</button>
+                        </column>
+
+                        <spacer width="5" hide-highlight></spacer>
+
+                        <column vert-spaced-by="20" hide-info>
+                            <button>÷</button>
+                            <button>×</button>
+                            <button>–</button>
+                            <button>+</button>
+                        </column>
+
+                    </row>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Calculator"
+                ) {
+                    Column() {
+                        Text("9876543210")
+
+                        Row() {
+                            Column() {
+                                Button(...) { Text("7") }
+                                Button(...) { Text("4") }
+                                Button(...) { Text("1") }
+                                Button(...) { Text("0") }
+                            }
+                            Column() {
+                                Button(...) { Text("8") }
+                                Button(...) { Text("5") }
+                                Button(...) { Text("2") }
+                                Button(...) { Text(".") }
+                            }
+                            Column() {
+                                Button(...) { Text("9") }
+                                Button(...) { Text("6") }
+                                Button(...) { Text("3") }
+                                Button(...) { Text("=") }
+                            }
+                            Column() {
+                                Button(...) { Text("÷") }
+                                Button(...) { Text("×") }
+                                Button(...) { Text("–") }
+                                Button(...) { Text("+") }
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <p><em>Note that these examples have spacing added around elements to help show how the layouts work. The code snippets don't apply the same spacing. Also note that other layout containers are available in Compose (e.g. <strong>Box</strong>). However, for most layouts, Row and Column suffice.</em></p>
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

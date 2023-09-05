@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Positioning and Alignment</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Positioning and Alignment</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Positioning and Alignment</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Simple Window</h2>
+
+            <div class="description">
+                <p>This window contains nothing but a single <strong>Text</strong> element. It aligns to the top-left.</p>
+            </div>
+
+            <window width="300" height="200" title="Basic" show-outlines>
+
+                <text>Hello World</text>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Basic"
+                ) {
+                    Text("Hello World!")
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Horizontal Sizing</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> layout container set to the full width of the window.</p>
+            </div>
+
+            <window width="300" height="200" title="Horizontal Sizing" show-outlines>
+
+                <row fill-max-width>
+
+                    <text>Hello World</text>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Horizontal Sizing"
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Vertical Sizing</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> layout container set to the full height of the window.</p>
+            </div>
+
+            <window width="300" height="200" title="Vertical Sizing" show-outlines>
+
+                <column fill-max-height>
+
+                    <text>Hello World</text>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Horizontal"
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxHeight()
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Full Width and Height</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> layout container set to the full width and height of the window.</p>
+            </div>
+
+            <window width="300" height="200" title="Full Size" show-outlines>
+
+                <row fill-max-size>
+
+                    <text>Hello World</text>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Full Size"
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Simple Centering</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> layout container set to fill the window, and with the vertical and horizontal alignment centred.</p>
+            </div>
+
+            <window width="300" height="200" title="Simple Centering" show-outlines>
+
+                <row fill-max-size horiz-center vert-center>
+
+                    <text>Hello World!</text>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Simple Centering"
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalArrangement = Arrangement.CenterHorizontally,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Padding</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> layout container with padding. This adds space around its content.</p>
+            </div>
+
+            <window width="300" height="200" title="Padding" show-outlines>
+
+                <row padding="30">
+
+                    <text>Hello World!</text>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Padding"
+                ) {
+                    Row(
+                        modifier = Modifier.padding(30.dp)
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Row Horizontal Alignment</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>horizontal alignment</strong> settings.</p>
+            </div>
+
+            <window width="420" height="350" title="Horizontal Alignment" show-outlines>
+
+                <column fill-max-size vert-space-between padding="20" hide-highlight>
+
+                    <row fill-max-width horiz-start>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-center>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-end>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Horizontal Alignment",
+                ) {
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.CenterHorizontally
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Row Horizontal Spacing</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>horizontal spacing</strong> settings.</p>
+            </div>
+
+            <window width="420" height="350" title="Horizontal Spacing" show-outlines>
+
+                <column fill-max-size vert-space-between padding="20" hide-highlight>
+
+                    <row fill-max-width horiz-spaced-by="20">
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-space-evenly>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-space-around>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-space-between>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Horizontal Spacing",
+                ) {
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(20.dp)
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceAround
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Column Vertical Alignment</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong> with various <strong>vertical alignment</strong> settings.</p>
+            </div>
+
+            <window width="420" height="350" title="Vertical Alignment" show-outlines>
+
+                <row fill-max-size horiz-space-between padding="20" hide-highlight>
+
+                    <column fill-max-height vert-top>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-center>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-bottom>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Vertical Alignment"
+                ) {
+                    Row {
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.Top
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.CenterVertically
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.End
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Column Vertical Spacing</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong> with various <strong>vertical spacing</strong> settings.</p>
+            </div>
+
+            <window width="420" height="350" title="Vertical Spacing" show-outlines>
+
+                <row fill-max-size horiz-space-between padding="20" hide-highlight>
+
+                    <column fill-max-height vert-spaced-by="20">
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-space-evenly>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-space-around>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-space-between>
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Vertical Spacing"
+                ) {
+                    Row {
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            horizontalArrangement = Arrangement.spacedBy(20.dp)
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceAround
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Button(...) { Text("A") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Row Vertical Alignment</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>vertical alignment</strong> settings.</p>
+            </div>
+
+            <window width="400" height="400" title="Vertical Alignment" show-outlines>
+
+                <column fill-max-size vert-space-between padding="20" hide-highlight>
+
+                    <row fill-max-width horiz-space-evenly vert-top>
+                        <button>A<br>A<br>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-space-evenly vert-center>
+                        <button>A<br>A<br>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                    <row fill-max-width horiz-space-evenly vert-bottom>
+                        <button>A<br>A<br>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </row>
+
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Vertical Alignment"
+                ) {
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            Button(...) { Text("A\nA\nA") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Button(...) { Text("A\nA\nA") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                            verticalAlignment = Alignment.Bottom
+                        ) {
+                            Button(...) { Text("A\nA\nA") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+                    }
+                }
+            </code></pre>
+
+       </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Column Horizontal Alignment</h2>
+
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> of <strong>Column</strong> with various <strong>horizontal alignment</strong> settings.</p>
+            </div>
+
+            <window width="400" height="400" title="Horizontal Alignment" show-outlines>
+
+                <row fill-max-size horiz-space-between padding="20" hide-highlight>
+
+                    <column fill-max-height vert-space-evenly horiz-start>
+                        <button>A A A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-space-evenly horiz-center>
+                        <button>A A A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                    <column fill-max-height vert-space-evenly horiz-end>
+                        <button>A A A</button>
+                        <button>B</button>
+                        <button>C</button>
+                    </column>
+
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Horizontal Alignment"
+                ) {
+                    Row {
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceEvenly
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Button(...) { Text("AAA") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceEvenly
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Button(...) { Text("AAA") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceEvenly
+                            horizontalAlignment = Alignment.End
+                        ) {
+                            Button(...) { Text("AAA") }
+                            Button(...) { Text("B") }
+                            Button(...) { Text("C") }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

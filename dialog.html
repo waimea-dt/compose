@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Dialog</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Dialogs</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Dialog Windows</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Simple Dialog</h2>
+
+            <div class="description">
+                <p>A dialog pop-up window is a child of the main window. Dialogs are <em>modal</em>, meaning that they sit in front of the main window and must be closed before the user can interact with the main window again.</p>
+
+                <p>Dialogs can be easily shown / hidden through the use of a boolean state variable created via <strong>mutableStateOf(...)</strong>. See the <a href="state.html">State page</a> for more information on these.</p>
+
+                <p>Dialogs are <a href="layout.html">laid out</a> and can contain the same <a href="elements.html">elements</a> as a normal window.</p>
+            </div>
+
+            <window width="400" height="250" title="Window with Dialog">
+
+                <column fill-max-size horiz-center vert-center vert-spaced-by="30" hide-highlight>
+                    <text align-center hide-info>This is the main window</text>
+                    <button animate-click animate-delay="1500" animate-interval="6000" hide-info>See Extra Info</button>
+                </column>
+
+                <dialog width="300" height="200" title="Extra Info" animate-open animate-delay="2000" animate-close-after="3000" animate-interval="6000">
+                    <column fill-max-size horiz-center vert-center vert-spaced-by="30" hide-highlight>
+                        <text align-center hide-info>Here is some additional information</text>
+                        <button animate-click animate-delay="4500" animate-interval="6000" hide-info>Close</button>
+                    </column>
+                </dialog>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Window with Dialog",
+                ) {
+                    var isDialogOpen by remember { mutableStateOf(false) }
+
+                    Column() {
+                        Text("This is the main window")
+
+                        Button(
+                            onClick = { isDialogOpen = true }
+                        ) {
+                            Text(text = "See Extra Info")
+                        }
+                    }
+
+                    if (isDialogOpen) {
+                        Dialog(
+                            title = "Extra Info",
+                            onCloseRequest = { isDialogOpen = false }
+                        ) {
+                            Column() {
+                                Text("Here is some additional information")
+
+                                Button(
+                                    onClick = { isDialogOpen = false }
+                                ) {
+                                    Text(text = "Close")
+                                }
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Keyboard Closing of Dialog</h2>
+
+            <div class="description">
+                <p>Key presses can be used to open / close <a href="dialog.html">Dialog Windows</a>. See the <a href="keys.html">Key Events page</a> for more information</p>
+
+                <p>In this example the <strong>button opens</strong> the dialog and the <strong>ESC key closes</strong> it. The dialog window handles the ESC key (since it has the focus when it is open).</p>
+            </div>
+
+            <window width="400" height="250" title="Window with Dialog">
+
+                <column fill-max-size horiz-center vert-center vert-spaced-by="30" hide-highlight>
+                    <text align-center hide-info>This is the main window</text>
+
+                    <button animate-click animate-delay="2500" animate-interval="6000" hide-info>See Extra Info</button>
+
+                    <dialog width="300" height="120" title="Extra Info" animate-open animate-delay="3000" animate-close-after="2000" animate-interval="6000">
+                        <column fill-max-size horiz-center vert-center hide-highlight>
+                            <text align-center hide-info>Here is some additional information</text>
+                        </column>
+                    </dialog>
+
+                    <key animate-press animate-delay="4700" animate-interval="6000" hide-highlight>ESC</key>
+
+                </column>
+
+            </window>
+
+            <pre line-numbers data-line="5-10"><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Window with Dialog",
+                ) {
+                    var isDialogOpen by remember { mutableStateOf(false) }
+
+                    Column() {
+                        Text("This is the main window")
+
+                        Button(
+                            onClick = { isDialogOpen = true }
+                        ) {
+                            Text(text = "See Extra Info")
+                        }
+                    }
+
+                    if (isDialogOpen) {
+                        Dialog(
+                            title = "Extra Info",
+                            onCloseRequest = { isDialogOpen = false },
+
+                            onPreviewKeyEvent = {
+                                if (
+                                    it.key == Key.Escape &&
+                                    it.type == KeyEventType.KeyDown
+                                ) {
+                                    isDialogOpen = false
+                                    true
+                                } else {
+                                    false
+                                }
+                            }
+                        ) {
+                            Column() {
+                                Text("Here is some additional information")
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

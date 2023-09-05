@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Elements</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>UI Elements</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform UI Elements</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Text</h2>
+
+            <div class="description">
+                <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
+
+                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnages to the object will caude the UI to update accordingly.</p>
+
+                <p>More styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/text/style-text">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/text-in-compose">here</a>.</p>
+            </div>
+
+            <window width="500" height="350" title="Text">
+
+                <row padding="20" fill-max-size horiz-space-between hide-highlight>
+                    <column fill-max-size vert-space-between hide-highlight>
+                        <text>Hello World!</text>
+                        <text font-bold>Hello World!</text>
+                        <text font-italic>Hello World!</text>
+                        <text font-size="30">Hello World!</text>
+                        <text color="Red">Hello World!</text>
+                        <text var="message">Text from a variable</text>
+                    </column>
+                    <column fill-max-size vert-space-between hide-highlight>
+                        <text align-left   fill-max-width>Hello World!</text>
+                        <text align-center fill-max-width>Hello World!</text>
+                        <text align-right  fill-max-width>Hello World!</text>
+                        <text>This is a very long line of text that won't fit onto a single line</text>
+                        <text max-lines="1">This is a very long line of text that won't fit onto a single line</text>
+                        <text max-lines="2">This is a very long line of text that won't fit onto a single line</text>
+                    </column>
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                var message by mutableStateOf("Text from a variable")
+
+                fun main() = singleWindowApplication( title = "Text" ) {
+                    Row {
+                        Column {
+                            Text("Hello World!")
+                            Text("Hello World!", fontWeight = FontWeight.Bold)
+                            Text("Hello World!", fontStyle = FontStyle.Italic)
+                            Text("Hello World!", fontSize = 30.sp)
+                            Text("Hello World!", color = Color.Red)
+                            Text(message)
+                        }
+
+                        Column {
+                            Text("Hello World!", textAlign = TextAlign.Left)
+                            Text("Hello World!", textAlign = TextAlign.Center)
+                            Text("Hello World!", textAlign = TextAlign.Right)
+                            Text("This is a very long line of text ...")
+                            Text("This is a very long line of text ...", maxLines = 1)
+                            Text("This is a very long line of text ...", maxLines = 2)
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Images</h2>
+
+            <div class="description">
+                <p>The <strong>Image</strong> element can be used to display images which can be sized and cropped in various ways.</p>
+
+                <p>Images should be placed into an 'images' folder within the <strong>resources</strong> folder within your project (see <a href="images/images-folder.png">here</a>).</p>
+
+                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/graphics/images/customize">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/image-in-jetpack-compose">here</a>, and tutorial examples <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Image_And_Icons_Manipulations/README.md">here</a>.</p>
+            </div>
+
+            <window width="580" height="460" title="Images">
+
+                <column padding="20" vert-spaced-by="20" hide-highlight>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <img src="images/avatar.png">
+                        <img src="images/avatar.png" size="150">
+                        <img src="images/avatar.png" size="100">
+                    </row>
+                    <row horiz-spaced-by="20" vert-center hide-highlight >
+                        <img src="images/avatar.png" size="150" background="Red">
+                        <img src="images/avatar.png" width="150" height="80" background="Red">
+                        <img src="images/avatar.png" width="80" height="150" background="Red">
+                        <img src="images/avatar.png" width="100" height="150" background="Red" content-crop>
+                    </row>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Images" ) {
+                    Column {
+                        Row {
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar"
+                            )
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar",
+                                modifier = Modifier.size(150.dp)
+                            )
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar",
+                                modifier = Modifier.size(100.dp)
+                            )
+                        }
+
+                        Row {
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar",
+                                modifier = Modifier
+                                    .size(150.dp)
+                                    .background(Color.Red)
+                            )
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar",
+                                modifier = Modifier
+                                    .width(150.dp)
+                                    .height(80.dp)
+                                    .background(Color.Red)
+                            )
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar",
+                                modifier = Modifier
+                                    .width(80.dp)
+                                    .height(150.dp)
+                                    .background(Color.Red)
+                            )
+                            Image(
+                                painter = painterResource("images/avatar.png"),
+                                contentDescription = "User avatar",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .width(100.dp)
+                                    .height(150.dp)
+                                    .background(Color.Red)
+                            )
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Icons</h2>
+
+            <div class="description">
+                <p>The <strong>Icon</strong> element can be used to display icons from the <a target="_blank" href="https://fonts.google.com/icons">Material Design icon set</a>.</p>
+
+                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/material/icons/package-summary">here</a>.</p>
+            </div>
+
+            <window width="300" height="230" title="Icons">
+
+                <column padding="20" fill-max-size vert-space-between hide-highlight>
+                    <row fill-max-size horiz-space-between hide-highlight>
+                        <img icon src="images/icon-home.svg">
+                        <img icon src="images/icon-menu.svg">
+                        <img icon src="images/icon-settings.svg">
+                        <img icon src="images/icon-favorite.svg">
+                        <img icon src="images/icon-thumbUp.svg">
+                    </row>
+                    <row fill-max-size horiz-space-between hide-highlight>
+                        <img icon src="images/icon-favorite.svg" size="12">
+                        <img icon src="images/icon-favorite.svg" size="24">
+                        <img icon src="images/icon-favorite.svg" size="48">
+                        <img icon src="images/icon-favorite.svg" size="96">
+                    </row>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Icons" ) {
+                    Column {
+                        Row {
+                            Icon(
+                                Icons.Outlined.Home,
+                                contentDescription = "Home Icon"
+                            )
+                            Icon(
+                                Icons.Outlined.Menu,
+                                contentDescription = "Menu Icon"
+                            )
+                            Icon(
+                                Icons.Outlined.Settings,
+                                contentDescription = "Settings Icon"
+                            )
+                            Icon(
+                                Icons.Outlined.Favorite,
+                                contentDescription = "Favorite Icon"
+                            )
+                            Icon(
+                                Icons.Outlined.ThumbUp,
+                                contentDescription = "Thumb Up Icon"
+                            )
+                        }
+
+                        Row {
+                            Icon(
+                                Icons.Outlined.Favorite,
+                                contentDescription = "Favorite Icon",
+                                modifier = Modifier.size(12.dp)
+                            )
+                            Icon(
+                                Icons.Outlined.Favorite,
+                                contentDescription = "Favorite Icon",
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Icon(
+                                Icons.Outlined.Favorite,
+                                contentDescription = "Favorite Icon",
+                                modifier = Modifier.size(48.dp)
+                            )
+                            Icon(
+                                Icons.Outlined.Favorite,
+                                contentDescription = "Favorite Icon",
+                                modifier = Modifier.size(96.dp)
+                            )
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Spacers</h2>
+
+            <div class="description">
+                <p>The <strong>Spacer</strong> element can be used to add additional gaps between elements or containers.</p>
+            </div>
+
+            <window width="350" height="230" title="Spacers" show-outlines>
+
+                <row padding="10" horiz-spaced-by="5" horiz-center fill-max-size hide-highlight>
+                    <column vert-spaced-by="5" hide-highlight>
+                        <text hide-highlight>Hello World!</text>
+                        <text hide-highlight>Hello World!</text>
+                        <spacer height="10"></spacer>
+                        <text hide-highlight>Hello World!</text>
+                        <spacer height="50"></spacer>
+                        <text hide-highlight>Hello World!</text>
+                    </column>
+                    <spacer width="60"></spacer>
+                    <column vert-spaced-by="5" hide-highlight>
+                        <text hide-highlight>Hello World!</text>
+                        <spacer height="40"></spacer>
+                        <text hide-highlight>Hello World!</text>
+                        <spacer height="20"></spacer>
+                        <text hide-highlight>Hello World!</text>
+                        <text hide-highlight>Hello World!</text>
+                    </column>
+                </row>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Spacers" ) {
+                    Row {
+                        Column {
+                            Text("Hello World!")
+                            Text("Hello World!")
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Text("Hello World!")
+                            Spacer(modifier = Modifier.height(50.dp))
+                            Text("Hello World!")
+                        }
+
+                        Spacer(modifier = Modifier.width(60.dp))
+
+                        Column {
+                            Text("Hello World!")
+                            Spacer(modifier = Modifier.height(40.dp))
+                            Text("Hello World!")
+                            Spacer(modifier = Modifier.height(20.dp))
+                            Text("Hello World!")
+                            Text("Hello World!")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Buttons</h2>
+
+            <div class="description">
+                <p>The <strong>Button</strong> element can be used for user interaction.</p>
+
+                <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked.</p>
+
+                <p>Buttons generally contain a <strong>Text</strong> element, but can also contain <strong>Image</strong> and/or <strong>Icon</strong> elements. More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/components/button">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/buttons-in-jetpack-compose">here</a>.</p>
+            </div>
+
+            <window width="400" height="200" title="Buttons">
+
+                <column padding="20" fill-max-size vert-space-between horiz-center hide-highlight>
+                    <row horiz-spaced-by="20">
+                        <button>Hello World!</button>
+                        <button><img icon src="images/icon-favorite.svg">Like</button>
+                    </row>
+
+                    <row horiz-spaced-by="20">
+                        <button outlined>Hello World!</button>
+                        <button outlined><img icon src="images/icon-favorite.svg">Like</button>
+                    </row>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Buttons" ) {
+                    Column {
+                        Row {
+                            Button(
+                                onClick = {...}
+                            ) {
+                                Text("Hello World!")
+                            }
+
+                            Button(
+                                onClick = {...}
+                            ) {
+                                Icon(
+                                    Icons.Outlined.Favorite,
+                                    contentDescription = "Favorite Icon"
+                                )
+                                Text("Like")
+                            }
+                        }
+
+                        Row {
+                            OutlinedButton(
+                                onClick = {...}
+                            ) {
+                                Text("Send Message")
+                            }
+
+                            OutlinedButton(
+                                onClick = {...}
+                            ) {
+                                Icon(
+                                    Icons.Outlined.Favorite,
+                                    contentDescription = "Favorite Icon"
+                                )
+                                Text("Like")
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Text Inputs</h2>
+
+            <div class="description">
+                <p>The <strong>OutlinedTextField</strong> element can be used to get text input from the user. They have an optional <strong>label</strong> property.</p>
+
+                <p>TextFields require an <strong>onValueChange</strong> parameter with the code to be run when text is typed.</p>
+
+                <p>A TextField will usually update an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong>, so the <strong>value</strong> parameter is set to the object and the <strong>onValueChange</strong> code updates the object (see code example).</p>
+
+                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/text/user-input">here</a>.</p>
+            </div>
+
+            <window width="400" height="250" title="Text Inputs">
+
+                <column padding="20" fill-max-size vert-space-between horiz-center hide-highlight>
+                    <input label="Name">
+                    <input label="Email" value="jim@uxpro.co.nz">
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                var name by mutableStateOf("")
+                var email by mutableStateOf("jim@uxpro.co.nz")
+
+                fun main() = singleWindowApplication(
+                    title = "Text Inputs"
+                ) {
+                    Column {
+                        OutlinedTextField(
+                            label = { Text("Name") },
+                            value = name,
+                            onValueChange = { name = it }
+                        )
+
+                        OutlinedTextField(
+                            label = { Text("Email") },
+                            value = email,
+                            onValueChange = { email = it }
+                        )
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Other Element Types</h2>
+
+            <div class="description">
+                <p>There are other types of UI elements that can be used, such as:</p>
+
+                <ul>
+                    <li>
+                        <strong><a target="_blank" href="https://developer.android.com/jetpack/compose/components/progress">Progress Indicators</a></strong> - Linear bars, or circular ones
+                        <img src="images/progress.png" alt="Progress indicatos" class="example">
+                    </li>
+                    <li>
+                        <strong><a target="_blank" href="https://developer.android.com/jetpack/compose/components/slider">Sliders</a></strong> - For user input between a min and max value
+                        <img src="images/slider.png" alt="Slider" class="example">
+                    </li>
+                    <li>
+                        <strong><a target="_blank" href="https://developer.android.com/jetpack/compose/components/switch">Toggle Switches</a></strong> - Can be toggled on or off, often used for options / settings
+                        <img src="images/switches.png" alt="Switches" class="example">
+                    </li>
+                </ul>
+
+            </div>
+
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <p><em>Note that these examples have spacing added around elements to help show how the layouts work. The code snippets don't apply the same spacing.</em></p>
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+
