@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Compose UI - Sound</title>
+    <title>Compose UI - Sounds</title>
 
     <link rel="stylesheet" href="css/prism-one-dark.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -28,7 +28,7 @@
 
     <main>
 
-        <h1>Compose Multi-Platform Sound</h1>
+        <h1>Compose Multi-Platform Sounds</h1>
 
         <!-- -------------------------------------------------------------------------------------- -->
 
@@ -40,41 +40,60 @@
 
                 <p>Sound files should be placed into an 'sounds' folder within the <strong>resources</strong> folder inside your project (see <a href="images/sounds-folder.png">here</a>).</p>
 
+                <p>Sound files need to be configured as <strong>AudioStreams</strong> and as audio <strong>Clips</strong>, then loaded when the window first renders via the <strong>LaunchedEffect</strong> window component. The clips can then be played as needed. In the example code, a <strong>play()</strong> function is added to the Clip class to make this easier.</p>
+
                 <p><em>(Note that you will need to click somewhere in this page for the audio to play correctly)</em></p>
 
             </div>
 
-            <window width="300" height="200" title="Sound">
+            <window width="300" height="150" title="Sounds">
 
-                <column padding="30" fill-max-size vert-center horiz-center hide-highlight>
-                    <button animate-click animate-delay="2000" animate-interval="6000" hide-info>Squeak!</button>
-                </column>
+                <row padding="30" fill-max-size vert-center horiz-spaced-by="30" hide-highlight>
+                    <button animate-click animate-delay="1000" animate-interval="6000" hide-info>Squeak!</button>
+                    <button animate-click animate-delay="4000" animate-interval="6000" hide-info>Ding!</button>
+                </row>
 
-                <sound animate-sound="squeak.wav" animate-delay="2000" animate-interval="6000" hide-info></sound>
+                <sound animate-sound="squeak.wav" animate-delay="1000" animate-interval="6000" hide-info></sound>
+                <sound animate-sound="ding.wav"   animate-delay="4000" animate-interval="6000" hide-info></sound>
 
             </window>
 
             <pre><code class="language-kotlin">
-                val file = object {}.javaClass.getResource("/sounds/squeak.wav")
-                val stream = AudioSystem.getAudioInputStream(file)
-                val clip = AudioSystem.getClip()
+                val squeakFile = object {}.javaClass.getResource("/sounds/squeak.wav")
+                val dingFile   = object {}.javaClass.getResource("/sounds/ding.wav")
+
+                val squeakStream = AudioSystem.getAudioInputStream(squeakFile)
+                val dingStream   = AudioSystem.getAudioInputStream(dingFile)
+                val squeakClip = AudioSystem.getClip()
+                val dingClip   = AudioSystem.getClip()
 
                 fun main() = singleWindowApplication( title = "Timer" ) {
+                    // Load clips into memory on first render
                     LaunchedEffect(Unit) {
-                        clip.open(stream)
+                        squeakClip.open(squeakStream)
+                        dingClip.open(dingStream)
                     }
 
-                    Column() {
+                    Row() {
                         Button(
-                            onClick = {
-                                clip.stop()
-                                clip.framePosition = 0
-                                clip.start()
-                             }
+                            onClick = { squeakClip.play() }
                         ) {
                             Text(text = "Squeak!")
                         }
+
+                        Button(
+                            onClick = { dingClip.play() }
+                        ) {
+                            Text(text = "Ding!")
+                        }
                     }
+                }
+
+                // Add a play function to the Clip class
+                fun Clip.play() {
+                    this.stop()             // Stop if already playing
+                    this.framePosition = 0  // Rewind to start
+                    this.start()            // And start playing
                 }
             </code></pre>
 

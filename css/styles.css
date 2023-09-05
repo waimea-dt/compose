@@ -6,8 +6,22 @@
     src: url('../fonts/JetBrainsSans.woff2') format('woff2');
 }
 
+@font-face {
+    font-family: 'Anton';
+    src: url('../fonts/Anton-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('../fonts/Caveat-Regular.ttf') format('truetype');
+}
+
 
 :root {
+    --default-font: 'JetBrains Sans',Inter,system-ui,Roboto,'Helvetica Neue',Arial,sans-serif;
+    --default-font-weight: 400;
+    --default-font-size: 20px;
+
     --back-col: #13466F;
     --back-img: url("../images/wallpaper.jpg");
 
@@ -62,10 +76,10 @@
     --container-outline-col: #0006;
     --container-back-col: #0001;
     --highlight-outline-col: #f00;
-    --highlight-back-col: #ff04;
+    --highlight-back-col: #ff06;
     --sec-highlight-outline-col: #00c;
 
-    --padding-small: 0.5em;
+    --padding-small: 0.5rem;
     --padding-large: calc(2 * var(--padding-small));
     --padding-v-large: calc(3 * var(--padding-small));
 
@@ -90,10 +104,9 @@
 html {
     padding: 0;
     margin: 0;
-    font-family: system-ui, sans-serif;
-    font-family: 'JetBrains Sans',Inter,system-ui,Roboto,'Helvetica Neue',Arial,sans-serif;
-    font-weight: 400;
-    font-size: 20px;
+    font-family: var(--default-font);
+    font-weight: var(--default-font-weight);
+    font-size: var(--default-font-size);
 
     /* scrollbar-face-color: var(--scroll-thumb-col); */
     /* scrollbar-base-color: var(--scroll-thumb-col); */
@@ -154,6 +167,10 @@ em {
 
 a {
     color: var(--text-link-col);
+}
+
+underline {
+    text-decoration: underline;
 }
 
 
@@ -256,7 +273,6 @@ a {
 
 main {
     padding: 3rem;
-    /* max-width: 70rem; */
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -275,6 +291,11 @@ main > h1 {
     text-align: center;
 }
 
+main .explanation {
+    width: 100%;
+    padding: 0 max(calc((100% - 50rem) / 2), 0px);
+}
+
 article {
     flex: 1;
     display: flex;
@@ -287,7 +308,6 @@ article {
     background-color: var(--panel-back-col);
     border-radius: var(--corner-radius);
     box-shadow: 0 var(--shadow-offset-small) var(--shadow-size-small) var(--shadow-col);
-    /* transition: transform 300ms; */
     transition: all 200ms;
 }
 
@@ -303,8 +323,6 @@ article:hover {
     box-shadow: 0 var(--shadow-offset) var(--shadow-size) var(--shadow-col);
     background-color: var(--panel-back-high-col);
     border-color: var(--panel-border-high-col);
-    /* transform: translateY(-0.2rem); */
-    /* transform: scale(1.02); */
 }
 
 article :is(h1, h2, h3, p, ul) {
@@ -313,7 +331,6 @@ article :is(h1, h2, h3, p, ul) {
 
 article a {
     color: var(--text-link-col);
-    /* font-weight: bold; */
 }
 
 article img {
@@ -344,7 +361,6 @@ article .info {
 }
 
 article .info h2 {
-    /* text-align: center; */
     order: 1;
 }
 
@@ -360,7 +376,6 @@ article .info div.description {
     display: flex;
     flex-direction: column;
     gap: var(--padding-small);
-    /* text-align: center; */
 }
 
 article .info img.example {
@@ -376,11 +391,7 @@ code[class*="language-"],
 pre[class*="language-"] {
     font-size: 0.9rem;
     font-family: 'JetBrains Mono', monospace;
-    line-height: 1.1;
-    background-color: var(--code-back-col);
-}
-
-code[class*="language-"] {
+    line-height: 1.3;
     background-color: var(--code-back-col);
 }
 
@@ -393,6 +404,7 @@ pre[class*="language-"] {
 label.toggle-code {
     order: 4;
     text-align: center;
+    align-self: center;
 }
 
 label.toggle-code span.open {
@@ -427,12 +439,6 @@ label.toggle-code input {
 
 label.toggle-code pre {
     display: none;
-    /* background-color: var(--code-back-col); */
-}
-
-label.toggle-code pre code {
-    /* background-color: var(--code-back-col);
-    line-height: 1.3; */
 }
 
 article:has(input:checked) {
@@ -445,15 +451,11 @@ article:has(input:checked) {
     background-color: var(--back-col);
 
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     padding: 2rem;
     gap: 2rem;
 
     max-width: unset;
-}
-
-article:has(input:checked) :is(h2, p) {
-    /* text-align: left; */
 }
 
 label.toggle-code input:checked ~ pre {
@@ -496,7 +498,8 @@ window, dialog {
     margin: 0 auto;
     width: 30rem;
     height: 25rem;
-    padding: calc(2rem + 2px) 2px 2px 2px;
+    /* padding: calc(2rem + 2px) 2px 2px 2px; */
+    padding: var(--win-titlebar-height) 0 0 0;
     background-color: var(--win-back-col);
     color: var(--win-text-col);
     border: 1px solid var(--win-border-col);
@@ -604,7 +607,6 @@ window column spacer {
 
 window img {
     display: block;
-    /* max-width: 5rem; */
     height: auto;
     object-fit: contain;
 }
@@ -672,7 +674,7 @@ window button {
     color: var(--win-inv-text-col);
     padding: var(--padding-small) var(--padding-large);
     border-radius: var(--corner-radius);
-    border: 1px solid var(--win-primary-col);
+    border: 1px solid transparent;
     display: flex;
     align-items: center;
     gap: var(--padding-small);
@@ -694,6 +696,7 @@ window button:focus {
 window button[outlined] {
     background-color: var(--win-primary-col-low);
     color: var(--win-primary-col);
+    border-color: var(--win-primary-col);
 }
 
 window button[outlined] img[icon] {
@@ -745,14 +748,6 @@ window key {
     box-shadow: 0 6px 0 #111,
                 0 6px 6px #f07;
 
-    /* color: #333;
-
-    background-color: #fff;
-    background: linear-gradient(to top, #eee, #ddd);
-    border: 1px solid #fff;
-    box-shadow: 0 6px 0 2px #ccc,
-                0 3px 10px var(--shadow-col); */
-
     transition: all 100ms ease;
 }
 
@@ -783,14 +778,24 @@ column[horiz-center], row[vert-center] { align-items: center; }
 column[horiz-start],  row[vert-top]    { align-items: start; }
 column[horiz-end],    row[vert-bottom] { align-items: end; }
 
-text[align-left]   { text-align: left; }
-text[align-right]  { text-align: right; }
-text[align-center] { text-align: center; }
+[bordered] { border: 4px solid black; }
+[bordered="red"]   { border-color: red; }
+[bordered="green"] { border-color: green; }
+[bordered="blue"]  { border-color: blue; }
+[bordered="grey"]  { border-color: #263238; }
 
-text[font-bold]   { font-weight: bold; }
-text[font-italic] { font-style: italic; }
 
-div[max-lines] {
+[font="anton"]  { font-family: Anton; }
+[font="caveat"] { font-family: Caveat; }
+
+[align-left]   { text-align: left; }
+[align-right]  { text-align: right; }
+[align-center] { text-align: center; }
+
+[font-bold]   { font-weight: bold; }
+[font-italic] { font-style: italic; }
+
+[max-lines] {
     overflow-y: hidden;
 }
 
@@ -812,21 +817,11 @@ window > :is(text) {        /* Allows for demo of text not in containers */
     left: 0;
 }
 
-window:hover :is(row, column, img, text, timer, spacer):not([hide-highlight]) {
-    outline: 3px dashed var(--container-outline-col);
-    background-color: var(--container-back-col);
-}
-
+window:hover :is(row, column, img, text, timer, spacer):not([hide-highlight]),
 window[show-outlines] :is(row, column, spacer):not([hide-highlight]) {
-    outline: 3px dashed var(--container-outline-col);
+    outline: 2px dashed var(--container-outline-col);
     background-color: var(--container-back-col);
-    /* background: repeating-linear-gradient(
-        -45deg,
-        var(--container-outline-col),
-        var(--container-outline-col) 2px,
-        transparent 2px,
-        transparent 6px
-    ); */
+    outline-offset: -2px;
 }
 
 window:hover :is(row, column):not([hide-highlight]):hover {
@@ -835,7 +830,8 @@ window:hover :is(row, column):not([hide-highlight]):hover {
 }
 
 window :is(text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover {
-    outline: 3px solid var(--sec-highlight-outline-col);
+    outline: 2px solid var(--sec-highlight-outline-col);
+    outline-offset: -2px;
 }
 
 window :is(row, column, text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before  {
@@ -844,7 +840,9 @@ window :is(row, column, text, button, timer, spacer, div.wrapper):not([hide-high
     font-size: 0.7rem;
     font-style: normal;
     font-weight: normal;
+    font-family: var(--default-font);
     line-height: 1.2;
+    text-align: left;
     padding: 0.1em 0.3em;
     background-color: var(--highlight-outline-col);
     color: var(--win-inv-text-col);
@@ -853,13 +851,13 @@ window :is(row, column, text, button, timer, spacer, div.wrapper):not([hide-high
 }
 
 window :is(row, text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before {
-    bottom: calc(100% + 4px);
-    left: -2px;
+    bottom: calc(100% + 2px);
+    left: 0;
 }
 
 window :is(column):not([hide-highlight]):hover::before  {
-    top: -2px;
-    right: calc(100% + 4px);
+    top: 0;
+    right: calc(100% + 2px);
 }
 
 window :is(text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before  {

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Colouts and Fonts</title>
+
+    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/compose.js"></script>
+
+</head>
+
+<body onload="parse();">
+
+    <header id="main-header">
+        <nav id="top-nav">
+            <a href="./">
+                <img src="images/home.svg" alt="Home icon">
+                <h1>Kotlin Compose Multi-Platform</h1>
+            </a>
+        </nav>
+        <h2>Colours and Fonts</h2>
+        <p>Hover over the windows to see the containers, elements and settings used</p>
+    </header>
+
+    <main>
+
+        <h1>Compose Multi-Platform Colours and Fonts</h1>
+
+        <div class="explanation">
+
+            <p>Colours can be specified in a variety of ways, including:</p>
+
+            <ul>
+                <li><strong>Named colours</strong> via the Color class, e.g. <code class="language-kotlin">Color.Yellow</code> (limited range)</li>
+                <li><strong>Decimal RGB</strong> (0-255 for each value), e.g. <code class="language-kotlin">Color(255,0,255)</code></li>
+                <li><strong>Decimal RGBA</strong> (RGB with alpha channel, 0-255 for each value), e.g. <code class="language-kotlin">Color(255,0,0,150)</code></li>
+                <li><strong>Hex ARGB</strong> (RGB with alpha channel, format 0xAARRGGBB), e.g. <code class="language-kotlin">Color(0xff336699)</code></li>
+            </ul>
+
+        </div>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Background Colour</h2>
+
+            <div class="description">
+                <p>Colour can't simply be applied to the Window background. Instead colour is applied to the <strong>Row</strong> and/or <strong>Column</strong> containers within using <strong>Modifiers</strong>.</p>
+            </div>
+
+            <window width="350" height="200" title="Coloured Window">
+                <column fill-max-size background="cyan" vert-center horiz-center>
+                    <text>Hello World!</text>
+                </column>
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Coloured Window"
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxSize().background(Color.Cyan)
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Text Colour</h2>
+
+            <div class="description">
+                <p>Colour can be applied to any text by setting the <strong>color</strong> parameter to the desired colour.</p>
+            </div>
+
+            <window width="350" height="200" title="Coloured Text">
+                <column fill-max-size vert-center horiz-center vert-spaced-by="20" hide-highlight>
+                    <text color="red">Hello World</text>
+                    <text color="green">from</text>
+                    <text color="blue">Kotlin Compose MP!</text>
+                </column>
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Coloured Text"
+                ) {
+                    Column() {
+                        Text(
+                            text = "Hello World",
+                            color = Color.Red
+                        )
+
+                        Text(
+                            text = "from",
+                            color = Color.Green
+                        )
+
+                        Text(
+                            text = "Kotlin Compose MP!",
+                            color = Color.Blue
+                        )
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Button Colour</h2>
+
+            <div class="description">
+                <p>Colours can be applied to buttons by setting a <strong>backgroundColor</strong> and <strong>contentColor</strong> value (see the example code).</p>
+            </div>
+
+            <window width="350" height="200" title="Coloured Buttons">
+                <row fill-max-size vert-center horiz-center horiz-spaced-by="20" hide-highlight>
+                    <button background="red" color="white">A</button>
+                    <button background="green" color="white">A</button>
+                    <button background="blue" color="white">A</button>
+                </row>
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Coloured Text"
+                ) {
+                    Row() {
+                        Button(
+                            onClick = {...},
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color.Red,
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Text("A")
+                        }
+
+                        Button(
+                            onClick = {...},
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color.Green,
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Text("B")
+                        }
+
+                        Button(
+                            onClick = {...},
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color.Blue,
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Text("C")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Borders</h2>
+
+            <div class="description">
+                <p>Containers such as <strong>Rows</strong> and <strong>Columns</strong> can have borders added to them using the <strong>border Modifier</strong>.</p>
+
+                <p>Note that the <strong>Modifier order</strong> is important: Add borders and backgrounds <em>before</em> padding.</p>
+            </div>
+
+            <window width="350" height="200" title="Borders">
+                <row fill-max-size vert-center horiz-space-evenly hide-highlight>
+                    <column bordered="green" background="yellow" padding="30">
+                        <text>Hello</text>
+                        <text>World!</text>
+                    </column>
+                    <column bordered="blue" background="cyan" padding="30">
+                        <text>Hello</text>
+                        <text>World!</text>
+                    </column>
+                </row>
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Borders"
+                ) {
+                    Row() {
+                        Column(
+                            modifier = Modifier
+                                .border(4.dp, Color.Green)
+                                .background(Color.Yellow)
+                                .padding(30.dp)
+                        ) {
+                            Text("Hello")
+                            Text("World!")
+                        }
+
+                        Column(
+                            modifier = Modifier
+                                .border(4.dp, Color.Blue)
+                                .background(Color.Cyan)
+                                .padding(30.dp)
+                        ) {
+                            Text("Hello")
+                            Text("World!")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Text Size, Weight and Style</h2>
+
+            <div class="description">
+                <p>The size, weight and style of text can be modified using <strong>fontWeight</strong>, <strong>fontStyle</strong> and <strong>fontSize</strong> parameters.</p>
+            </div>
+
+            <window width="450" height="260" title="Styled Text">
+                <column fill-max-size vert-center horiz-center vert-spaced-by="10" hide-highlight>
+                    <text font-bold>Hello World!</text>
+                    <text font-italic>Hello World!</text>
+                    <text font-size="30">Hello World!</text>
+                    <text font-size="60">Hello World!</text>
+                </column>
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Styled Text"
+                ) {
+                    Column() {
+                        Text("Hello World!", fontWeight = FontWeight.Bold)
+                        Text("Hello World!", fontStyle = FontStyle.Italic)
+                        Text("Hello World!", fontSize = 30.sp)
+                        Text("Hello World!", fontSize = 60.sp)
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Text Fonts</h2>
+
+            <div class="description">
+                <p>Fonts can be loaded and used, either as the default font for the whole UI, or on an individual text element.</p>
+
+                <p>Font files should be placed into a 'fonts' folder within the <strong>resources</strong> folder inside your project (see <a href="images/fonts-folder.png">here</a>). TrueType (TTF) fonts should be used.</p>
+
+                <p>Note, make sure the correct Font class is imported: <strong>androidx.compose.ui.text.<underline>platform</underline>.Font</strong></p>
+
+            </div>
+
+            <window width="450" height="250" title="Fonts">
+                <column fill-max-size vert-center horiz-center vert-spaced-by="20" hide-highlight align-center>
+                    <text font="caveat">The default font for all UI elements has been altered to this monstrosity... Don't ever do this!</text>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <input font="caveat" label="Name" value="Jimmy Smith">
+                        <button font="caveat">Press Me!</button>
+                    </row>
+                    <text font="anton">This text has a different font specified</text>
+                </column>
+            </window>
+
+            <pre><code class="language-kotlin">
+                val antonFont  = FontFamily(Font("fonts/Anton-Regular.ttf"))
+                val caveatFont = FontFamily(Font("fonts/Caveat-Regular.ttf"))
+
+                fun main() = singleWindowApplication(
+                    title = "Fonts"
+                ) {
+                    // Set the default font for the app
+                    MaterialTheme(
+                        typography = Typography(defaultFontFamily = caveatFont)
+                    ) {
+                        Column() {
+                            // All elements will use default font...
+                            Text("The default font for all UI elements ...")
+
+                            Row() {
+                                OutlinedTextField(
+                                    label = { Text("Name") },
+                                    value = "Jimmy Smith",
+                                    onValueChange = {...}
+                                )
+
+                                Button(onClick = {}) { Text("Press Me!") }
+                            }
+
+                            // ... unless a different font is specified
+                            Text(
+                                "This has a different font specified",
+                                fontFamily = antonFont
+                            )
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Themed Example 1</h2>
+
+            <div class="description">
+                <p>This example note-taking app shows off various theming techniques: custom fonts; background, button and text colours; custom borders; etc.</p>
+            </div>
+
+            <window width="400" height="400" title="Notes" background="#fff176">
+
+                <column fill-max-size vert-center horiz-center vert-spaced-by="20" padding="20" font="caveat" hide-info>
+
+                    <text font-size="30" font="anton" color="#d32f2f">My Important Notes</text>
+
+                    <column fill-max-size horiz-start vert-spaced-by="5" hide-info>
+
+                        <text font-size="20">Organise a get-together with the girls</text>
+                        <text font-size="20">Meet Jimmy for lunch</text>
+                        <text font-size="20">Contact the bank about my lost Bitcoins</text>
+                        <text font-size="20">Bank password: ThisIsMySecret123</text>
+                        <text font-size="20">Need to think of a good way to get rich</text>
+
+                    </column>
+
+                    <row fill-max-width vert-center horiz-center horiz-spaced-by="20" hide-info>
+                        <input bordered="red">
+                        <button font-size="36" background="#d32f2f" color="white">+</button>
+                    </row>
+                </column>
+
+            </window>
+
+
+            <pre><code class="language-kotlin">
+                val antonFont  = FontFamily(Font("fonts/Anton-Regular.ttf"))
+                val caveatFont = FontFamily(Font("fonts/Caveat-Regular.ttf"))
+
+                val backCol   = Color(0xfffff176)
+                val accentCol = Color(0xffd32f2f)
+
+                fun main() = singleWindowApplication(
+                    title = "Notes"
+                ) {
+                    MaterialTheme(
+                        typography = Typography(defaultFontFamily = caveatFont)
+                    ) {
+                        Column(
+                            modifier = Modifier.background(backCol)
+                        ) {
+                            Text(
+                                "My Important Notes",
+                                fontFamily = antonFont,
+                                fontSize = 30.sp,
+                                color = accentCol
+                            )
+
+                            Column() {
+                                Text(notes[0], fontSize = 20.sp )
+                                Text(notes[1], fontSize = 20.sp )
+                                Text(notes[2], fontSize = 20.sp )
+                                Text(notes[3], fontSize = 20.sp )
+                                Text(notes[4], fontSize = 20.sp )
+                            }
+
+                            Row() {
+                                OutlinedTextField(
+                                    value = newNote,
+                                    onValueChange = {...},
+                                    modifier = Modifier.border(3.dp, accentCol)
+                                )
+
+                                Button(
+                                    onClick = {...},
+                                    colors = ButtonDefaults.buttonColors(
+                                        backgroundColor = accentCol,
+                                        contentColor = Color.White
+                                    )
+                                ) {
+                                    Text("+")
+                                }
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Themed Example 2</h2>
+
+            <div class="description">
+                <p>This example game window showing some player stats, shows off various theming techniques: custom font, background and text colours, borders, etc.</p>
+            </div>
+
+            <window width="550" height="320" title="Player Stats" background="#37474f">
+
+                <row fill-max-size vert-center horiz-center horiz-spaced-by="10" padding="10" hide-info>
+
+                    <img src="images/druid.jpg" size="250" bordered="grey">
+
+                    <column fill-max-height horiz-center vert-center vert-spaced-by="20" hide-info>
+
+                        <text font-size="30" font="anton" color="#ffca28">Fenrick Greenleaf</text>
+
+                        <row horiz-spaced-by="10" hide-info>
+
+                            <column fill-max-height vert-spaced-by="10" padding="10" background="#90a4ae" bordered="grey" hide-info>
+                                <text font-bold>Druid</text>
+                                <text font-size="12">Able to call on the elemental forces of nature and can emulate the creatures of the animal world. An embodiment of nature's resilience, cunning, and fury.</text>
+                            </column>
+
+                            <column fill-max-height vert-center vert-spaced-by="8" padding="10" background="#90a4ae" bordered="grey" hide-info>
+                                <row horiz-spaced-by="5" fill-max-width hide-highlight><text fill-max-width hide-info>STR</text><text font-bold>10</text></row>
+                                <row horiz-spaced-by="5" fill-max-width hide-highlight><text fill-max-width hide-info>DEX</text><text font-bold>17</text></row>
+                                <row horiz-spaced-by="5" fill-max-width hide-highlight><text fill-max-width hide-info>CON</text><text font-bold>9</text></row>
+                                <row horiz-spaced-by="5" fill-max-width hide-highlight><text fill-max-width hide-info>INT</text><text font-bold>12</text></row>
+                                <row horiz-spaced-by="5" fill-max-width hide-highlight><text fill-max-width hide-info>WIS</text><text font-bold>18</text></row>
+                                <row horiz-spaced-by="5" fill-max-width hide-highlight><text fill-max-width hide-info>CHA</text><text font-bold>11</text></row>
+                            </column>
+                        </row>
+                    </column>
+                </row>
+
+            </window>
+
+
+            <pre><code class="language-kotlin">
+                val antonFont = FontFamily(Font("fonts/Anton-Regular.ttf"))
+
+                val backCol   = Color(0xff37474f)
+                val borderCol = Color(0xff263238)
+                val panelCol  = Color(0xff90a4ae)
+
+                fun main() = singleWindowApplication(
+                    title = "Player Stats"
+                ) {
+                    Row(
+                        modifier = Modifier.background(backCol)
+                    ) {
+                        Image(
+                            painter = painterResource(playerImage),
+                            contentDescription = "Player image",
+                            modifier = Modifier.border(4.dp, borderCol)
+                        )
+
+                        Column() {
+                            Text(
+                                playerName,
+                                fontFamily = antonFont,
+                                fontSize = 30.sp,
+                                color = Color(0xffffca28)
+                            )
+
+                            Row() {
+                                Column(
+                                    modifier = Modifier
+                                        .background(panelCol)
+                                        .border(4.dp, borderCol)
+                                ) {
+                                    Text(playerClass)
+
+                                    Text(
+                                        playerDescription,
+                                        fontSize = 12.sp
+                                    )
+                                }
+
+                                Column(
+                                    modifier = Modifier
+                                        .background(panelCol)
+                                        .border(4.dp, borderCol)
+                                ) {
+                                    Row() {
+                                        Text("STR")
+                                        Text(
+                                            playerStrength,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                    Row() {
+                                        Text("DEX")
+                                        Text(
+                                            playerDexterity,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                    Row() {
+                                        Text("CON")
+                                        Text(
+                                            playerConstitution,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                    Row() {
+                                        Text("INT")
+                                        Text(
+                                            playerIntelligence,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                    Row() {
+                                        Text("WIS")
+                                        Text(
+                                            playerWisdom,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                    Row() {
+                                        Text("CHA")
+                                        Text(
+                                            playerCharisma,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <p><em>Note that these examples have spacing added around elements to help show how the layouts work. The code snippets don't apply the same spacing.</em></p>
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+
