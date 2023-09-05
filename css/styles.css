@@ -22,10 +22,18 @@
     --default-font-weight: 400;
     --default-font-size: 20px;
 
-    --back-col: #13466F;
-    --back-img: url("../images/wallpaper.jpg");
+    /* --back-col: #13466F; */
+    /* --back-img: url("../images/wallpaper.jpg"); */
+    --back-gradient-start: #0b234c;
+    --back-gradient-end: #14408a;
+    --back-col: var(--back-gradient-end);
+    --back-img: linear-gradient(
+        to bottom,
+        var(--back-gradient-start) 0%,
+        var(--back-gradient-end) 100%
+    );
 
-    --primary-col: #6ab7ff;
+    --primary-col: #7daefd;
     --secondary-col: #ff8abf;
 
     --text-col: #fff;
