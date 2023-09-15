@@ -6,33 +6,29 @@
 
     <title>Compose UI</title>
 
-    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="scripts/loader.js"></script>
     <script src="scripts/compose.js"></script>
-
 </head>
 
 <body>
 
-    <header id="main-header">
-        <nav id="top-nav">
-            <a href="./">
-                <img src="images/home.svg" alt="Home icon">
-                <h1>Kotlin Compose Multi-Platform</h1>
-            </a>
-        </nav>
-        <p>A multi-platform UI framework for Kotlin, based on Jetpack Compose</p>
-    </header>
+    <include src="includes/header.html" data-sub-title=""></include>
 
     <main id="home">
 
         <!-- ----------------------------------------------------------------------------------- -->
 
         <article>
-            <img class="logo" src="images/compose-logo.svg" alt="Compose logo">
+            <header>
+                <img class="logo" src="images/jetpack-logo.svg" alt="Compose logo">
 
-            <h1>Compose Multi-Platform</h1>
+                <h1>Kotlin Compose MP</h1>
+            </header>
 
             <p>Compose Multi-Platform is a framework for creating UIs that work across multiple platforms including Windows, MacOS, Linux, Android and iOS.</p>
 
@@ -47,34 +43,64 @@
 
             <nav id="main-nav">
                 <dl>
-                    <dt><a href="app.html">Application Windows</a></dt>
+                    <dt><a href="app.html">
+                        <span class="material-symbols-outlined">web_asset</span>
+                        Application Windows
+                    </a></dt>
                     <dd>Creating a Compose MP application main window</dd>
 
-                    <dt><a href="layout.html">Layout Principles</a></dt>
+                    <dt><a href="layout.html">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        Layout Principles
+                    </a></dt>
                     <dd>Using Row and Column containers to group elements</dd>
 
-                    <dt><a href="elements.html">UI Elements</a></dt>
+                    <dt><a href="elements.html">
+                        <span class="material-symbols-outlined">image</span>
+                        UI Elements
+                    </a></dt>
                     <dd>UI elements and controls that can be added to a window</dd>
 
-                    <dt><a href="position.html">Position &amp; Alignment</a></dt>
+                    <dt><a href="position.html">
+                        <span class="material-symbols-outlined">format_line_spacing</span>
+                        Position &amp; Alignment
+                    </a></dt>
                     <dd>Positioning, spacing and aligning elements within a window</dd>
 
-                    <dt><a href="state.html">Application State</a></dt>
+                    <dt><a href="state.html">
+                        <span class="material-symbols-outlined">dataset_linked</span>
+                        Application State Data
+                    </a></dt>
                     <dd>Connecting variables and lists to UI elements</dd>
 
-                    <dt><a href="dialog.html">Dialog Windows</a></dt>
+                    <dt><a href="dialog.html">
+                        <span class="material-symbols-outlined">select_window</span>
+                        Dialog Windows
+                    </a></dt>
                     <dd>Opening temporary, modal dialog windows</dd>
 
-                    <dt><a href="keys.html">Keyboard Events</a></dt>
+                    <dt><a href="keys.html">
+                        <span class="material-symbols-outlined">keyboard</span>
+                        Keyboard Events
+                    </a></dt>
                     <dd>Responding to key press and release events</dd>
 
-                    <dt><a href="timer.html">Background Task Timer</a></dt>
-                    <dd>Running background code at regular intervals</dd>
+                    <dt><a href="timer.html">
+                        <span class="material-symbols-outlined">timer</span>
+                        Timers and Delays
+                    </a></dt>
+                    <dd>Running background code at regular intervals, or delaying events</dd>
 
-                    <dt><a href="sound.html">Playing Sounds</a></dt>
+                    <dt><a href="sound.html">
+                        <span class="material-symbols-outlined">volume_up</span>
+                        Playing Sounds
+                    </a></dt>
                     <dd>Playing audio clips and sound effects</dd>
 
-                    <dt><a href="theming.html">Theming Your UI</a></dt>
+                    <dt><a href="theming.html">
+                        <span class="material-symbols-outlined">palette</span>
+                        Theming Your UI
+                    </a></dt>
                     <dd>Altering the colours, fonts, borders, etc. used in your UI</dd>
                 </dl>
             </nav>

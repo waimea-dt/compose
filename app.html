@@ -6,25 +6,18 @@
 
     <title>Compose UI - App Windows</title>
 
-    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="icon" href="images/compose-logo.png" type="image/png">
+    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="scripts/loader.js"></script>
     <script src="scripts/compose.js"></script>
-
 </head>
 
-<body onload="parse();">
+<body>
 
-    <header id="main-header">
-        <nav id="top-nav">
-            <a href="./">
-                <img src="images/home.svg" alt="Home icon">
-                <h1>Kotlin Compose Multi-Platform</h1>
-            </a>
-        </nav>
-        <h2>App Windows</h2>
-        <p>Hover over the windows to see the containers, elements and settings used</p>
-    </header>
+    <include src="includes/header.html" data-sub-title="App Windows"></include>
 
     <main>
 
@@ -84,14 +77,15 @@
         <!-- -------------------------------------------------------------------------------------- -->
 
         <article>
-            <h2>Refining the Window</h2>
+            <h2>Sizing and Positioning the Window</h2>
 
             <div class="description">
                 <p>The window can be refined by providing additional parameters, and through the use of <strong>Modifiers</strong>:</p>
 
                 <ul>
-                    <li>The initial width / height of the window</li>
-                    <li>Prevent the window from being resized</li>
+                    <li>The initial <strong>width</strong> / <strong>height</strong> of the window</li>
+                    <li><strong>Centring</strong> the window on-screen</li>
+                    <li>Prevent the window from being <strong>resized</strong></li>
                 </ul>
 
                 <p>There are tutorial examples with various configurations <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Window_API_new/README.md">here</a>.</p>
@@ -103,7 +97,11 @@
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Sized Window",
-                    state = WindowState(width = 250.dp, height = 150.dp),
+                    state = WindowState(
+                        width = 250.dp,
+                        height = 150.dp,
+                        position = WindowPosition(Alignment.Center)
+                    ),
                     resizable = false
                 ) {
                     // Window content

@@ -6,25 +6,18 @@
 
     <title>Compose UI - State</title>
 
-    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="icon" href="images/compose-logo.png" type="image/png">
+    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="scripts/loader.js"></script>
     <script src="scripts/compose.js"></script>
-
 </head>
 
-<body onload="parse();">
+<body>
 
-    <header id="main-header">
-        <nav id="top-nav">
-            <a href="./">
-                <img src="images/home.svg" alt="Home icon">
-                <h1>Kotlin Compose Multi-Platform</h1>
-            </a>
-        </nav>
-        <h2>App State</h2>
-        <p>Hover over the windows to see the containers, elements and settings used</p>
-    </header>
+    <include src="includes/header.html" data-sub-title="App State"></include>
 
     <main>
 
@@ -52,7 +45,7 @@
             <div class="description">
                 <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
 
-                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnages to the object will caude the UI to update accordingly.</p>
+                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnges to the object will caude the UI to update accordingly.</p>
             </div>
 
             <window width="300" height="200" title="System Status">
@@ -88,7 +81,7 @@
             <h2>Responding to Buttons</h2>
 
             <div class="description">
-                <p><strong>Button</strong> elements can trigger a chnage in internal state, which could then be reflected in <strong>Text</strong> elements.</p>
+                <p><strong>Button</strong> elements can trigger a change in internal state, which could then be reflected in <strong>Text</strong> elements.</p>
 
                 <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked. Here is where the internal state can be updated.</p>
             </div>
@@ -235,7 +228,7 @@
 
             <pre><code class="language-kotlin">
                 // This list will be updated elsewhere in the code
-                val employees = mutableStateListOf<String>()
+                val employees = mutableStateListOf&lt;String&gt;()
 
                 fun main() = singleWindowApplication(
                     title = "Employee List"

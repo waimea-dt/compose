@@ -6,25 +6,18 @@
 
     <title>Compose UI - Elements</title>
 
-    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="icon" href="images/compose-logo.png" type="image/png">
+    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="scripts/loader.js"></script>
     <script src="scripts/compose.js"></script>
-
 </head>
 
-<body onload="parse();">
+<body>
 
-    <header id="main-header">
-        <nav id="top-nav">
-            <a href="./">
-                <img src="images/home.svg" alt="Home icon">
-                <h1>Kotlin Compose Multi-Platform</h1>
-            </a>
-        </nav>
-        <h2>UI Elements</h2>
-        <p>Hover over the windows to see the containers, elements and settings used</p>
-    </header>
+    <include src="includes/header.html" data-sub-title="UI Elements"></include>
 
     <main>
 
@@ -38,7 +31,7 @@
             <div class="description">
                 <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
 
-                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnages to the object will caude the UI to update accordingly.</p>
+                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any changes to the object will cause the UI to update accordingly.</p>
 
                 <p>More styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/text/style-text">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/text-in-compose">here</a>.</p>
             </div>
@@ -348,17 +341,22 @@
                 <p>Buttons generally contain a <strong>Text</strong> element, but can also contain <strong>Image</strong> and/or <strong>Icon</strong> elements. More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/components/button">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/buttons-in-jetpack-compose">here</a>.</p>
             </div>
 
-            <window width="400" height="200" title="Buttons">
+            <window width="400" height="250" title="Buttons">
 
                 <column padding="20" fill-max-size vert-space-between horiz-center hide-highlight>
-                    <row horiz-spaced-by="20">
-                        <button>Hello World!</button>
+                    <row horiz-spaced-by="20" hide-highlight>
+                        <button animate-click animate-delay="1000" animate-interval="3000" hide-info>Hello World!</button>
                         <button><img icon src="images/icon-favorite.svg">Like</button>
                     </row>
 
-                    <row horiz-spaced-by="20">
+                    <row horiz-spaced-by="20" hide-highlight>
                         <button outlined>Hello World!</button>
                         <button outlined><img icon src="images/icon-favorite.svg">Like</button>
+                    </row>
+
+                    <row horiz-spaced-by="20" hide-highlight>
+                        <button disabled>Hello World!</button>
+                        <button disabled><img icon src="images/icon-favorite.svg">Like</button>
                     </row>
                 </column>
 
@@ -402,6 +400,61 @@
                                 Text("Like")
                             }
                         }
+
+                        Row {
+                            Button(
+                                onClick = {...},
+                                enabled = false
+                            ) {
+                                Text("Hello World!")
+                            }
+
+                            Button(
+                                onClick = {...},
+                                enabled = false
+                            ) {
+                                Icon(
+                                    Icons.Outlined.Favorite,
+                                    contentDescription = "Favorite Icon"
+                                )
+                                Text("Like")
+                            }
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Clickable Text</h2>
+
+            <div class="description">
+                <p>The <strong>ClickableText</strong> element can be used for user interaction.</p>
+
+                <p>ClickableText require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked.</p>
+
+                <p>The text content of a ClickableText element must be created as an <strong>AnnotatedString</strong>.</p>
+            </div>
+
+            <window width="400" height="250" title="Clickable Text">
+
+                <column padding="20" fill-max-size vert-center horiz-center hide-highlight>
+                    <text font-size="30" animate-click animate-delay="1500" animate-interval="3000" hide-info>Hello World!</text>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Clickable Text" ) {
+                    Column {
+                        ClickableText(
+                            text = buildAnnotatedString { append("Hello World!") },
+                            onClick = {...}
+                        )
                     }
                 }
             </code></pre>

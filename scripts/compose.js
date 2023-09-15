@@ -1,7 +1,8 @@
-function parse() {
+document.addEventListener('DOMContentLoaded', () => {
     const windows = document.getElementsByTagName('window');
+    const articles = document.querySelectorAll('main:not(#home) article');
 
-    for (const window of windows) {
+    [...windows].forEach(window => {
         addTagInfo(window);
         addWrappers(window);
         doStyling(window);
@@ -9,14 +10,11 @@ function parse() {
         addTimers(window);
         addAnimations(window);
         addIcons(window);
-    }
+    });
 
-    const articles = document.getElementsByTagName('article');
+    [...articles].forEach(article => addStructure(article));
+});
 
-    for (const article of articles) {
-        addStructure(article);
-    }
-}
 
 //-----------------------------------------------------------------
 
@@ -42,15 +40,6 @@ function addStructure(article) {
         article.append(toggle);
     }
 }
-
-
-//-----------------------------------------------------------------
-// function setWindowSize(window) {
-//     for (const attr of window.attributes) {
-//         if (attr.name == 'width')  { window.style.width  = `${attr.value}px`; }
-//         if (attr.name == 'height') { window.style.height = `${attr.value}px`; }
-//     }
-// }
 
 
 //-----------------------------------------------------------------
@@ -213,10 +202,15 @@ function addTimers(window) {
 
             if(target) {
                 setInterval(() => {
-                    var curValue = parseInt(target.innerText);
-                    curValue++;
-                    target.innerText = curValue;
-                    timer.classList.toggle('on');
+                    var curValue = target.innerText;
+                    target.innerText = curValue == 'TICK' ? 'TOCK' : 'TICK';
+                    // var curValue = parseInt(target.innerText);
+                    // curValue++;
+                    // target.innerText = curValue;
+                    timer.classList.add('on');
+                    setTimeout(() => {
+                        timer.classList.remove('on');
+                    }, interval / 2);
                 }, interval);
             }
         }
@@ -368,12 +362,20 @@ function addAnimations(window) {
     for (const clicker of clickers) {
         let delay    = clicker.getAttribute('animate-delay');
         let interval = clicker.getAttribute('animate-interval');
+        let disable  = clicker.getAttribute('disabled-interval');
         if (!delay)    delay = 0;
         if (!interval) interval = 0;
+        if (!disable)  disable = 0;
 
         (function repeatLoop() {
             setTimeout(() => {
                 clicker.classList.add('clicking');
+                if (disable) {
+                    clicker.classList.add('disabled');
+                    setTimeout(() => {
+                        clicker.classList.remove('disabled');
+                    }, disable);
+                }
                 setTimeout(() => {
                     clicker.classList.remove('clicking');
                 }, 300);

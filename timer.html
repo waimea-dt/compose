@@ -4,27 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Compose UI - Timers</title>
+    <title>Compose UI - Timers and Delays</title>
 
-    <link rel="stylesheet" href="css/prism-one-dark.css">
+    <link rel="icon" href="images/compose-logo.png" type="image/png">
+    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="scripts/loader.js"></script>
     <script src="scripts/compose.js"></script>
-
 </head>
 
-<body onload="parse();">
+<body>
 
-    <header id="main-header">
-        <nav id="top-nav">
-            <a href="./">
-                <img src="images/home.svg" alt="Home icon">
-                <h1>Kotlin Compose Multi-Platform</h1>
-            </a>
-        </nav>
-        <h2>Timers</h2>
-        <p>Hover over the windows to see the containers, elements and settings used</p>
-    </header>
+    <include src="includes/header.html" data-sub-title="Timers and Delays"></include>
 
     <main>
 
@@ -46,24 +39,79 @@
             <window width="300" height="200" title="Timer">
 
                 <column padding="30" fill-max-size vert-center horiz-center hide-highlight>
-                    <text id="count" font-size="50">0</text>
+                    <text id="status" font-size="50">TICK</text>
                 </column>
 
-                <timer interval="500" target="count">TICK</timer>
+                <timer interval="1000" target="status">Timer</timer>
 
             </window>
 
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication( title = "Timer" ) {
-                    var count by mutableStateOf(0)
+                    var status by mutableStateOf("TICK")
 
-                    Text(count)
+                    Text(status)
 
                     LaunchedEffect(Unit) {
                         while(true) {
-                            delay(500)
-                            count++  // Any code could run here
+                            delay(1000)
+                            status = if (status == "TICK" ) "TOCK" else "TICK"
                         }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Delaying Events</h2>
+
+            <div class="description">
+                <p>Delays can be added to code in Compose using a <strong>Coroutine</strong> (runs as a separate process to the main code).</p>
+
+                <p>For example, after the user performs an action (e.g. clicking a button), the subsequent events that occur can be delayed.</p>
+
+                <p>(In this example, the button is disabled during the delayed events toi prevent them being re-triggered.)</p>
+            </div>
+
+            <window width="300" height="200" title="Delays">
+
+                <column fill-max-size horiz-center vert-center vert-spaced-by="30" hide-highlight>
+                    <div animate-swap animate-interval="2000">
+                        <text var="message">Press the button...</text>
+                        <text var="message">Click!</text>
+                        <text var="message">Hello World!</text>
+                    </div>
+                    <button animate-click animate-delay="2000" animate-interval="6000" disabled-interval="4000" hide-info>Click Me!</button>
+                </column>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication( title = "Delays" ) {
+                    var message by mutableStateOf("Press the button...")
+                    var buttonEnabled by mutableStateOf(true)
+
+                    Text(message)
+
+                    Button(
+                        onClick = {
+                            CoroutineScope(Dispatchers.Default).launch {
+                                buttonEnabled = false
+                                message = "Click!"
+                                delay(2.seconds)
+                                message = "Hello World!"
+                                delay(2.seconds)
+                                message = "Press the button..."
+                                buttonEnabled = true
+                            }
+                        },
+                        enabled = buttonEnabled
+                    ) {
+                        Text("Click Me!")
                     }
                 }
             </code></pre>
