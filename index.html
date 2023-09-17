@@ -53,7 +53,7 @@
                         <span class="material-symbols-outlined">dashboard</span>
                         Layout Principles
                     </a></dt>
-                    <dd>Using Row and Column containers to group elements</dd>
+                    <dd>Using Box, Row and Column containers to group elements</dd>
 
                     <dt><a href="elements.html">
                         <span class="material-symbols-outlined">image</span>
@@ -65,7 +65,7 @@
                         <span class="material-symbols-outlined">format_line_spacing</span>
                         Position &amp; Alignment
                     </a></dt>
-                    <dd>Positioning, spacing and aligning elements within a window</dd>
+                    <dd>Positioning, spacing and aligning elements within containers</dd>
 
                     <dt><a href="state.html">
                         <span class="material-symbols-outlined">dataset_linked</span>
@@ -116,7 +116,12 @@
                 fun main() = singleWindowApplication(
                     title = "Compose Demo"
                 ) {
-                    Text("Hello World!")
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Hello World!")
+                    }
                 }
             </code></pre>
 
@@ -129,13 +134,22 @@
         <article>
             <h2>Useful Links</h2>
 
-            <p>We will create simple UIs for desktop using some key features of this powerful framework. However, Compose MP can create complex, composable, reactive UIs that run natively across a wide variety of devices and operating systems.</p>
+            <p>The guides and examples on this site cover creating relatively simple UIs for desktop using some of the key features of this powerful framework.</p>
+
+            <p>However, Compose MP can create all sorts of complex, composable, reactive UIs that run natively across a wide variety of devices and operating systems.</p>
+
+            <p>These sites have good examples of Compose in-use:</p>
 
             <ul>
                 <li><a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/README.md">Compose MP Tutorials</a></li>
                 <li><a target="_blank" href="https://developer.android.com/jetpack/compose/layouts/basics">Jetpack Compose Layout Basics</a></li>
                 <li><a target="_blank" href="https://developer.android.com/jetpack/compose/modifiers-list">Jetpack Compose Layout Modifiers</a></li>
-                <li><a target="_blank" href="https://www.jetpackcompose.net/">Jetpack Compose Tutorials (layout, elements, etc.)</a></li>
+                <li><a target="_blank" href="https://www.jetpackcompose.net/">Jetpack Compose Tutorials</a> (layout, elements, etc.)</li>
+            </ul>
+
+            <p>And these are the home of Compose Multi-Platform:</p>
+
+            <ul>
                 <li><a target="_blank" href="https://www.jetbrains.com/lp/compose-multiplatform/">Compose MP Home</a></li>
                 <li><a target="_blank" href="https://github.com/JetBrains/compose-multiplatform">Compose MP GitHub Repository</a></li>
             </ul>

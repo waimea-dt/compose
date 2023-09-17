@@ -209,6 +209,7 @@ underline {
 #main-nav dt {
     height: 100%;
     white-space: nowrap;
+    min-height: 2em;
 }
 
 #main-nav dd {
@@ -321,6 +322,12 @@ article a {
 
 article img {
     display: block;
+    max-width: 100%;
+    margin-top: var(--padding-small);
+}
+
+article img:not(:last-child) {
+    margin-bottom: var(--padding-large);
 }
 
 article img.logo {

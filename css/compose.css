@@ -253,6 +253,12 @@ window > img.win-icon {
 /* LAYOUT CONTAINERS
 *************************************************************/
 
+window > :is(text) {        /* Allows for demo of text not in containers */
+    position: absolute;
+    top: 2rem;
+    left: 0;
+}
+
 window column {
     display: flex;
     flex-direction: column;
@@ -268,6 +274,20 @@ window row {
     height: fit-content;
     align-items: start;
 }
+
+window box {
+    display: grid;
+    width: max-content;
+    height: max-content;
+}
+
+window box > * {
+    grid-row: 1;
+    grid-column: 1;
+    width: max-content;
+    height: max-content;
+}
+
 
 /* COMPONENTS
 *************************************************************/
@@ -302,6 +322,7 @@ window img {
     display: block;
     height: auto;
     object-fit: contain;
+    margin: 0;
 }
 
 window input {
@@ -494,6 +515,22 @@ column[horiz-center], row[vert-center] { align-items: center; }
 column[horiz-start],  row[vert-top]    { align-items: start; }
 column[horiz-end],    row[vert-bottom] { align-items: end; }
 
+box[content-top-start]     > *, box [self-top-start]     { justify-self: start;  align-self: start; }
+box[content-top-center]    > *, box [self-top-center]    { justify-self: center; align-self: start; }
+box[content-top-end]       > *, box [self-top-end]       { justify-self: end;    align-self: start; }
+box[content-center-start]  > *, box [self-center-start]  { justify-self: start;  align-self: center; }
+box[content-center]        > *, box [self-center]        { justify-self: center; align-self: center; }
+box[content-center-end]    > *, box [self-center-end]    { justify-self: end;    align-self: center; }
+box[content-bottom-start]  > *, box [self-bottom-start]  { justify-self: start;  align-self: end; }
+box[content-bottom-center] > *, box [self-bottom-center] { justify-self: center; align-self: end; }
+box[content-bottom-end]    > *, box [self-bottom-end]    { justify-self: end;    align-self: end; }
+/* box[horiz-start]  > *, box [self-horiz-start]  { justify-self: start; }
+box[horiz-center] > *, box [self-horiz-center] { justify-self: center; }
+box[horiz-end]    > *, box [self-horiz-end]    { justify-self: end; }
+box[vert-top]     > *, box [self-vert-top]     { align-self: start; }
+box[vert-center]  > *, box [self-vert-center]  { align-self: center; }
+box[vert-bottom]  > *, box [self-vert-bottom]  { align-self: end; } */
+
 [bordered] { border: 4px solid black; }
 [bordered="red"]   { border-color: red; }
 [bordered="green"] { border-color: green; }
@@ -519,7 +556,7 @@ column[horiz-end],    row[vert-bottom] { align-items: end; }
 /* HIGHLIGHTING
 *************************************************************/
 
-window :is(row, column, button, spacer, div.wrapper) {
+window :is(row, column, box, button, spacer, div.wrapper) {
     position: relative;
 }
 
@@ -527,20 +564,14 @@ window > * :is(text) {
     position: relative;
 }
 
-window > :is(text) {        /* Allows for demo of text not in containers */
-    position: absolute;
-    top: 2rem;
-    left: 0;
-}
-
-window:hover :is(row, column, img, text, timer, spacer):not([hide-highlight]),
-window[show-outlines] :is(row, column, spacer):not([hide-highlight]) {
+window:hover :is(row, column, box, img, text, timer, spacer):not([hide-highlight]),
+window[show-outlines] :is(row, column, box, spacer):not([hide-highlight]) {
     outline: 2px dashed var(--container-outline-col);
     background-color: var(--container-back-col);
     outline-offset: -2px;
 }
 
-window:hover :is(row, column):not([hide-highlight]):hover {
+window:hover :is(row, column, box):not([hide-highlight]):hover {
     background-color: var(--highlight-back-col);
     outline-color: var(--highlight-outline-col);
 }
@@ -550,7 +581,7 @@ window :is(text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover
     outline-offset: -2px;
 }
 
-window :is(row, column, text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before  {
+window :is(row, column, box, text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before  {
     content: attr(info);
     position: absolute;
     font-size: 0.7rem;
@@ -566,7 +597,7 @@ window :is(row, column, text, button, timer, spacer, div.wrapper):not([hide-high
     z-index: 10;
 }
 
-window :is(row, text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before {
+window :is(row, box, text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover::before {
     bottom: calc(100% + 2px);
     left: 0;
 }
@@ -581,7 +612,7 @@ window :is(text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover
 }
 
 /* Kludge to colour label back to match hovered window back colour */
-window :is(row, column):not([hide-highlight]):hover div.wrapper input:required:is(:focus, :valid) ~ label::before {
+window :is(row, column, box):not([hide-highlight]):hover div.wrapper input:required:is(:focus, :valid) ~ label::before {
     content: "";
     position: absolute;
     top: 0;

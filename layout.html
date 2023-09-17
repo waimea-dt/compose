@@ -27,6 +27,28 @@
 
         <article>
 
+            <h2>Layout via Containers</h2>
+
+            <div class="description">
+                <p>Elements are laid out in Compose using <strong>containers</strong>. The key containers are:</p>
+
+                <ul>
+                    <li><strong>Row</strong> to place child elements horizontally, side-by-side</li>
+                    <li><strong>Column</strong> to place child elements in a vertical stack</li>
+                    <li><strong>Box</strong> to place child elements overlapping each other</li>
+                </ul>
+
+                <img src="images/containers.svg" alt="Compose containers">
+
+            </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
             <h2>No Layout</h2>
 
             <div class="description">
@@ -224,6 +246,56 @@
                             Text("from")
                         }
                         Column() {
+                            Text("Kotlin")
+                            Text("Compose!")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Box: Overlapping</h2>
+
+            <div class="description">
+                <p>To layout our <strong>Text</strong> elements so they overlap eachother (useful for placing images behind elements, for example), we can create a <strong>Box</strong> layout container</p>
+            </div>
+
+            <window width="320" height="220" title="Box Layout">
+
+                <box horiz-center vert-center hide-info padding="10">
+                    <img src="images/compose-logo.png" size="150" hide-info>
+
+                    <column vert-spaced-by="5" hide-info>
+                        <text>Hello</text>
+                        <text>World</text>
+                        <text>from</text>
+                        <text>Kotlin</text>
+                        <text>Compose!</text>
+                    </column>
+                </box>
+
+            </window>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Box Layout"
+                ) {
+                    Box() {
+                        Image(
+                            painter = painterResource("images/compose.png"),
+                            contentDescription = "Compose logo"
+                        )
+
+                        Column() {
+                            Text("Hello")
+                            Text("World")
+                            Text("from")
                             Text("Kotlin")
                             Text("Compose!")
                         }
