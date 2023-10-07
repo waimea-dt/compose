@@ -6,8 +6,8 @@
 
     <title>Compose UI - Key Events</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -27,20 +27,6 @@
 
         <article>
             <h2>Key Press Events</h2>
-
-            <div class="description">
-                <p>Key presses can be detected at the window level as well as for individual controls (e.g. TextFields). At the window level the <strong>onPreviewKeyEvent</strong> parameter can be set with some code to be run each time a key is pressed.</p>
-
-                <p>Key events have data attached specifying:</p>
-
-                <ul>
-                    <li>If it was a key <strong>press</strong> or a key <strong>release</strong></li>
-                    <li>What key was pressed, e.g. <strong>Key.A</strong>, <strong>Key.Up</strong> or <strong>Key.Enter</strong></li>
-                    <li>Any <strong>modifier</strong> keys (e.g. CTRL or ALT)</li>
-                </ul>
-
-                <p>More info on key handling can be found <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Keyboard/README.md">here</a> and a full list of key codes can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/ui/input/key/Key">here</a>.</p>
-            </div>
 
             <window width="400" height="150" title="Key Press Events">
 
@@ -64,6 +50,20 @@
 
             </window>
 
+            <div class="description">
+                <p>Key presses can be detected at the window level as well as for individual controls (e.g. TextFields). At the window level the <strong>onPreviewKeyEvent</strong> parameter can be set with some code to be run each time a key is pressed.</p>
+
+                <p>Key events have data attached specifying:</p>
+
+                <ul>
+                    <li>If it was a key <strong>press</strong> or a key <strong>release</strong></li>
+                    <li>What key was pressed, e.g. <strong>Key.A</strong>, <strong>Key.Up</strong> or <strong>Key.Enter</strong></li>
+                    <li>Any <strong>modifier</strong> keys (e.g. CTRL or ALT)</li>
+                </ul>
+
+                <p>More info on key handling can be found <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Keyboard/README.md">here</a> and a full list of key codes can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/ui/input/key/Key">here</a>.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 var status by mutableStateOf("Press a key...")
 
@@ -71,6 +71,11 @@
                     title = "Key Press Events",
                     onPreviewKeyEvent = { handleKeyEvent(it) }
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Text(status)
                     }
@@ -99,12 +104,6 @@
         <article>
             <h2>Keyboard Control of Windows</h2>
 
-            <div class="description">
-                <p>Key presses can be used to open / close <a href="dialog.html">Dialog Windows</a>. </p>
-
-                <p>In this example the I key opens the dialog and the ESC key closes it. The main window handles the I key, but the dialog window handles the ESC key (since it has the focus when it is open).</p>
-            </div>
-
             <window width="400" height="250" title="Window with Dialog">
 
                 <column fill-max-size horiz-start vert-center padding="30" hide-highlight>
@@ -124,6 +123,12 @@
 
             </window>
 
+            <div class="description">
+                <p>Key presses can be used to open / close <a href="dialog.html">Dialog Windows</a>. </p>
+
+                <p>In this example the I key opens the dialog and the ESC key closes it. The main window handles the I key, but the dialog window handles the ESC key (since it has the focus when it is open).</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 var isDialogOpen by mutableStateOf(false)
 
@@ -141,30 +146,38 @@
                         }
                     }
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Text("For more info, press I")
                     }
 
                     if (isDialogOpen) {
-                        Dialog(
-                            title = "Dialog Window",
-                            onCloseRequest = { isDialogOpen = false },
-                            onPreviewKeyEvent = {
-                                if (
-                                    it.key == Key.Escape &&
-                                    it.type == KeyEventType.KeyDown
-                                ) {
-                                    isDialogOpen = false
-                                    true
-                                } else {
-                                    false
-                                }
-                            }
+                        Dialog()
+                    }
+                }
+
+                @Composable
+                fun Dialog() = DialogWindow(
+                    title = "Dialog Window",
+                    onCloseRequest = { isDialogOpen = false },
+                    onPreviewKeyEvent = {
+                        if (
+                            it.key == Key.Escape &&
+                            it.type == KeyEventType.KeyDown
                         ) {
-                            Column() {
-                                Text("Here is some information")
-                            }
+                            isDialogOpen = false
+                            true
+                        } else {
+                            false
                         }
+                    }
+                ) {
+                    Column() {
+                        Text("Here is some information")
                     }
                 }
             </code></pre>

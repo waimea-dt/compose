@@ -6,8 +6,8 @@
 
     <title>Compose UI - Elements</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -27,14 +27,6 @@
 
         <article>
             <h2>Text</h2>
-
-            <div class="description">
-                <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
-
-                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any changes to the object will cause the UI to update accordingly.</p>
-
-                <p>More styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/text/style-text">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/text-in-compose">here</a>.</p>
-            </div>
 
             <window width="500" height="350" title="Text">
 
@@ -59,12 +51,27 @@
 
             </window>
 
-            <pre><code class="language-kotlin">
-                var message by mutableStateOf("Text from a variable")
+            <div class="description">
+                <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
 
-                fun main() = singleWindowApplication( title = "Text" ) {
-                    Row {
-                        Column {
+                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any changes to the object will cause the UI to update accordingly.</p>
+
+                <p>More styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/text/style-text">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/text-in-compose">here</a>.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Text"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var message by remember{ mutableStateOf("Text from a variable") }
+
+                    Row() {
+                        Column() {
                             Text("Hello World!")
                             Text("Hello World!", fontWeight = FontWeight.Bold)
                             Text("Hello World!", fontStyle = FontStyle.Italic)
@@ -73,7 +80,7 @@
                             Text(message)
                         }
 
-                        Column {
+                        Column() {
                             Text("Hello World!", textAlign = TextAlign.Left)
                             Text("Hello World!", textAlign = TextAlign.Center)
                             Text("Hello World!", textAlign = TextAlign.Right)
@@ -93,14 +100,6 @@
         <article>
             <h2>Images</h2>
 
-            <div class="description">
-                <p>The <strong>Image</strong> element can be used to display images which can be sized and cropped in various ways.</p>
-
-                <p>Images should be placed into an 'images' folder within the <strong>resources</strong> folder within your project (see <a href="images/images-folder.png">here</a>).</p>
-
-                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/graphics/images/customize">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/image-in-jetpack-compose">here</a>, and tutorial examples <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Image_And_Icons_Manipulations/README.md">here</a>.</p>
-            </div>
-
             <window width="580" height="460" title="Images">
 
                 <column padding="20" vert-spaced-by="20" hide-highlight>
@@ -119,10 +118,26 @@
 
             </window>
 
+            <div class="description">
+                <p>The <strong>Image</strong> element can be used to display images which can be sized and cropped in various ways.</p>
+
+                <p>Images should be placed into an 'images' folder within the <strong>resources</strong> folder within your project (see <a href="images/images-folder.png">here</a>).</p>
+
+                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/graphics/images/customize">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/image-in-jetpack-compose">here</a>, and tutorial examples <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Image_And_Icons_Manipulations/README.md">here</a>.</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Images" ) {
-                    Column {
-                        Row {
+                fun main() = singleWindowApplication(
+                    title = "Images"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+
+                        Row() {
                             Image(
                                 painter = painterResource("images/avatar.png"),
                                 contentDescription = "User avatar"
@@ -139,7 +154,7 @@
                             )
                         }
 
-                        Row {
+                        Row() {
                             Image(
                                 painter = painterResource("images/avatar.png"),
                                 contentDescription = "User avatar",
@@ -185,12 +200,6 @@
         <article>
             <h2>Icons</h2>
 
-            <div class="description">
-                <p>The <strong>Icon</strong> element can be used to display icons from the <a target="_blank" href="https://fonts.google.com/icons">Material Design icon set</a>.</p>
-
-                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/material/icons/package-summary">here</a>.</p>
-            </div>
-
             <window width="300" height="230" title="Icons">
 
                 <column padding="20" fill-max-size vert-space-between hide-highlight>
@@ -205,16 +214,30 @@
                         <img icon src="images/icon-favorite.svg" size="12">
                         <img icon src="images/icon-favorite.svg" size="24">
                         <img icon src="images/icon-favorite.svg" size="48">
-                        <img icon src="images/icon-favorite.svg" size="96">
+                        <img icon src="images/icon-favorite-red.svg" size="96" tint="Red">
                     </row>
                 </column>
 
             </window>
 
+            <div class="description">
+                <p>The <strong>Icon</strong> element can be used to display icons from the <a target="_blank" href="https://fonts.google.com/icons">Material Design icon set</a>.</p>
+
+                <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/material/icons/package-summary">here</a>.</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Icons" ) {
-                    Column {
-                        Row {
+                fun main() = singleWindowApplication(
+                    title = "Icons"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+
+                        Row() {
                             Icon(
                                 Icons.Outlined.Home,
                                 contentDescription = "Home Icon"
@@ -237,7 +260,7 @@
                             )
                         }
 
-                        Row {
+                        Row() {
                             Icon(
                                 Icons.Outlined.Favorite,
                                 contentDescription = "Favorite Icon",
@@ -256,7 +279,8 @@
                             Icon(
                                 Icons.Outlined.Favorite,
                                 contentDescription = "Favorite Icon",
-                                modifier = Modifier.size(96.dp)
+                                modifier = Modifier.size(96.dp),
+                                tint = Color.Red
                             )
                         }
                     }
@@ -270,10 +294,6 @@
 
         <article>
             <h2>Spacers</h2>
-
-            <div class="description">
-                <p>The <strong>Spacer</strong> element can be used to add additional gaps between elements or containers.</p>
-            </div>
 
             <window width="350" height="230" title="Spacers" show-outlines>
 
@@ -299,10 +319,22 @@
 
             </window>
 
+            <div class="description">
+                <p>The <strong>Spacer</strong> element can be used to add additional gaps between elements or containers.</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Spacers" ) {
-                    Row {
-                        Column {
+                fun main() = singleWindowApplication(
+                    title = "Spacers"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Row() {
+
+                        Column() {
                             Text("Hello World!")
                             Text("Hello World!")
                             Spacer(modifier = Modifier.height(10.dp))
@@ -313,7 +345,7 @@
 
                         Spacer(modifier = Modifier.width(60.dp))
 
-                        Column {
+                        Column() {
                             Text("Hello World!")
                             Spacer(modifier = Modifier.height(40.dp))
                             Text("Hello World!")
@@ -332,14 +364,6 @@
 
         <article>
             <h2>Buttons</h2>
-
-            <div class="description">
-                <p>The <strong>Button</strong> element can be used for user interaction.</p>
-
-                <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked.</p>
-
-                <p>Buttons generally contain a <strong>Text</strong> element, but can also contain <strong>Image</strong> and/or <strong>Icon</strong> elements. More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/components/button">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/buttons-in-jetpack-compose">here</a>.</p>
-            </div>
 
             <window width="400" height="250" title="Buttons">
 
@@ -362,10 +386,26 @@
 
             </window>
 
+            <div class="description">
+                <p>The <strong>Button</strong> element can be used for user interaction.</p>
+
+                <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked.</p>
+
+                <p>Buttons generally contain a <strong>Text</strong> element, but can also contain <strong>Image</strong> and/or <strong>Icon</strong> elements. More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/components/button">here</a> and <a target="_blank" href="https://www.jetpackcompose.net/buttons-in-jetpack-compose">here</a>.</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Buttons" ) {
-                    Column {
-                        Row {
+                fun main() = singleWindowApplication(
+                    title = "Buttons"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+
+                        Row() {
                             Button(
                                 onClick = {...}
                             ) {
@@ -383,7 +423,7 @@
                             }
                         }
 
-                        Row {
+                        Row() {
                             OutlinedButton(
                                 onClick = {...}
                             ) {
@@ -401,7 +441,7 @@
                             }
                         }
 
-                        Row {
+                        Row() {
                             Button(
                                 onClick = {...},
                                 enabled = false
@@ -432,14 +472,6 @@
         <article>
             <h2>Clickable Text</h2>
 
-            <div class="description">
-                <p>The <strong>ClickableText</strong> element can be used for user interaction.</p>
-
-                <p>ClickableText require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked.</p>
-
-                <p>The text content of a ClickableText element must be created as an <strong>AnnotatedString</strong>.</p>
-            </div>
-
             <window width="400" height="250" title="Clickable Text">
 
                 <column padding="20" fill-max-size vert-center horiz-center hide-highlight>
@@ -448,9 +480,24 @@
 
             </window>
 
+            <div class="description">
+                <p>The <strong>ClickableText</strong> element can be used for user interaction.</p>
+
+                <p>ClickableText require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked.</p>
+
+                <p>The text content of a ClickableText element must be created as an <strong>AnnotatedString</strong>.</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Clickable Text" ) {
-                    Column {
+                fun main() = singleWindowApplication(
+                    title = "Clickable Text"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
                         ClickableText(
                             text = buildAnnotatedString { append("Hello World!") },
                             onClick = {...}
@@ -468,6 +515,15 @@
         <article>
             <h2>Text Inputs</h2>
 
+            <window width="400" height="280" title="Text Inputs">
+
+                <column padding="20" fill-max-size vert-center vert-spaced-by="30" horiz-center hide-highlight>
+                    <input var="name" label="Name" value="Jimmy" animate-typing="200" animate-delay="1000" animate-interval="6000" hide-info>
+                    <input var="email" label="Email">
+                </column>
+
+            </window>
+
             <div class="description">
                 <p>The <strong>OutlinedTextField</strong> element can be used to get text input from the user. They have an optional <strong>label</strong> property.</p>
 
@@ -478,23 +534,19 @@
                 <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/jetpack/compose/text/user-input">here</a>.</p>
             </div>
 
-            <window width="400" height="250" title="Text Inputs">
-
-                <column padding="20" fill-max-size vert-space-between horiz-center hide-highlight>
-                    <input label="Name">
-                    <input label="Email" value="jim@uxpro.co.nz">
-                </column>
-
-            </window>
-
             <pre><code class="language-kotlin">
-                var name by mutableStateOf("")
-                var email by mutableStateOf("jim@uxpro.co.nz")
-
                 fun main() = singleWindowApplication(
                     title = "Text Inputs"
                 ) {
-                    Column {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var name by remember{ mutableStateOf("") }
+                    var email by remember{ mutableStateOf("") }
+
+                    Column() {
                         OutlinedTextField(
                             label = { Text("Name") },
                             value = name,
@@ -509,6 +561,280 @@
                     }
                 }
             </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Validating Text Inputs</h2>
+
+            <window width="450" height="250" title="Valid Text Inputs">
+
+                <column padding="30" fill-max-size vert-center vert-spaced-by="30" horiz-center hide-highlight>
+                    <row horiz-spaced-by="30" hide-highlight>
+                        <input var="name" label="Name" width="230" text-only value="Jimmy" animate-typing="200" animate-delay="2000" animate-interval="8000" hide-info>
+                        <input var="age" label="Age" number-only value="99" animate-typing="200" animate-delay="4000" animate-interval="8000" hide-info>
+                    </row>
+
+                    <button animate-click animate-delay="7500" animate-interval="8000" hide-info>Save Person</button>
+                </column>
+
+            </window>
+
+            <div class="description">
+                <p><strong>OutlinedTextField</strong> elements can set the <strong>isError</strong> property to true to indicate an invalid input. This property can be <strong>linked to a Boolean state variable</strong>, calculated when the TextField <strong>text changes</strong>. The state variable can also be used to <strong>disable other inputs until valid data is entered</strong>, for example an add/save button (see the example code).</p>
+
+                <p><em>Note that it is best to <strong>link all TextFields to String state variables</strong> since the conversion of TextField text into numberic state values and back again during validation can cause issues.</em></p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Valid Text Inputs"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var name by remember{ mutableStateOf("") }
+                    var age by remember{ mutableStateOf("") }
+                    var nameValid by remember{ mutableStateOf(false) }
+                    var ageValid by remember{ mutableStateOf(false) }
+
+                    Column() {
+
+                        Row() {
+                            OutlinedTextField(
+                                label = { Text("Name") },
+                                value = name,
+                                isError = !nameValid,
+                                onValueChange = {
+                                    name = it
+                                    nameValid = name.isNotBlank()
+                                }
+                            )
+
+                            OutlinedTextField(
+                                label = { Text("Age") },
+                                value = age,
+                                isError = !ageValid,
+                                onValueChange = {
+                                    age = it
+                                    ageValid = age.all(Char::isDigit) &&
+                                               age.toIntOrNull() != null
+                                }
+                            )
+                        }
+
+                        Button(
+                            enabled = nameValid && ageValid,
+                            onClick = {
+                                // Do something with data
+                            }
+                        ) {
+                            Text("Save Person")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Toggle Switches</h2>
+
+            <window width="300" height="250" title="Toggle Switches">
+
+                <column padding="30" fill-max-size vert-center vert-spaced-by="20" horiz-end hide-highlight>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <text hide-highlight>Speaks French</text>
+                        <input var="french" type="checkbox" checked>
+                    </row>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <text hide-highlight>Likes cheese</text>
+                        <input var="cheese" type="checkbox">
+                    </row>
+                    <row horiz-spaced-by="20" vert-center hide-highlight>
+                        <text hide-highlight>Plays cricket</text>
+                        <input var="cricket" type="checkbox">
+                    </row>
+                </column>
+
+            </window>
+
+            <div class="description">
+                <p>The <strong>Switch</strong> element is a toggleable, boolean (on/off or yes/no) control. It can be used for user input.</p>
+
+                <p>Switches require an <strong>onCheckedChange</strong> parameter with the code that is run when the Switch is clicked.</p>
+
+                <p>The <strong>checked state</strong> of the Switch can be controlled / linked to a <strong>boolean state variable</strong>.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Toggle Switches"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var french by remember{ mutableStateOf(true) }
+                    var cheese by remember{ mutableStateOf(false) }
+                    var cricket by remember{ mutableStateOf(false) }
+
+                    Column() {
+
+                        Row() {
+                            Text("Speaks french")
+                            Switch(
+                                checked = french,
+                                onCheckedChange = { french = it }
+                            )
+                        }
+
+                        Row() {
+                            Text("Likes cheese")
+                            Switch(
+                                checked = cheese,
+                                onCheckedChange = { cheese = it }
+                            )
+                        }
+
+                        Row() {
+                            Text("Plays cricket")
+                            Switch(
+                                checked = cricket,
+                                onCheckedChange = { cricket = it }
+                            )
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+        <article>
+            <h2>Drop-Down Option Menu</h2>
+
+            <window width="400" height="250" title="Drop-Down Menu">
+
+                <box padding="20" fill-max-size content-center hide-highlight>
+                    <select var="language" label="Language">
+                        <option>Python</option>
+                        <option selected>Kotlin</option>
+                        <option>JavaScript</option>
+                    </select>
+                </column>
+
+            </window>
+
+            <div class="description">
+                <p>There is no built-in drop-down menu control in Compose MP.</p>
+
+                <p>The code here creates a <strong>Dropdown Composable</strong> from an <strong>OutlinedTextField</strong>, an arrow <strong>Icon</strong> and a <strong>DropdownMenu</strong>. It works well and fits in with the look and feel of other controls.</p>
+
+                <p>The code shows how this composable can be used, how to pass it a list of options, and how to retrieve and respond to the selected option.</p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                fun main() = singleWindowApplication(
+                    title = "Drop-Down Menu"
+                ) {
+                    App()
+                }
+
+
+                @Composable
+                fun App() {
+                    var language by remember{ mutableStateOf("") }
+
+                    Dropdown(
+                        label = "Language",
+                        options = listOf("Python", "Kotlin", "Javascript"),
+                        value = language,
+                        onValueChange = {
+                            language = it
+                        }
+                    )
+                }
+
+
+                @Composable
+                fun Dropdown(
+                    options: List<String>,
+                    value: String? = null,
+                    label: String? = null,
+                    modifier: Modifier = Modifier,
+                    onValueChange: (it: String) -> Unit
+                ) {
+                    // Toggle visibility via this value
+                    var expanded by remember { mutableStateOf(false) }
+                    // Text of option picked. Default to first if none given
+                    var selectedOption by remember { mutableStateOf<String>(
+                        value ?: options[0]
+                    ) }
+
+                    Box(
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        OutlinedTextField(
+                            label = { if (label != null) Text(label) },
+                            value = selectedOption,
+                            readOnly = true,
+                            singleLine = true,
+                            // Intercept mouse clicks to toggle menu
+                            modifier = modifier.pointerInput(Unit) {
+                                awaitEachGesture {
+                                    awaitFirstDown(false)
+                                    if (waitForUpOrCancellation() != null) {
+                                        expanded = !expanded
+                                    }
+                                }
+                            },
+                            onValueChange = {}
+                        )
+
+                        Icon(
+                            Icons.Filled.ArrowDropDown,
+                            contentDescription = "Drop-down arrow",
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 10.dp, top = 5.dp)
+                                // Rotate 180 when menu open
+                                .rotate(if (expanded) 180f else 0f)
+                        )
+
+                        DropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            options.forEach { selectionOption ->
+                                DropdownMenuItem(
+                                    onClick = {
+                                        selectedOption = selectionOption
+                                        expanded = false
+                                        // Pass back value via lambda
+                                        onValueChange(selectedOption)
+                                    }
+                                ) {
+                                    Text(selectionOption)
+                                }
+                            }
+                        }
+                    }
+                }
+             --></code></pre>
 
         </article>
 
@@ -530,14 +856,9 @@
                         <strong><a target="_blank" href="https://developer.android.com/jetpack/compose/components/slider">Sliders</a></strong> - For user input between a min and max value
                         <img src="images/slider.png" alt="Slider" class="example">
                     </li>
-                    <li>
-                        <strong><a target="_blank" href="https://developer.android.com/jetpack/compose/components/switch">Toggle Switches</a></strong> - Can be toggled on or off, often used for options / settings
-                        <img src="images/switches.png" alt="Switches" class="example">
-                    </li>
                 </ul>
 
             </div>
-
 
         </article>
 

@@ -6,8 +6,8 @@
 
     <title>Compose UI - Timers and Delays</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -28,14 +28,6 @@
         <article>
             <h2>Timers</h2>
 
-            <div class="description">
-                <p>A timer can be used to run <strong>code at a regular interval</strong>. A timer does not have to relate to a visual UI element as in this example, but can be used to update or monitor the internal state of a system.</p>
-
-                <p>A 'timer' is created using a <strong>LaunchedEffect</strong> element which runs as a seperate process to the main program. To get the effect of a timer we use a <strong>loop</strong> with a <strong>delay</strong>, plus the code to be run each 'tick' of the timer.</p>
-
-                <p>Note that the loop can be an infinite one, or could be contitional, allowing the 'timer' to be stopped.</p>
-            </div>
-
             <window width="300" height="200" title="Timer">
 
                 <column padding="30" fill-max-size vert-center horiz-center hide-highlight>
@@ -46,9 +38,24 @@
 
             </window>
 
+            <div class="description">
+                <p>A timer can be used to run <strong>code at a regular interval</strong>. A timer does not have to relate to a visual UI element as in this example, but can be used to update or monitor the internal state of a system.</p>
+
+                <p>A 'timer' is created using a <strong>LaunchedEffect</strong> element which runs as a seperate process to the main program. To get the effect of a timer we use a <strong>loop</strong> with a <strong>delay</strong>, plus the code to be run each 'tick' of the timer.</p>
+
+                <p>Note that the loop can be an infinite one, or could be contitional, allowing the 'timer' to be stopped.</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Timer" ) {
-                    var status by mutableStateOf("TICK")
+                fun main() = singleWindowApplication(
+                    title = "Timer"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var status by remember { mutableStateOf("TICK") }
 
                     Text(status)
 
@@ -69,14 +76,6 @@
         <article>
             <h2>Delaying Events</h2>
 
-            <div class="description">
-                <p>Delays can be added to code in Compose using a <strong>Coroutine</strong> (runs as a separate process to the main code).</p>
-
-                <p>For example, after the user performs an action (e.g. clicking a button), the subsequent events that occur can be delayed.</p>
-
-                <p>(In this example, the button is disabled during the delayed events toi prevent them being re-triggered.)</p>
-            </div>
-
             <window width="300" height="200" title="Delays">
 
                 <column fill-max-size horiz-center vert-center vert-spaced-by="30" hide-highlight>
@@ -90,10 +89,25 @@
 
             </window>
 
+            <div class="description">
+                <p>Delays can be added to code in Compose using a <strong>Coroutine</strong> (runs as a separate process to the main code).</p>
+
+                <p>For example, after the user performs an action (e.g. clicking a button), the subsequent events that occur can be delayed.</p>
+
+                <p>(In this example, the button is disabled during the delayed events toi prevent them being re-triggered.)</p>
+            </div>
+
             <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication( title = "Delays" ) {
-                    var message by mutableStateOf("Press the button...")
-                    var buttonEnabled by mutableStateOf(true)
+                fun main() = singleWindowApplication(
+                    title = "Delays"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var message by remember { mutableStateOf("Press the button...") }
+                    var buttonEnabled by remember { mutableStateOf(true) }
 
                     Text(message)
 

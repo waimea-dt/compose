@@ -6,8 +6,8 @@
 
     <title>Compose UI - Layout Principles</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -51,12 +51,6 @@
 
             <h2>No Layout</h2>
 
-            <div class="description">
-                <p>This window contains several <strong>Text</strong> elements.</p>
-
-                <p>Without any indication of how to layout the elements, the window simple stacks them all on top of each other in the top-left corner.</p>
-            </div>
-
             <window width="300" height="200" title="No Layout">
 
                 <text>Hello</text>
@@ -67,10 +61,21 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains several <strong>Text</strong> elements.</p>
+
+                <p>Without any indication of how to layout the elements, the window simple stacks them all on top of each other in the top-left corner.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "No Layout"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Text("Hello")
                     Text("World")
                     Text("from")
@@ -88,10 +93,6 @@
 
             <h2>Row: Horizontal Flow</h2>
 
-            <div class="description">
-                <p>We can specifiy that we want the <strong>Text</strong> elements to sit horizontally, side-by-side by placing them into a <strong>Row</strong> layout container</p>
-            </div>
-
             <window width="340" height="200" title="Horizontal">
 
                 <row horiz-spaced-by="7" padding="10" hide-info>
@@ -104,10 +105,19 @@
 
             </window>
 
+            <div class="description">
+                <p>We can specifiy that we want the <strong>Text</strong> elements to sit horizontally, side-by-side by placing them into a <strong>Row</strong> layout container</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Horizontal"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Text("Hello")
                         Text("World")
@@ -127,10 +137,6 @@
 
             <h2>Column: Vertical Stack</h2>
 
-            <div class="description">
-                <p>We can specifiy that we want the <strong>Text</strong> elements to stack up vertically, one above the other by placing them into a <strong>Column</strong> layout container</p>
-            </div>
-
             <window width="320" height="250" title="Vertical">
 
                 <column vert-spaced-by="10" padding="10" hide-info>
@@ -143,10 +149,19 @@
 
             </window>
 
+            <div class="description">
+                <p>We can specifiy that we want the <strong>Text</strong> elements to stack up vertically, one above the other by placing them into a <strong>Column</strong> layout container</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Vertical"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Text("Hello")
                         Text("World")
@@ -166,10 +181,6 @@
 
             <h2>Grid: Rows in Columns</h2>
 
-            <div class="description">
-                <p>To layout our <strong>Text</strong> elements in a grid that flows from left-to-right, we can create a <strong>Column</strong> with multiple, nested <strong>Row</strong> layout containers</p>
-            </div>
-
             <window width="320" height="200" title="Rows in Columns">
 
                 <column vert-spaced-by="15" padding="10" hide-info>
@@ -187,10 +198,19 @@
 
             </window>
 
+            <div class="description">
+                <p>To layout our <strong>Text</strong> elements in a grid that flows from left-to-right, we can create a <strong>Column</strong> with multiple, nested <strong>Row</strong> layout containers</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Rows in Columns"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Row() {
                             Text("Hello")
@@ -214,10 +234,6 @@
 
             <h2>Grid: Columns in Rows</h2>
 
-            <div class="description">
-                <p>Similarly, to layout our <strong>Text</strong> elements in a grid that flows from top-to-bottom, we can create a <strong>Row</strong> with multiple, nested <strong>Column</strong> layout containers</p>
-            </div>
-
             <window width="320" height="200" title="Columns in Rows">
 
                 <row horiz-spaced-by="15" padding="10" hide-info>
@@ -235,10 +251,19 @@
 
             </window>
 
+            <div class="description">
+                <p>Similarly, to layout our <strong>Text</strong> elements in a grid that flows from top-to-bottom, we can create a <strong>Row</strong> with multiple, nested <strong>Column</strong> layout containers</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Columns in Rows"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Column() {
                             Text("Hello")
@@ -262,10 +287,6 @@
 
             <h2>Box: Overlapping</h2>
 
-            <div class="description">
-                <p>To layout our <strong>Text</strong> elements so they overlap eachother (useful for placing images behind elements, for example), we can create a <strong>Box</strong> layout container</p>
-            </div>
-
             <window width="320" height="220" title="Box Layout">
 
                 <box horiz-center vert-center hide-info padding="10">
@@ -282,10 +303,19 @@
 
             </window>
 
+            <div class="description">
+                <p>To layout our <strong>Text</strong> elements so they overlap eachother (useful for placing images behind elements, for example), we can create a <strong>Box</strong> layout container</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Box Layout"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box() {
                         Image(
                             painter = painterResource("images/compose.png"),
@@ -312,10 +342,6 @@
 
             <h2>Example Layout 1</h2>
 
-            <div class="description">
-                <p>A <strong>Row</strong> with a nested <strong>Column</strong> allows images and text elements to be laid out next to each other.</p>
-            </div>
-
             <window width="360" height="210" title="User Info">
 
                 <row fill-max-size horiz-center horiz-spaced-by="20" vert-center hide-info>
@@ -331,10 +357,19 @@
 
             </window>
 
+            <div class="description">
+                <p>A <strong>Row</strong> with a nested <strong>Column</strong> allows images and text elements to be laid out next to each other.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "User Info"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Image(
                             painter = painterResource("images/avatar.png"),
@@ -359,10 +394,6 @@
 
             <h2>Example Layout 2</h2>
 
-            <div class="description">
-                <p>An outer <strong>Column</strong> container with nested <strong>Row</strong> and <strong>Column</strong> containers within can produce quite complex layouts.</p>
-            </div>
-
             <window width="400" height="400" title="Message User">
 
                 <column fill-max-size vert-space-between horiz-center padding="30" hide-info>
@@ -386,10 +417,19 @@
 
             </window>
 
+            <div class="description">
+                <p>An outer <strong>Column</strong> container with nested <strong>Row</strong> and <strong>Column</strong> containers within can produce quite complex layouts.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Message User"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Row() {
                             Image(
@@ -426,11 +466,82 @@
 
         <article>
 
-            <h2>Example Layout 3</h2>
+            <h2>Custom Composable Elements</h2>
+
+            <window width="400" height="400" title="Who Are We?">
+
+                <column fill-max-size horiz-center vert-spaced-by="20" vert-center padding="20" hide-highlight>
+
+                    <row fill-max-width horiz-center horiz-spaced-by="20" vert-center hide-info bordered="lightgrey" padding="10">
+                        <img src="images/avatar2.png" size="120" hide-info>
+
+                        <column vert-spaced-by="5" weight="1" hide-info>
+                            <text font-bold hide-info>Helen Pickles</text>
+                            <spacer height="10" hide-highlight></spacer>
+                            <text hide-info><em>Managing Director</em></text>
+                            <text hide-info><em>Demo Corp.</em></text>
+                        </column>
+                    </row>
+
+                    <row fill-max-width horiz-center horiz-spaced-by="20" vert-center hide-info bordered="lightgrey" padding="10">
+                        <img src="images/avatar.png" size="120" hide-info>
+
+                        <column vert-spaced-by="5" weight="1" hide-info>
+                            <text font-bold hide-info>Jean-Paul Williams</text>
+                            <spacer height="10" hide-highlight></spacer>
+                            <text hide-info><em>UX Designer</em></text>
+                            <text hide-info><em>Demo Corp.</em></text>
+                        </column>
+                    </row>
+
+                </column>
+
+            </window>
 
             <div class="description">
-                <p>Several <strong>Row</strong> and <strong>Column</strong> layout containers are nested within each other to position and align the UI elements for this calculator.</p>
+                <p>In order to keep your main <strong>App()</strong> function <strong>compact and easy to read / maintain</strong>, or if part of your UI layout is to be <strong>repeated</strong>, it is a good idea to define custom <strong>@Composable</strong> elements you can then use within your main layout.</p>
+
+                <p>You can <strong>pass data as arguments</strong> to a composable element that it can then use to create part of the UI...</p>
             </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Who Are We?"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+                        StaffCard(helen)
+                        StaffCard(jeanpaul)
+                    }
+                }
+
+                @Composable
+                fun StaffCard(staff: Employee) = Row() {
+                    Image(
+                        painter = painterResource("images/${staff.avatar}"),
+                        contentDescription = "${staff.name} avatar"
+                    )
+
+                    Column() {
+                        Text(staff.name)
+                        Text(staff.role)
+                        Text("Demo Corp.")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Example Layout 3</h2>
 
             <window width="360" height="420" title="Calculator">
 
@@ -479,10 +590,19 @@
 
             </window>
 
+            <div class="description">
+                <p>Several <strong>Row</strong> and <strong>Column</strong> layout containers are nested within each other to position and align the UI elements for this calculator.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Calculator"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Text("9876543210")
 

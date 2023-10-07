@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Saving / Loading Data</title>
+
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/compose.js"></script>
+</head>
+
+<body>
+
+    <include src="includes/header.html" data-sub-title="Saving and Loading Data"></include>
+
+    <main>
+
+        <h1>Saving Data to File and Loading it Later</h1>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article class="show-code">
+            <h2>Overview of Saving via Serialization</h2>
+
+            <div class="description">
+                <p>Often we need to <strong>save application data</strong> so that it can be reloaded when the application launches again and we can carry on where we left off.</p>
+
+                <p>When we have complex data structures (e.g. MutableLists of OOP objects), the simplest way to save the data within then to a file for later access, is to:</p>
+
+                <ol>
+                    <li><strong>Serialize</strong> the data into a text format such as <a target="_blank" href="https://www.json.org/json-en.html">JSON</a></li>
+                    <li>Write this JSON string to a <strong>text file</strong> (e.g. data.json)</li>
+                </ol>
+
+                <img src="images/serialization.png" alt="Data serialization">
+
+            </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article class="show-code">
+            <h2>Adding the Kotlin Serialization Library</h2>
+
+            <div class="description">
+                <p>In your IntelliJ IDEA project, you need to make sure that you're using the most recent version of Kotlin and the Compose library, and also add in the serialization library.</p>
+
+                <p>Update the following configuration files to specify the libraries and versions. As of writing, these are:</p>
+
+                <h4>gradle.properties</h4>
+
+                <pre><code class="language-kotlin">
+                    kotlin.version=1.9.10
+                    compose.version=1.5.1
+                </code></pre>
+
+                <h4>build.gradle.kts</h4>
+
+                <pre><code class="language-kotlin">
+                    plugins {
+                        kotlin("jvm")
+                        kotlin("plugin.serialization") version "1.9.10"
+                        id("org.jetbrains.compose")
+                    }
+
+                    dependencies {
+                        implementation(compose.desktop.currentOs)
+                        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+                    }
+                </code></pre>
+
+                <p>Note: you can find the latest versions of Kotlin and Compose listed <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility">here</a> (most recent at the bottom of the table).</p>
+
+            </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article class="show-code">
+            <h2>Setting Up Data Classes for Save/Load</h2>
+
+            <div class="description">
+                <p>When creating classes for data inside your application, you should use <strong>data class</strong>. This is a simple type of class that is specifically for data-based objects.</p>
+
+                <p>To allow serialization of the data, the <strong>data class</strong> needs to be labelled as <strong>@Serializable</strong>.</p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                @Serializable
+                data class User(
+                    val id: Int,
+                    val name: String,
+                    val user: String,
+                    val admin: Boolean = false
+                )
+
+                val users = mutableStateListOf<User>()
+            --></code></pre>
+
+
+            <div class="description">
+                <p><a target="_blank" href="https://kotlinlang.org/docs/data-classes.html">Data Classes</a> come with useful, built-in functionality, such as a pre-configured <strong>.toString()</strong> function, a <strong>.copy()</strong> function, etc.</p>
+            </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Saving and Loading Mutable Lists</h2>
+
+            <div class="description">
+                <p>Here are <strong>two functions that extend the MutableList class</strong> to allow saving and loading lists to/from JSON text files.</p>
+            </div>
+
+
+            <pre><code class="language-kotlin"><!--
+                /**
+                * Save a list of objects to a given file in JSON format
+                */
+                inline fun <reified T : Any> MutableList<T>.loadFromFile(): Boolean {
+                    return try {
+                        val dataFile = File(dataFilePath)
+                        val jsonString = dataFile.readText()
+                        val peopleData = Json.decodeFromString<List<T>>(jsonString)
+                        this.clear()
+                        this.addAll(peopleData)
+                        true
+                    } catch (e: Exception) {
+                        // File is missing or corrupt
+                        false
+                    }
+                }
+
+                /**
+                * Load object data from a given JSON file into a list
+                */
+                inline fun <reified T : Any> MutableList<T>.saveToFile(): Boolean {
+                    val jsonBuild = Json { prettyPrint = true }
+                    return try {
+                        val jsonString = jsonBuild.encodeToString(this)
+                        val dataFile = File(dataFilePath)
+                        dataFile.writeText(jsonString)
+                        true
+                    } catch (e: Exception) {
+                        // File could not be written
+                        false
+                    }
+                }
+            --></code></pre>
+
+            <div class="description">
+                <p>A global <strong>dataFilePath</strong> variable needs to be set to a location and filename (the file is created when the data is first written).</p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                val homeFolder = System.getenv("HOMEPATH")
+                val dataFilePath = homeHolder + "/users.json"
+
+                // Save the list to a file
+                users.saveToFile()
+
+                // Load the list from a previous saved file
+                users.loadFromFile()
+            --></code></pre>
+
+            <div class="description">
+                <p>Note that the functions <strong>return false</strong> if there were any issues, so that you can respond accordingly...</p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                if (!users.loadFromFile()) {
+                    // File wasn't loaded so do something
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article class="show-code">
+            <h2>When to Load Data</h2>
+
+            <div class="description">
+                <p>You would usually want to load your data <strong>when your application first loads</strong>, and before the UI is first rendered...</p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                val homeFolder = System.getenv("HOMEPATH")
+                val dataFilePath = homeHolder + "/users.json"
+
+                val users = mutableStateListOf<User>()
+
+                fun main() = singleWindowApplication() {
+
+                    // Load the data before launching UI
+                    people.loadFromFile()
+
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+                        for (user in users) {
+                            // Show the user data
+                        }
+                    }
+                }
+            --></code></pre>
+
+
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article class="show-code">
+            <h2>When to Save Data</h2>
+
+            <div class="description">
+                <p>Generally, you want to <strong>save your data each time the data is modified</strong> (i.e. new item added, item deleted, or item edited).</p>
+
+                <p>So you might have a button that creates a new object and adds it to the MutableList, then the list is saved...</p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                Button(
+                    onClick = {
+                        val newUser = User(...)
+                        users.add(newUser)
+
+                        // Data has changed, so save it
+                        users.saveToFile()
+                    }
+                ) {
+                    Text("Add New User")
+                }
+            </code></pre>
+
+            <div class="description">
+                <p>Note that you could chose to wait until the application is closing before you save any of your data, but this risks data loss if the application crashes.</p>
+            </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

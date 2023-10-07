@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const windows = document.getElementsByTagName('window');
-    const articles = document.querySelectorAll('main:not(#home) article');
+    const articles = document.querySelectorAll('main:not(#home) article:not(.show-code)');
 
     [...windows].forEach(window => {
         addTagInfo(window);
         addWrappers(window);
         doStyling(window);
         addLabels(window);
+        addValidation(window);
         addTimers(window);
         addAnimations(window);
         addIcons(window);
@@ -30,11 +31,11 @@ function addStructure(article) {
         article.append(wrapper);
     }
 
-    const codeBlocks = article.getElementsByTagName('pre');
+    const codeBlocks = article.querySelectorAll('pre:not(.show-inline)');
     if (codeBlocks.length) {
         const toggle = document.createElement('label');
         toggle.className = 'toggle-code';
-        toggle.innerHTML = '<input type="checkbox"><span class="open">See Code</span><span class="close">🗙</span>';
+        toggle.innerHTML = '<input type="checkbox" class="toggle-code"><span class="open">See Code</span><span class="close">🗙</span>';
 
         toggle.append(codeBlocks[0]);
         article.append(toggle);
@@ -79,7 +80,9 @@ function addTagInfo(el) {
 
         if      (el.tagName == 'IMG' && el.hasAttribute('icon')) { inf += "Icon"; }
         else if (el.tagName == 'IMG')                            { inf += "Image"; }
-        else if (el.tagName == 'INPUT')                          { inf += "OutlinedTextField"; }
+        else if (el.tagName == 'INPUT' && el.type == 'text')     { inf += "OutlinedTextField"; }
+        else if (el.tagName == 'INPUT' && el.type == 'checkbox') { inf += "Switch"; }
+        else if (el.tagName == 'SELECT')                         { inf += "Dropdown"; }
         else                                                     { inf += titleCase(el.tagName); }
 
         for (const attr of el.attributes) {
@@ -87,11 +90,13 @@ function addTagInfo(el) {
                 inf += ` [${attr.value}]`;
             }
             else if (!el.hasAttribute('hide-info')) {
-                if      (attr.name == 'id')    { inf += `#${attr.value}`; }
-                else if (attr.name == 'class') { inf += `.${attr.value}`; }
-                else if (attr.name == 'src')   { inf += `(${attr.value.split(/[\/\.\-]/).at(-2)})`; }
-                else if (attr.name == 'style') { continue; }
-                else if (attr.name == 'icon')  { continue; }
+                if      (attr.name == 'id')      { inf += `#${attr.value}`; }
+                else if (attr.name == 'class')   { inf += `.${attr.value}`; }
+                else if (attr.name == 'src')     { inf += `(${attr.value.split(/[\/\.\-]/).at(-2)})`; }
+                else if (attr.name == 'style')   { continue; }
+                else if (attr.name == 'icon')    { continue; }
+                else if (attr.name == 'type')    { continue; }
+                else if (attr.name == 'checked') { continue; }
                 else{
                     inf += ` ${kebabToCamelCase(attr.name)}`;
                     if (attr.value != '') {
@@ -121,6 +126,7 @@ function doStyling(el) {
         if      (attr.name == 'size')            { el.style.width           = `${attr.value}px`; el.style.maxWidth  = `${attr.value}px`; }
         else if (attr.name == 'width')           { el.style.width           = `${attr.value}px`; el.style.maxWidth  = `${attr.value}px`; }
         else if (attr.name == 'height')          { el.style.height          = `${attr.value}px`; el.style.maxHeight = `${attr.value}px`; }
+        else if (attr.name == 'weight')          { el.style.flexGrow        = `${attr.value}`;   el.style.flexBasis = `0`; }
         else if (attr.name == 'vert-spaced-by')  { el.style.gap             = `${attr.value}px`; }
         else if (attr.name == 'horiz-spaced-by') { el.style.gap             = `${attr.value}px`; }
         else if (attr.name == 'padding')         { el.style.padding         = `${attr.value}px`; }
@@ -143,7 +149,7 @@ function doStyling(el) {
 //-----------------------------------------------------------------
 
 function addWrappers(window) {
-    let elements = window.querySelectorAll('input, img');
+    let elements = window.querySelectorAll('input, select, img');
 
     for (const el of elements) {
         const wrapper = document.createElement('div');
@@ -174,17 +180,54 @@ function addWrappers(window) {
 //-----------------------------------------------------------------
 
 function addLabels(window) {
-    const inputs = window.getElementsByTagName('input');
+    const inputs = window.querySelectorAll('input, select');
 
     for (const input of inputs) {
         if (input.hasAttribute('label')) {
-            input.required = true;
+            input.placeholder = ' ';   // Used to style inputs with content
 
             const label = document.createElement('label');
             label.innerHTML = input.getAttribute('label');
 
             const parent = input.parentElement;
             parent.append(label);
+        }
+    }
+}
+
+
+
+//-----------------------------------------------------------------
+
+function addValidation(window) {
+    // Get all containers that might contain inputs and buttons
+    const groups = window.querySelectorAll(':is(box, row, column):has(:is(input[text-only], input[number-only]))');
+
+    for (const group of groups) {
+        const inputs = group.querySelectorAll('input[text-only], input[number-only]');
+        const buttons = group.querySelectorAll('button');
+        const button = buttons.length > 0 ? buttons[0] : null;
+
+        for (const input of inputs) {
+            input.required = true;
+
+            if (input.hasAttribute('text-only')) {
+                input.pattern='[a-zA-Z]+';
+            }
+            if (input.hasAttribute('number-only')) {
+                input.pattern='[0-9]+';
+            }
+
+            if (button) {
+                const validate = () => {
+                    let allValid = true;
+                    inputs.forEach(inp => allValid &&= inp.checkValidity() );
+                    button.disabled = !allValid;
+                }
+
+                validate();
+                input.addEventListener('input', validate);
+            }
         }
     }
 }
@@ -290,7 +333,8 @@ function addAnimations(window) {
         setInterval(() => {
             for (let i = 0; i < children.length; i++) {
                 const child = children[i];
-                child.style.display = (i < show) ? 'block' : 'none';
+                const display = (child.tagName == 'ROW' || child.tagName == 'COLUMN') ? 'flex' : 'block';
+                child.style.display = (i < show) ? display : 'none';
             }
 
             show += offset;
@@ -333,9 +377,11 @@ function addAnimations(window) {
         if (!interval) interval = 0;
 
         const text = typer.value;
+        const e = new Event('input');
 
         (function repeatLoop() {
             typer.value = "";
+            typer.dispatchEvent(e);
 
             setTimeout(() => {
                 let show = 0;
@@ -344,6 +390,7 @@ function addAnimations(window) {
                     // typer.focus();
                     typer.classList.add('typing');
                     typer.value += text[show++];
+                    typer.dispatchEvent(e);
 
                     if (show >= text.length) {
                         clearInterval(typist);
@@ -370,12 +417,14 @@ function addAnimations(window) {
         (function repeatLoop() {
             setTimeout(() => {
                 clicker.classList.add('clicking');
+
                 if (disable) {
                     clicker.classList.add('disabled');
                     setTimeout(() => {
                         clicker.classList.remove('disabled');
                     }, disable);
                 }
+
                 setTimeout(() => {
                     clicker.classList.remove('clicking');
                 }, 300);

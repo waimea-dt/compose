@@ -6,8 +6,8 @@
 
     <title>Compose UI - App Windows</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -21,7 +21,7 @@
 
     <main>
 
-        <h1>Compose Multi-Platform Application Windows</h1>
+        <h1>Compose Multi-Platform Project Setup and Main Windows</h1>
 
         <!-- -------------------------------------------------------------------------------------- -->
 
@@ -31,7 +31,7 @@
             <div class="description">
                 <p>In IntelliJ IDEA, create a new project, and select <strong>Compose for Desktop</strong> as the generator.</p>
 
-                <p>Configure the project:</p>
+                <h3>Configure the Project</h3>
 
                 <ul>
                     <li><em>Name</em> - Pick a suitable name for your app / project</li>
@@ -40,9 +40,22 @@
                     <li><em>JDK</em> - Version <strong>18</strong> seems to work best</li>
                 </ul>
 
+                <img class="example" src="images/new-project.png" alt="IntelliJ IDEA project setup">
             </div>
 
-            <img class="example" src="images/new-project.png" alt="IntelliJ IDEA project setup">
+            <div class="description">
+                <h3>Get the Latest Version of Kotlin and Compose</h3>
+
+                <p>In your project, open <strong>gradle.properties</strong> and set the version numbers for Kotlin, Compose and the Andorid Gradle Plugin (AGP). As of writing, these are:</p>
+
+                <pre class="show-inline"><code class="language-kotlin">
+                    kotlin.version  = 1.9.10
+                    compose.version = 1.5.1
+                    agp.version     = 8.1.1
+                </code></pre>
+
+                <p>Note: you can find the latest versions of Kotlin and Compose listed <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility">here</a> (most recent at the bottom of the table), and the latest version of the AGP listed <a target="_blank" href="https://developer.android.com/reference/tools/gradle-api">here</a>.</p>
+            </div>
 
         </article>
 
@@ -50,7 +63,10 @@
         <!-- -------------------------------------------------------------------------------------- -->
 
         <article>
-            <h2>Basic Application</h2>
+            <h2>A Basic Application Window</h2>
+
+            <window width="400" height="250" title="Basic Window">
+            </window>
 
             <div class="description">
                 <p>A UI window can easily be created using the <strong>singleWindowApplication</strong> class.</p>
@@ -58,18 +74,32 @@
                 <p>At a minimum, you need to provide a <strong>title</strong> for the window.</p>
 
                 <p>By default, the window will be <strong>resizeable</strong> and will be of an arbitrary initial size.</p>
+
+                <p>The code for this is shown below:</p>
             </div>
 
-            <window width="400" height="250" title="Basic Window">
-            </window>
-
-            <pre><code class="language-kotlin">
+            <pre class="show-inline"><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Basic Window"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     // Window content
                 }
             </code></pre>
+
+            <div class="description">
+                Some things to note...</p>
+
+                <ul>
+                    <li>The <code class="language-kotlin">main()</code> function sets up the Window</li>
+                    <li>The Window is then populated by the <code class="language-kotlin">App()</code> function</li>
+                    <li>The <code class="language-kotlin">@Composable</code> annotation indicates that this function is a UI 'building block'</li>
+                </ul>
+            </div>
 
         </article>
 
@@ -77,7 +107,10 @@
         <!-- -------------------------------------------------------------------------------------- -->
 
         <article>
-            <h2>Sizing and Positioning the Window</h2>
+            <h2>Setting the Window Size and Position</h2>
+
+            <window width="250" height="250" title="Sized Window" no-max>
+            </window>
 
             <div class="description">
                 <p>The window can be refined by providing additional parameters, and through the use of <strong>Modifiers</strong>:</p>
@@ -91,9 +124,6 @@
                 <p>There are tutorial examples with various configurations <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Window_API_new/README.md">here</a>.</p>
             </div>
 
-            <window width="250" height="250" title="Sized Window" no-max>
-            </window>
-
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Sized Window",
@@ -104,6 +134,11 @@
                     ),
                     resizable = false
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     // Window content
                 }
             </code></pre>
@@ -116,14 +151,14 @@
         <article>
             <h2>Setting the Window Icon</h2>
 
+            <window width="350" height="250" title="Window with Icon" icon="compose-logo.svg">
+            </window>
+
             <div class="description">
                 <p>The window icon can be any provided image (e.g. PNG, JPEG, etc.). It is set using the window's <strong>icon</strong> parameter.</p>
 
                 <p>The icon image should be placed into an 'images' folder within the <strong>resources</strong> folder within your project (see <a href="images/images-folder.png">here</a>).</p>
             </div>
-
-            <window width="350" height="250" title="Window with Icon" icon="compose-logo.svg">
-            </window>
 
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
@@ -133,6 +168,11 @@
                         ::loadImageBitmap
                     ))
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     // Window content
                 }
             </code></pre>

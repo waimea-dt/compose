@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Compose UI - Positioning and Alignment</title>
+    <title>Compose UI - Size, Positioning and Alignment</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -17,11 +17,11 @@
 
 <body>
 
-    <include src="includes/header.html" data-sub-title="Positioning and Alignment"></include>
+    <include src="includes/header.html" data-sub-title="Size, Positioning and Alignment"></include>
 
     <main>
 
-        <h1>Compose Multi-Platform Positioning and Alignment</h1>
+        <h1>Compose Multi-Platform Size, Positioning and Alignment</h1>
 
         <!-- -------------------------------------------------------------------------------------- -->
 
@@ -29,20 +29,25 @@
 
             <h2>Simple Window</h2>
 
-            <div class="description">
-                <p>This window contains nothing but a single <strong>Text</strong> element. It aligns to the top-left.</p>
-            </div>
-
             <window width="300" height="200" title="Basic" show-outlines>
 
                 <text>Hello World</text>
 
             </window>
 
+            <div class="description">
+                <p>This window contains nothing but a single <strong>Text</strong> element. It aligns to the top-left.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Basic"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Text("Hello World!")
                 }
             </code></pre>
@@ -54,13 +59,9 @@
 
         <article>
 
-            <h2>Horizontal Sizing</h2>
+            <h2>Horizontal Full Width</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Box</strong> layout container set to the full width of the window.</p>
-            </div>
-
-            <window width="300" height="200" title="Horizontal Sizing" show-outlines>
+            <window width="300" height="200" title="Full Width" show-outlines>
 
                 <box fill-max-width>
 
@@ -70,10 +71,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Box</strong> layout container set to the full width of the window.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
-                    title = "Horizontal Sizing"
+                    title = "Full Width"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box(
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -89,13 +99,9 @@
 
         <article>
 
-            <h2>Vertical Sizing</h2>
+            <h2>Vertical Full Height</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Box</strong> layout container set to the full height of the window.</p>
-            </div>
-
-            <window width="300" height="200" title="Vertical Sizing" show-outlines>
+            <window width="300" height="200" title="Full Height" show-outlines>
 
                 <box fill-max-height>
 
@@ -105,10 +111,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Box</strong> layout container set to the full height of the window.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
-                    title = "Horizontal"
+                    title = "Full Height"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box(
                         modifier = Modifier.fillMaxHeight()
                     ) {
@@ -126,10 +141,6 @@
 
             <h2>Full Width and Height</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Box</strong> layout container set to the full width and height of the window.</p>
-            </div>
-
             <window width="300" height="200" title="Full Size" show-outlines>
 
                 <box fill-max-size>
@@ -140,10 +151,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Box</strong> layout container set to the full width and height of the window.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Full Size"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box(
                         modifier = Modifier.fillMaxSize()
                     ) {
@@ -159,11 +179,191 @@
 
         <article>
 
-            <h2>Simple Centering</h2>
+            <h2>Using Weights</h2>
+
+            <window width="300" height="200" title="Using Weights" show-outlines>
+
+                <row fill-max-size hide-highlight>
+
+                    <column weight="2" fill-max-height>
+
+                        <text>Hello World!</text>
+
+                    </column>
+
+                    <column weight="1" fill-max-height>
+
+                        <text>From</text>
+
+                    </column>
+
+                    <column weight="1" fill-max-height>
+
+                        <text>Kotlin</text>
+
+                    </column>
+
+                </row>
+
+            </window>
 
             <div class="description">
-                <p>This window contains a <strong>Box</strong> layout container set to fill the window, and with the alignment centred.</p>
+                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong>. Each of the Columns has a <strong>weight</strong> modifier which determines what proportion of the overall width it will try to take up.</p>
             </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Using Weights"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Row(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(2.0f).fillMaxHeight()
+                        ) {
+                            Text("Hello World!")
+                        }
+
+                        Column(
+                            modifier = Modifier.weight(1.0f).fillMaxHeight()
+                        ) {
+                            Text("From")
+                        }
+
+                        Column(
+                            modifier = Modifier.weight(1.0f).fillMaxHeight()
+                        ) {
+                            Text("Kotlin")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Using a Single Weight</h2>
+
+            <window width="300" height="200" title="Single Weight" show-outlines>
+
+                <column fill-max-size hide-highlight>
+
+                    <row weight="0" fill-max-width hide-info>
+
+                        <text>Hello World!</text>
+
+                    </row>
+
+                    <row weight="1" fill-max-width>
+
+                        <text>From</text>
+
+                    </row>
+
+                    <row weight="0" fill-max-width hide-info>
+
+                        <text>Kotlin</text>
+
+                    </row>
+
+                </column>
+
+            </window>
+
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong>. Only the <strong>middle</strong> Row has a <strong>weight</strong> modifier which results in that Row <strong>growing to fill all of the available space</strong>, pushing the other Rows up / down.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Single Weight"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Row(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Column(
+                            modifier = Modifier.fillMaxHeight()
+                        ) {
+                            Text("Hello World!")
+                        }
+
+                        Column(
+                            modifier = Modifier.fillMaxHeight()
+                        ) {
+                            Text("From")
+                        }
+
+                        Column(
+                            modifier = Modifier.weight(1.0f).fillMaxHeight()
+                        ) {
+                            Text("Kotlin")
+                        }
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Padding</h2>
+
+            <window width="300" height="200" title="Padding" show-outlines>
+
+                <box padding="30">
+
+                    <text>Hello World!</text>
+
+                </box>
+
+            </window>
+
+            <div class="description">
+                <p>This window contains a <strong>Box</strong> layout container with padding. This adds space around its content.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
+                fun main() = singleWindowApplication(
+                    title = "Padding"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Box(
+                        modifier = Modifier.padding(30.dp)
+                    ) {
+                        Text("Hello World!")
+                    }
+                }
+            </code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+
+            <h2>Simple Centering</h2>
 
             <window width="300" height="200" title="Simple Centering" show-outlines>
 
@@ -175,10 +375,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Box</strong> layout container set to fill the window, and with the alignment centred.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Simple Centering"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -195,46 +404,7 @@
 
         <article>
 
-            <h2>Padding</h2>
-
-            <div class="description">
-                <p>This window contains a <strong>Box</strong> layout container with padding. This adds space around its content.</p>
-            </div>
-
-            <window width="300" height="200" title="Padding" show-outlines>
-
-                <box padding="30">
-
-                    <text>Hello World!</text>
-
-                </box>
-
-            </window>
-
-            <pre><code class="language-kotlin">
-                fun main() = singleWindowApplication(
-                    title = "Padding"
-                ) {
-                    Box(
-                        modifier = Modifier.padding(30.dp)
-                    ) {
-                        Text("Hello World!")
-                    }
-                }
-            </code></pre>
-
-        </article>
-
-
-        <!-- -------------------------------------------------------------------------------------- -->
-
-        <article>
-
             <h2>Box Alignment of All Content</h2>
-
-            <div class="description">
-                <p>This window contains a collection of <strong>Box</strong> containers with various <strong>alignment</strong> settings. These alignments affect <em>all child elements</em>, since they are set on the Box itself.</p>
-            </div>
 
             <window width="400" height="400" title="Box Alignment of All" show-outlines>
 
@@ -280,10 +450,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a collection of <strong>Box</strong> containers with various <strong>alignment</strong> settings. These alignments affect <em>all child elements</em>, since they are set on the Box itself.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Box Alignment of All"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Row() {
                             Box(
@@ -366,10 +545,6 @@
 
             <h2>Content Alignment Within a Box</h2>
 
-            <div class="description">
-                <p>This window contains a single <strong>Box</strong> container with a number of elements inside. These each have different <strong>alignment</strong> settings which only affect them individually.</p>
-            </div>
-
             <window width="400" height="400" title="Alignment Within Box" show-outlines>
 
                 <column fill-max-size padding="20" hide-highlight>
@@ -390,10 +565,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a single <strong>Box</strong> container with a number of elements inside. These each have different <strong>alignment</strong> settings which only affect them individually.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Alignment Within Box"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box(
                         modifier = Modifier.fillMaxSize()
                     ) {
@@ -472,10 +656,6 @@
 
             <h2>Row Horizontal Alignment</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>horizontal alignment</strong> settings.</p>
-            </div>
-
             <window width="420" height="350" title="Horizontal Alignment" show-outlines>
 
                 <column fill-max-size vert-space-between padding="20" hide-highlight>
@@ -502,10 +682,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>horizontal alignment</strong> settings.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Horizontal Alignment",
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -546,10 +735,6 @@
 
             <h2>Row Horizontal Spacing</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>horizontal spacing</strong> settings.</p>
-            </div>
-
             <window width="420" height="350" title="Horizontal Spacing" show-outlines>
 
                 <column fill-max-size vert-space-between padding="20" hide-highlight>
@@ -582,10 +767,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>horizontal spacing</strong> settings.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Horizontal Spacing",
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -635,10 +829,6 @@
 
             <h2>Column Vertical Alignment</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong> with various <strong>vertical alignment</strong> settings.</p>
-            </div>
-
             <window width="420" height="350" title="Vertical Alignment" show-outlines>
 
                 <row fill-max-size horiz-space-between padding="20" hide-highlight>
@@ -665,10 +855,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong> with various <strong>vertical alignment</strong> settings.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Vertical Alignment"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Column(
                             modifier = Modifier.fillMaxHeight(),
@@ -709,10 +908,6 @@
 
             <h2>Column Vertical Spacing</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong> with various <strong>vertical spacing</strong> settings.</p>
-            </div>
-
             <window width="420" height="350" title="Vertical Spacing" show-outlines>
 
                 <row fill-max-size horiz-space-between padding="20" hide-highlight>
@@ -745,10 +940,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> of <strong>Columns</strong> with various <strong>vertical spacing</strong> settings.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Vertical Spacing"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Column(
                             modifier = Modifier.fillMaxHeight(),
@@ -798,10 +1002,6 @@
 
             <h2>Row Vertical Alignment</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>vertical alignment</strong> settings.</p>
-            </div>
-
             <window width="400" height="400" title="Vertical Alignment" show-outlines>
 
                 <column fill-max-size vert-space-between padding="20" hide-highlight>
@@ -828,10 +1028,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Column</strong> of <strong>Rows</strong> with various <strong>vertical alignment</strong> settings.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Vertical Alignment"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -875,10 +1084,6 @@
 
             <h2>Column Horizontal Alignment</h2>
 
-            <div class="description">
-                <p>This window contains a <strong>Row</strong> of <strong>Column</strong> with various <strong>horizontal alignment</strong> settings.</p>
-            </div>
-
             <window width="400" height="400" title="Horizontal Alignment" show-outlines>
 
                 <row fill-max-size horiz-space-between padding="20" hide-highlight>
@@ -905,10 +1110,19 @@
 
             </window>
 
+            <div class="description">
+                <p>This window contains a <strong>Row</strong> of <strong>Column</strong> with various <strong>horizontal alignment</strong> settings.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Horizontal Alignment"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Column(
                             modifier = Modifier.fillMaxHeight(),

@@ -47,7 +47,7 @@
                         <span class="material-symbols-outlined">web_asset</span>
                         Application Windows
                     </a></dt>
-                    <dd>Creating a Compose MP application main window</dd>
+                    <dd>Creating a Compose MP project and main window</dd>
 
                     <dt><a href="layout.html">
                         <span class="material-symbols-outlined">dashboard</span>
@@ -63,9 +63,9 @@
 
                     <dt><a href="position.html">
                         <span class="material-symbols-outlined">format_line_spacing</span>
-                        Position &amp; Alignment
+                        Size, Position &amp; Alignment
                     </a></dt>
-                    <dd>Positioning, spacing and aligning elements within containers</dd>
+                    <dd>Sizing, positioning, spacing and aligning elements within containers</dd>
 
                     <dt><a href="state.html">
                         <span class="material-symbols-outlined">dataset_linked</span>
@@ -102,6 +102,12 @@
                         Theming Your UI
                     </a></dt>
                     <dd>Altering the colours, fonts, borders, etc. used in your UI</dd>
+
+                    <dt><a href="files.html">
+                        <span class="material-symbols-outlined">folder_open</span>
+                        Saving / Load Files
+                    </a></dt>
+                    <dd>Saving data to file so you can load it again later</dd>
                 </dl>
             </nav>
 
@@ -116,6 +122,11 @@
                 fun main() = singleWindowApplication(
                     title = "Compose Demo"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -138,9 +149,10 @@
 
             <p>However, Compose MP can create all sorts of complex, composable, reactive UIs that run natively across a wide variety of devices and operating systems.</p>
 
-            <p>These sites have good examples of Compose in-use:</p>
+            <p>These sites introduce Compose and have good examples of Compose in-use:</p>
 
             <ul>
+                <li><a target="_blank" href="https://developer.android.com/jetpack/compose/mental-model">Thinking in Compose</a></li>
                 <li><a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/README.md">Compose MP Tutorials</a></li>
                 <li><a target="_blank" href="https://developer.android.com/jetpack/compose/layouts/basics">Jetpack Compose Layout Basics</a></li>
                 <li><a target="_blank" href="https://developer.android.com/jetpack/compose/modifiers-list">Jetpack Compose Layout Modifiers</a></li>

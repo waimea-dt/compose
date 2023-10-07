@@ -6,8 +6,8 @@
 
     <title>Compose UI - Colouts and Fonts</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -41,20 +41,25 @@
         <article>
             <h2>Background Colour</h2>
 
-            <div class="description">
-                <p>Colour can't simply be applied to the Window background. Instead colour is applied to the <strong>Row</strong> and/or <strong>Column</strong> containers within using <strong>Modifiers</strong>.</p>
-            </div>
-
             <window width="350" height="200" title="Coloured Window">
                 <column fill-max-size background="cyan" vert-center horiz-center>
                     <text>Hello World!</text>
                 </column>
             </window>
 
+            <div class="description">
+                <p>Colour can't simply be applied to the Window background. Instead colour is applied to the <strong>Row</strong> and/or <strong>Column</strong> containers within using <strong>Modifiers</strong>.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Coloured Window"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column(
                         modifier = Modifier.fillMaxSize().background(Color.Cyan)
                     ) {
@@ -72,10 +77,6 @@
         <article>
             <h2>Text Colour</h2>
 
-            <div class="description">
-                <p>Colour can be applied to any text by setting the <strong>color</strong> parameter to the desired colour.</p>
-            </div>
-
             <window width="350" height="200" title="Coloured Text">
                 <column fill-max-size vert-center horiz-center vert-spaced-by="20" hide-highlight>
                     <text color="red">Hello World</text>
@@ -84,10 +85,19 @@
                 </column>
             </window>
 
+            <div class="description">
+                <p>Colour can be applied to any text by setting the <strong>color</strong> parameter to the desired colour.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Coloured Text"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Text(
                             text = "Hello World",
@@ -116,10 +126,6 @@
         <article>
             <h2>Button Colour</h2>
 
-            <div class="description">
-                <p>Colours can be applied to buttons by setting a <strong>backgroundColor</strong> and <strong>contentColor</strong> value (see the example code).</p>
-            </div>
-
             <window width="350" height="200" title="Coloured Buttons">
                 <row fill-max-size vert-center horiz-center horiz-spaced-by="20" hide-highlight>
                     <button background="red" color="white">A</button>
@@ -128,10 +134,19 @@
                 </row>
             </window>
 
+            <div class="description">
+                <p>Colours can be applied to buttons by setting a <strong>backgroundColor</strong> and <strong>contentColor</strong> value (see the example code).</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Coloured Text"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Button(
                             onClick = {...},
@@ -174,12 +189,6 @@
         <article>
             <h2>Borders</h2>
 
-            <div class="description">
-                <p>Containers such as <strong>Rows</strong> and <strong>Columns</strong> can have borders added to them using the <strong>border Modifier</strong>.</p>
-
-                <p>Note that the <strong>Modifier order</strong> is important: Add borders and backgrounds <em>before</em> padding.</p>
-            </div>
-
             <window width="350" height="200" title="Borders">
                 <row fill-max-size vert-center horiz-space-evenly hide-highlight>
                     <column bordered="green" background="yellow" padding="30">
@@ -193,10 +202,21 @@
                 </row>
             </window>
 
+            <div class="description">
+                <p>Containers such as <strong>Rows</strong> and <strong>Columns</strong> can have borders added to them using the <strong>border Modifier</strong>.</p>
+
+                <p>Note that the <strong>Modifier order</strong> is important: Add borders and backgrounds <em>before</em> padding.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Borders"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row() {
                         Column(
                             modifier = Modifier
@@ -230,10 +250,6 @@
         <article>
             <h2>Text Size, Weight and Style</h2>
 
-            <div class="description">
-                <p>The size, weight and style of text can be modified using <strong>fontWeight</strong>, <strong>fontStyle</strong> and <strong>fontSize</strong> parameters.</p>
-            </div>
-
             <window width="450" height="260" title="Styled Text">
                 <column fill-max-size vert-center horiz-center vert-spaced-by="10" hide-highlight>
                     <text font-bold>Hello World!</text>
@@ -243,10 +259,19 @@
                 </column>
             </window>
 
+            <div class="description">
+                <p>The size, weight and style of text can be modified using <strong>fontWeight</strong>, <strong>fontStyle</strong> and <strong>fontSize</strong> parameters.</p>
+            </div>
+
             <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Styled Text"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Column() {
                         Text("Hello World!", fontWeight = FontWeight.Bold)
                         Text("Hello World!", fontStyle = FontStyle.Italic)
@@ -265,15 +290,6 @@
         <article>
             <h2>Text Fonts</h2>
 
-            <div class="description">
-                <p>Fonts can be loaded and used, either as the default font for the whole UI, or on an individual text element.</p>
-
-                <p>Font files should be placed into a 'fonts' folder within the <strong>resources</strong> folder inside your project (see <a href="images/fonts-folder.png">here</a>). TrueType (TTF) fonts should be used.</p>
-
-                <p>Note, make sure the correct Font class is imported: <strong>androidx.compose.ui.text.<underline>platform</underline>.Font</strong></p>
-
-            </div>
-
             <window width="450" height="250" title="Fonts">
                 <column fill-max-size vert-center horiz-center vert-spaced-by="20" hide-highlight align-center>
                     <text font="caveat">The default font for all UI elements has been altered to this monstrosity... Don't ever do this!</text>
@@ -285,6 +301,15 @@
                 </column>
             </window>
 
+            <div class="description">
+                <p>Fonts can be loaded and used, either as the default font for the whole UI, or on an individual text element.</p>
+
+                <p>Font files should be placed into a 'fonts' folder within the <strong>resources</strong> folder inside your project (see <a href="images/fonts-folder.png">here</a>). TrueType (TTF) fonts should be used.</p>
+
+                <p>Note, make sure the correct Font class is imported: <strong>androidx.compose.ui.text.<underline>platform</underline>.Font</strong></p>
+
+            </div>
+
             <pre><code class="language-kotlin">
                 val antonFont  = FontFamily(Font("fonts/Anton-Regular.ttf"))
                 val caveatFont = FontFamily(Font("fonts/Caveat-Regular.ttf"))
@@ -292,6 +317,11 @@
                 fun main() = singleWindowApplication(
                     title = "Fonts"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     // Set the default font for the app
                     MaterialTheme(
                         typography = Typography(defaultFontFamily = caveatFont)
@@ -329,10 +359,6 @@
         <article>
             <h2>Themed Example 1</h2>
 
-            <div class="description">
-                <p>This example note-taking app shows off various theming techniques: custom fonts; background, button and text colours; custom borders; etc.</p>
-            </div>
-
             <window width="400" height="400" title="Notes" background="#fff176">
 
                 <column fill-max-size vert-center horiz-center vert-spaced-by="20" padding="20" font="caveat" hide-info>
@@ -357,6 +383,9 @@
 
             </window>
 
+            <div class="description">
+                <p>This example note-taking app shows off various theming techniques: custom fonts; background, button and text colours; custom borders; etc.</p>
+            </div>
 
             <pre><code class="language-kotlin">
                 val antonFont  = FontFamily(Font("fonts/Anton-Regular.ttf"))
@@ -368,6 +397,11 @@
                 fun main() = singleWindowApplication(
                     title = "Notes"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     MaterialTheme(
                         typography = Typography(defaultFontFamily = caveatFont)
                     ) {
@@ -420,10 +454,6 @@
         <article>
             <h2>Themed Example 2</h2>
 
-            <div class="description">
-                <p>This example game window showing some player stats, shows off various theming techniques: custom font, background and text colours, borders, etc.</p>
-            </div>
-
             <window width="550" height="320" title="Player Stats" background="#37474f">
 
                 <row fill-max-size vert-center horiz-center horiz-spaced-by="10" padding="10" hide-info>
@@ -455,6 +485,9 @@
 
             </window>
 
+            <div class="description">
+                <p>This example game window showing some player stats, shows off various theming techniques: custom font, background and text colours, borders, etc.</p>
+            </div>
 
             <pre><code class="language-kotlin">
                 val antonFont = FontFamily(Font("fonts/Anton-Regular.ttf"))
@@ -466,6 +499,11 @@
                 fun main() = singleWindowApplication(
                     title = "Player Stats"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     Row(
                         modifier = Modifier.background(backCol)
                     ) {

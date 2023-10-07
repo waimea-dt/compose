@@ -49,6 +49,12 @@
 
     --win-input-back-col: #fff;
     --win-input-outline-col: #999;
+    --win-input-outline-invalid-col: #c00;
+
+    --win-switch-back-col: #ccc;
+    --win-switch-outline-col: #777;
+    --win-switch-slider-off-col: #777;
+    --win-switch-slider-on-col: #fff;
 
     --win-disabled-col: #ccc;
 
@@ -67,35 +73,28 @@ article .info {
     gap: var(--padding-v-large);
 }
 
-article .info h2 {
-    order: 1;
+article .info h3 {
+    color: var(--primary-col);
+    margin-top: var(--padding-small);
 }
 
-article .info window {
-    order: 2;
+
+/* CODE LISTS
+*************************************************************/
+dl.code-list {
+    margin: var(--padding-large) 0;
 }
 
-article .info div.description {
-    order: 3;
-    max-width: 35rem;
-    min-width: 25rem;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-small);
+dl.code-list dd {
+    font-size: 0.9em;
 }
-
-article .info img.example {
-    order: 4;
-}
-
 
 
 /* CODE PREVIEW
 *************************************************************/
 
 label.toggle-code {
-    order: 4;
+    /* order: 4; */
     text-align: center;
     align-self: center;
 }
@@ -134,7 +133,7 @@ label.toggle-code pre {
     display: none;
 }
 
-article:has(input:checked) {
+article:has(input.toggle-code:checked) {
     position: fixed;
     bottom: 50%;
     right: 50%;
@@ -151,23 +150,23 @@ article:has(input:checked) {
     max-width: unset;
 }
 
-label.toggle-code input:checked ~ pre {
+label.toggle-code input.toggle-code:checked ~ pre {
     display: block;
     max-height: 85vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-label.toggle-code input:checked ~ span.open {
+label.toggle-code input.toggle-code:checked ~ span.open {
     display: none;
 }
 
-label.toggle-code input:checked ~ span.close {
+label.toggle-code input.toggle-code:checked ~ span.close {
     display: block;
     opacity: 0.5;
 }
 
-label.toggle-code input:checked ~ span.close:hover {
+label.toggle-code input.toggle-code:checked ~ span.close:hover {
     opacity: 1.0;
 }
 
@@ -325,7 +324,7 @@ window img {
     margin: 0;
 }
 
-window input {
+window :is(input, select) {
     font-size: inherit;
     background-color: transparent;
     color: var(--win-text-col);
@@ -337,8 +336,8 @@ window input {
     overflow: visible;
 }
 
-window input:focus,
-window input.typing {
+window :is(input, select):focus,
+window :is(input, select).typing {
     outline: none;
     border-color: var(--win-primary-col);
 }
@@ -355,17 +354,24 @@ window div.wrapper label {
     transition: all 200ms;
 }
 
-window div.wrapper input:required:valid ~ label {
-    display: none;
-}
-
-window div.wrapper input:required:is(:focus, :valid) ~ label {
+window div.wrapper :is(input, select):is(:focus, :not(:placeholder-shown)) ~ label {
     display: block;
     top: -0.5rem;
     left: 0.6rem;
     font-size: 0.7rem;
-    color: var(--win-primary-col);
     background-color: var(--win-back-col);
+}
+
+window div.wrapper :is(input, select):focus ~ label {
+    color: var(--win-primary-col);
+}
+
+window :is(input, select):required:invalid {
+    border-color: var(--win-input-outline-invalid-col);
+}
+
+window div.wrapper :is(input, select):required:is(:focus, :not(:placeholder-shown)):invalid ~ label {
+    color: var(--win-input-outline-invalid-col);
 }
 
 window timer {
@@ -396,7 +402,9 @@ window button {
     border: 1px solid transparent;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--padding-small);
+    min-width: 1.5em;
 }
 
 window button img[icon] {
@@ -432,6 +440,57 @@ window button[disabled] {
     background-color: var(--win-disabled-col);
 }
 
+
+
+window input[type=checkbox] {
+    position: relative;
+    vertical-align: text-top;
+    width: 0;
+    height: 1.5em;
+    margin-right: 2.5em;
+}
+
+window input[type=checkbox]::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 2.5em;
+    height: 1.5em;
+    background-color: var(--win-switch-back-col);
+    border-radius: 1em;
+    border: 2px solid var(--win-switch-outline-col);
+}
+
+window input[type=checkbox]:checked::before {
+    background-color: var(--win-primary-col);
+    border-color: var(--win-primary-col);
+}
+
+window input[type=checkbox]::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0.35em;
+    left: 0.3em;
+    width: 0.8em;
+    height: 0.8em;
+    background-color: var(--win-switch-slider-off-col);
+    border-radius: 1em;
+    transition: all 250ms;
+}
+
+window input[type=checkbox]:checked::after {
+    top: 0.25em;
+    left: 1.2em;
+    width: 1em;
+    height: 1em;
+    background-color: var(--win-switch-slider-on-col);
+}
+
+
+
 window .clicking {
     transform: scale(0.9);
     z-index: 1;
@@ -451,8 +510,8 @@ window .clicking::after {
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    right: 0;
-    top: 1.5rem;
+    right: -0.5em;
+    top: 1.3rem;
     width: 1.5rem;
     height: 2rem;
     z-index: 1;
@@ -531,11 +590,13 @@ box[vert-top]     > *, box [self-vert-top]     { align-self: start; }
 box[vert-center]  > *, box [self-vert-center]  { align-self: center; }
 box[vert-bottom]  > *, box [self-vert-bottom]  { align-self: end; } */
 
-[bordered] { border: 4px solid black; }
-[bordered="red"]   { border-color: red; }
-[bordered="green"] { border-color: green; }
-[bordered="blue"]  { border-color: blue; }
-[bordered="grey"]  { border-color: #263238; }
+[bordered]             { border: 4px solid black; }
+[bordered="red"]       { border-color: red; }
+[bordered="green"]     { border-color: green; }
+[bordered="blue"]      { border-color: blue; }
+[bordered="yellow"]    { border-color: yellow; }
+[bordered="grey"]      { border-color: #263238; }
+[bordered="lightgrey"] { border-color: #8798a0; }
 
 
 [font="anton"]  { font-family: Anton; }
@@ -612,7 +673,7 @@ window :is(text, button, timer, spacer, div.wrapper):not([hide-highlight]):hover
 }
 
 /* Kludge to colour label back to match hovered window back colour */
-window :is(row, column, box):not([hide-highlight]):hover div.wrapper input:required:is(:focus, :valid) ~ label::before {
+window :is(row, column, box):not([hide-highlight]):hover div.wrapper :is(input, select):required:is(:focus, :valid) ~ label::before {
     content: "";
     position: absolute;
     top: 0;

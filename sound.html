@@ -6,8 +6,8 @@
 
     <title>Compose UI - Sounds</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -28,17 +28,6 @@
         <article>
             <h2>Sound</h2>
 
-            <div class="description">
-                <p>Sound files can be played when required. For cross-platform compatibility, sound files in <strong>WAV</strong> format are best (MP3s will play on some systems, but not all).</p>
-
-                <p>Sound files should be placed into an 'sounds' folder within the <strong>resources</strong> folder inside your project (see <a href="images/sounds-folder.png">here</a>).</p>
-
-                <p>Sound files need to be configured as <strong>AudioStreams</strong> and as audio <strong>Clips</strong>, then loaded when the window first renders via the <strong>LaunchedEffect</strong> window component. The clips can then be played as needed. In the example code, a <strong>play()</strong> function is added to the Clip class to make this easier.</p>
-
-                <p><em>(Note that you will need to click somewhere in this page for the audio to play correctly)</em></p>
-
-            </div>
-
             <window width="300" height="150" title="Sounds">
 
                 <row padding="30" fill-max-size vert-center horiz-spaced-by="30" hide-highlight>
@@ -51,6 +40,17 @@
 
             </window>
 
+            <div class="description">
+                <p>Sound files can be played when required. For cross-platform compatibility, sound files in <strong>WAV</strong> format are best (MP3s will play on some systems, but not all).</p>
+
+                <p>Sound files should be placed into an 'sounds' folder within the <strong>resources</strong> folder inside your project (see <a href="images/sounds-folder.png">here</a>).</p>
+
+                <p>Sound files need to be configured as <strong>AudioStreams</strong> and as audio <strong>Clips</strong>, then loaded when the window first renders via the <strong>LaunchedEffect</strong> window component. The clips can then be played as needed. In the example code, a <strong>play()</strong> function is added to the Clip class to make this easier.</p>
+
+                <p><em>(Note that you will need to click somewhere in this page for the audio to play correctly)</em></p>
+
+            </div>
+
             <pre><code class="language-kotlin">
                 val squeakFile = object {}.javaClass.getResource("/sounds/squeak.wav")
                 val dingFile   = object {}.javaClass.getResource("/sounds/ding.wav")
@@ -60,7 +60,14 @@
                 val squeakClip = AudioSystem.getClip()
                 val dingClip   = AudioSystem.getClip()
 
-                fun main() = singleWindowApplication( title = "Timer" ) {
+                fun main() = singleWindowApplication(
+                    title = "Timer"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
                     // Load clips into memory on first render
                     LaunchedEffect(Unit) {
                         squeakClip.open(squeakStream)

@@ -6,8 +6,8 @@
 
     <title>Compose UI - State</title>
 
-    <link rel="icon" href="images/compose-logo.png" type="image/png">
-    <link rel="icon" href="images/compose-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -23,30 +23,84 @@
 
         <h1>Compose Multi-Platform App State</h1>
 
-        <div class="explanation">
+        <!-- -------------------------------------------------------------------------------------- -->
 
-            <p>The state of an application is held by its variables, lists and objects. As the application runs, these change. Often we want this change of state to be linked to the UI: inputs that alter the state, or display elements that reflect the state in some way.</p>
+        <article>
+            <h2>Compose State Variables</h2>
 
-            <p>To make this easy, Compose MP provides <em>observable</em> objects - these are essentially variables that are monitored for changes. Any UI elements that they are linked to are <strong>automatically</strong> updated when the objects are changed.</p>
+            <div class="description">
 
-            <p>These observable objects are created using:</p>
+                <p>The <strong>state</strong> of an application is held by its <strong>variables</strong>, <strong>lists</strong> and <strong>objects</strong>. The values of these change as the application runs. Often we want this change of state to be reflected in the UI: text to update, values to alter, etc.</p>
 
-            <ul>
-                <li><strong>mutableStateOf(...)</strong> for single items like Strings, Ints, etc.</li>
-                <li><strong>mutableStateListOf&lt;Type&gt;()</strong> for lists of objects</li>
-            </ul>
-        </div>
+                <h3>State Variables</h3>
+
+                <p>To make this easy, Compose MP provides <em>state varaibles</em> that are <strong>'observable'</strong> which means that they are <strong>monitored for changes</strong> - Any UI elements that are linked to them are <strong>automatically</strong> updated when the variable values change.</p>
+
+            </div>
+
+            <img src="images/state-vars.png" alt="Compose state variable">
+
+        </article>
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Using Compose State Variables</h2>
+
+            <div class="description">
+
+                <h3>Where to Declare State Variables</h3>
+
+                <p>Declare state variables inside the <code class="language-kotlin">@Composable</code> function that will use it. This will often be <code class="language-kotlin">App()</code>, but it could be within a smaller element within the App.</p>
+
+            </div>
+
+            <div class="description">
+
+                <h3>How to Declare State Variables</h3>
+
+                <p>State variables are created as:</p>
+
+                <dl class="code-list">
+                    <dt><code class="language-kotlin"><!--MutableStateOf<Type>--></code></dt>
+                    <dd>For single Strings, Ints, etc.</dd>
+
+                    <dt><code class="language-kotlin"><!--MutableStateListOf<Type>--></code></dt>
+                    <dd>For lists (arrays) of objects</dd>
+                </dl>
+
+                <p>To create a single state variable use the <code class="language-kotlin">by</code> keyword. For a list state varaible, use <code class="language-kotlin">=</code>. Wrap the declaration in a <code class="language-kotlin">remember {...}</code> block to preserve the value when the UI updates...</p>
+
+            </div>
+
+            <div class="description">
+
+                <h3>Example State Variable Declarations</h3>
+
+                <pre class="show-inline"><code class="language-kotlin"><!--
+                    @Composable
+                    fun App() {
+
+                        var message by remember{
+                            mutableStateOf("Welcome!")
+                        }
+
+                        var names = remember{
+                            mutableStateListOf<String>()
+                        }
+
+                        // Window content
+                    }
+                --></code></pre>
+
+            </div>
+
+        </article>
 
         <!-- -------------------------------------------------------------------------------------- -->
 
         <article>
             <h2>Text Showing State</h2>
-
-            <div class="description">
-                <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
-
-                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnges to the object will caude the UI to update accordingly.</p>
-            </div>
 
             <window width="300" height="200" title="System Status">
 
@@ -59,13 +113,24 @@
 
             </window>
 
-            <pre><code class="language-kotlin">
-                // Value will be updated elsewhere in the code
-                var status by mutableStateOf("Please wait...")
+            <div class="description">
+                <p>The <strong>Text</strong> element can be used to display text which can be styled in various ways.</p>
 
+                <p>Text can be linked to an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong> meaning that any chnges to the object will caude the UI to update accordingly.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "System Status"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    // Value will be updated elsewhere in the code
+                    var status by remember{ mutableStateOf("Please wait...") }
+
                     Column {
                         Text(status)
                     }
@@ -79,12 +144,6 @@
 
         <article>
             <h2>Responding to Buttons</h2>
-
-            <div class="description">
-                <p><strong>Button</strong> elements can trigger a change in internal state, which could then be reflected in <strong>Text</strong> elements.</p>
-
-                <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked. Here is where the internal state can be updated.</p>
-            </div>
 
             <window width="300" height="200" title="Pick an Option">
 
@@ -104,13 +163,23 @@
 
             </window>
 
-            <pre><code class="language-kotlin">
-                // Values are linked to the TextField
-                var message by mutableStateOf("Pick an option...")
+            <div class="description">
+                <p><strong>Button</strong> elements can trigger a change in internal state, which could then be reflected in <strong>Text</strong> elements.</p>
 
+                <p>Buttons require an <strong>onClick</strong> parameter with the code that is run when the Button is clicked. Here is where the internal state can be updated.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Pick an Option"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var message by remember { mutableStateOf("Pick an option...") }
+
                     Column {
                         Text(message)
 
@@ -145,19 +214,11 @@
         <article>
             <h2>Text Changing State</h2>
 
-            <div class="description">
-                <p>The <strong>OutlinedTextField</strong> element can be used to get text input from the user.</p>
-
-                <p>TextFields require an <strong>onValueChange</strong> parameter with the code to be run when text is typed.</p>
-
-                <p>A TextField will usually update an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong>, so the <strong>value</strong> parameter is set to the object and the <strong>onValueChange</strong> code updates the object.</p>
-            </div>
-
             <window width="300" height="200" title="Who Are You?">
 
                 <column padding="20" fill-max-size vert-spaced-by="30" vert-center horiz-center hide-highlight>
                     <div animate-swap animate-interval="3000">
-                        <text var="message">Please enter your name...</text>
+                        <text var="message">Enter name...</text>
                         <text var="message">Welcome, Jimmy!</text>
                     </div>
                     <row horiz-spaced-by="20" vert-center hide-highlight>
@@ -168,14 +229,26 @@
 
             </window>
 
-            <pre><code class="language-kotlin">
-                // Values are linked to the TextField
-                var name by mutableStateOf("")
-                var welcome by mutableStateOf("Please enter your name...")
+            <div class="description">
+                <p>The <strong>OutlinedTextField</strong> element can be used to get text input from the user.</p>
 
+                <p>TextFields require an <strong>onValueChange</strong> parameter with the code to be run when text is typed.</p>
+
+                <p>A TextField will usually update an <em>observable</em>, mutable object created via <strong>mutableStateOf(...)</strong>, so the <strong>value</strong> parameter is set to the object and the <strong>onValueChange</strong> code updates the object.</p>
+            </div>
+
+            <pre><code class="language-kotlin">
                 fun main() = singleWindowApplication(
                     title = "Who Are You?",
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    var name by remember { mutableStateOf("") }
+                    var welcome by remember { mutableStateOf("Enter name...") }
+
                     Column {
                         Text(welcome)
 
@@ -203,12 +276,6 @@
         <article>
             <h2>List of Strings</h2>
 
-            <div class="description">
-                <p>Rather than use a <strong>MutableListOf&lt;String&gt;</strong> to store a list of Strings, instead use a <strong>MutableStateListOf&lt;String&gt;</strong>. This is an <em>observable</em> list, meaning that any changes to it will cause the UI to update accordingly. </p>
-
-                <p>A <strong>loop</strong> is used to show UI elements for the list.</p>
-            </div>
-
             <window width="300" height="280" title="Employee List">
 
                 <column padding="20" fill-max-size vert-spaced-by="20" horiz-center hide-highlight>
@@ -226,13 +293,24 @@
 
             </window>
 
-            <pre><code class="language-kotlin">
-                // This list will be updated elsewhere in the code
-                val employees = mutableStateListOf&lt;String&gt;()
+            <div class="description">
+                <p>Rather than use a <strong>MutableListOf&lt;String&gt;</strong> to store a list of Strings, instead use a <strong>MutableStateListOf&lt;String&gt;</strong>. This is an <em>observable</em> list, meaning that any changes to it will cause the UI to update accordingly. </p>
 
+                <p>A <strong>loop</strong> is used to show UI elements for the list.</p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
                 fun main() = singleWindowApplication(
                     title = "Employee List"
                 ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    // This list will be updated elsewhere in the code
+                    val employees = mutableStateListOf<String>()
+
                     Column {
                         Text("Employees")
 
@@ -244,7 +322,203 @@
                         }
                     }
                 }
-            </code></pre>
+            --></code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Lists with Complex Content</h2>
+
+            <window width="350" height="400" title="User List">
+
+                <column padding="20" fill-max-size vert-spaced-by="20" horiz-center hide-highlight>
+                    <text font-bold hide-highlight>Users</text>
+
+                    <column fill-max-width vert-spaced-by="8" hide-highlight>
+
+                        <row var="users[0]" vert-center horiz-spaced-by="8" fill-max-width bordered="red" padding="8" hide-info>
+                            <text var="id" font-bold hide-info>001</text>
+                            <text var="name" weight="1" hide-info>Jimmy Smith</text>
+                            <button padding="5" hide-info>🖉</button>
+                            <button padding="5" background="#c00" hide-info>✖</button>
+                        </row>
+
+                        <row var="users[1]" vert-center horiz-spaced-by="8" fill-max-width bordered="lightgrey" padding="8" hide-info>
+                            <text var="id" hide-info>216</text>
+                            <text var="name" weight="1" hide-info>Helen Pickles</text>
+                            <button padding="5" hide-info>🖉</button>
+                            <button padding="5" background="#c00" hide-info>✖</button>
+                        </row>
+
+                        <row var="users[2]" vert-center horiz-spaced-by="8" fill-max-width bordered="lightgrey" padding="8" hide-info>
+                            <text var="id" hide-info>037</text>
+                            <text var="name" weight="1" hide-info>Nigel Waffle</text>
+                            <button padding="5" hide-info>🖉</button>
+                            <button padding="5" background="#c00" hide-info>✖</button>
+                        </row>
+
+                        <row var="users[3]" vert-center horiz-spaced-by="8" fill-max-width bordered="red" padding="8" hide-info>
+                            <text var="id" hide-info>165</text>
+                            <text var="name" weight="1" hide-info>Sally Turnip</text>
+                            <button padding="5" hide-info>🖉</button>
+                            <button padding="5" background="#c00" hide-info>✖</button>
+                        </row>
+
+                    </column>
+                </column>
+
+            </window>
+
+            <div class="description">
+                <p>When a list of items is required that is more than just simple text (e.g. it might have multiple data fields, action buttons, special styling, etc.) it is best to create a separate, custom <strong>@Composable</strong> element for this.</p>
+
+                <p>This keeps your code much more modular, readable and compact.</p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                val users = mutableStateListOf<User>()
+
+                fun main() = singleWindowApplication(
+                    title = "User List"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+                        Text("Users")
+
+                        Column {
+                            for (user in users) {
+                                UserRow(user)
+                            }
+                        }
+                    }
+                }
+
+                @Composable
+                fun UserRow(user: User) = Row(
+                    modifier = Modifier.border(
+                        2.dp,
+                        if (user.admin) Color.Red else Color.Gray
+                    )
+                ) {
+                    Text(user.id)
+                    Text(user.name)
+
+                    Button(onClick = { ... }) { Text("🖉") }
+                    Button(onClick = { ... }) { Text("✖") }
+                }
+
+            --></code></pre>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Modifying List Items &amp; Updating the UI</h2>
+
+            <window width="350" height="320" title="Shopping List">
+
+                <column padding="20" fill-max-size vert-spaced-by="20" horiz-center hide-highlight>
+                    <text font-bold hide-highlight>You need to buy...</text>
+
+                    <column fill-max-width vert-spaced-by="10" hide-highlight>
+
+                        <row var="shopping[0]" vert-center horiz-spaced-by="10" fill-max-width bordered="lightgrey" padding="8" hide-info>
+                            <text var="name" weight="1" hide-info>Apples</text>
+                            <text var="count" hide-info>10</text>
+                            <button padding="5" hide-info>+</button>
+                            <button padding="5" hide-info>-</button>
+                        </row>
+
+                        <row var="shopping[1]" vert-center horiz-spaced-by="10" fill-max-width bordered="lightgrey" padding="8" hide-info>
+                            <text var="name" weight="1" hide-info>6-Pack Craft Beer</text>
+                            <div animate-swap animate-interval="1000">
+                                <text var="count" hide-info>1</text>
+                                <text var="count" hide-info>2</text>
+                                <text var="count" hide-info>2</text>
+                                <text var="count" hide-info>1</text>
+                            </div>
+                            <button padding="5" animate-click animate-delay="1000" animate-interval="4000" hide-info>+</button>
+                            <button padding="5" animate-click animate-delay="3000" animate-interval="4000" hide-info>-</button>
+                        </row>
+
+                        <row var="shopping[2]" vert-center horiz-spaced-by="10" fill-max-width bordered="lightgrey" padding="8" hide-info>
+                            <text var="name" weight="1" hide-info>Toilet Cleaner</text>
+                            <text var="count" hide-info>8</text>
+                            <button padding="5" hide-info>+</button>
+                            <button padding="5" hide-info>-</button>
+                        </row>
+
+                    </column>
+                </column>
+
+            </window>
+
+            <div class="description">
+                <p>When we use <strong>MutableStateListOf&lt;Type&gt;</strong>, the list <strong>observable</strong> so the UI will <strong>react to any changes</strong> to it, such as adding or removing items.</p>
+
+                <p>However, if <strong>individual items</strong> in the list are modified, <em>the UI will not react</em>. This is because the UI is not 'observing' the individual objects, but only the list as a whole.</p>
+
+                <p>The easist way to make the UI react to individual object updates is to <strong>replace the object with an updated copy</strong> using the <a target="_blank" href="https://kotlinlang.org/docs/data-classes.html#copying">data class .copy() function</a>. This modifies the containing list, so the UI reacts.<p>
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                val shopping = mutableStateListOf<Item>()
+
+                fun main() = singleWindowApplication(
+                    title = "Shopping List"
+                ) {
+                    App()
+                }
+
+                @Composable
+                fun App() {
+                    Column() {
+                        Text("You need to buy...")
+
+                        Column {
+                            for (item in shopping) {
+                                ItemRow(item)
+                            }
+                        }
+                    }
+                }
+
+                @Composable
+                fun ItemRow(item: Item) = Row() {
+                    Text(item.name)
+                    Text(item.count)
+
+                    Button(
+                        onClick = {
+                            val index = shopping.indexOf(item)
+                            val newCount = item.count + 1
+                            shopping[index] = item.copy(count = newCount)
+                        }
+                    ) {
+                        Text("+")
+                    }
+
+                    Button(
+                        onClick = {
+                            val index = shopping.indexOf(item)
+                            val newCount = item.count - 1
+                            shopping[index] = item.copy(count = newCount)
+                        }
+                    ) {
+                        Text("-")
+                    }
+                }
+
+            --></code></pre>
 
         </article>
 
