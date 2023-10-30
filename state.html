@@ -523,7 +523,92 @@
         </article>
 
 
-        <!-- -------------------------------------------------------------------------------------- -->
+       <!-- -------------------------------------------------------------------------------------- -->
+
+
+       <article>
+        <h2>Working with Dates</h2>
+
+        <window width="450" height="250" title="Age Calculator">
+
+            <column padding="30" fill-max-size vert-space-between horiz-center hide-highlight>
+                <div animate-swap animate-interval="4000">
+                    <text var="message">Enter your date of birth...<br></text>
+                    <text align-center var="message">You were born on 25/09/1978<br>so you are 45 years old</text>
+                </div>
+                <row horiz-spaced-by="20" vert-center hide-highlight>
+                    <input var="name" label="DoB (dd/mm/yyyy)" value="25/09/1978" animate-typing="200" animate-delay="1000" animate-interval="8000" hide-info>
+                    <button animate-click animate-delay="3500" animate-interval="8000" hide-info>Calculate</button>
+                </row>
+            </column>
+
+        </window>
+
+        <div class="description">
+            <p>An <strong>OutlinedTextField</strong> element can be used to get a date from the user. However, internally, you would want to store the date as a <a target="_blank" href="https://developer.android.com/reference/kotlin/java/time/LocalDate">LocalDate</a> object, so that it can make use of the many features of this class (e.g. date comparisons, offsets, etc.).</p>
+
+            <p>Since the text field works with Strings, you need to <strong>convert the LocalDate to/from a String</strong>.</p>
+
+            <p>For this you need to define a <strong>formatter</strong> with the date format you plan to use (e.g. <em>30/06/2021</em>, <em>30-06-2021</em>, <em>30 Jun 2021</em>, etc.)</p>
+        </div>
+
+        <pre><code class="language-kotlin"><!--
+            // Define a date formatter for converting between string / date
+            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+
+            fun main() = singleWindowApplication(
+                title = "Age Calculator",
+            ) {
+                App()
+            }
+
+
+            @Composable
+            fun App() {
+                // A LocalDate to store the data (could be part of a class, etc.)
+                var dob = LocalDate.now()
+
+                var message by remember { mutableStateOf("Enter your date of birth...") }
+                var dobText by remember { mutableStateOf("") }
+
+                Column() {
+                    Text(message)
+
+                    Row() {
+                        OutlinedTextField(
+                            label = { Text("DoB (dd/mm/yyyy)") },
+                            value = dobText,
+                            onValueChange = {
+                                dobText = it
+                            }
+                        )
+
+                        Button(
+                            onClick = {
+                                // Extract the DOB from the text via the formatter
+                                dob = LocalDate.parse(dobText, formatter)
+
+                                // Work out the age using LocalDate class functions
+                                val today = LocalDate.now()
+                                val age = dob.until(today)
+
+                                // Show DOB as a string via the formatter
+                                message = "You were born on " + dob.format(formatter)
+                                message += "\n"
+                                message += "so you are ${age.years} years old"
+                            }
+                        ) {
+                            Text("Calculate")
+                        }
+                    }
+                }
+            }
+        --></code></pre>
+
+    </article>
+
+    <!-- -------------------------------------------------------------------------------------- -->
 
 
         <p><em>Note that these examples have spacing added around elements to help show how the layouts work. The code snippets don't apply the same spacing.</em></p>

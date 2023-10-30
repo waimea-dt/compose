@@ -30,9 +30,11 @@
                 <h1>Kotlin Compose MP</h1>
             </header>
 
-            <p>Compose Multi-Platform is a framework for creating UIs that work across multiple platforms including Windows, MacOS, Linux, Android and iOS.</p>
+            <p>Compose Multi-Platform is a <a target="_blank" href="https://kotlinlang.org/">Kotlin</a> framework for creating UIs that work across multiple platforms including Windows, MacOS, Linux, Android and iOS. It is based on the Android <a target="_blank" href="https://developer.android.com/jetpack/compose">Jetpack Compose</a> library and is developed by <a target="_blank" href="https://www.jetbrains.com/">JetBrains</a>.</p>
 
-            <p>Compose MP uses <a target="_blank" href="https://kotlinlang.org/">Kotlin</a> and is based on <a target="_blank" href="https://developer.android.com/jetpack/compose">Jetpack Compose</a>. The library is developed by <a target="_blank" href="https://www.jetbrains.com/">JetBrains</a> and the open-source community.</p>
+            <p>A UI is defined as a heirarchy of components. Here is an example UI layout and its corresponding component tree...</p>
+
+            <img src="images/heirarchy.svg" alt="Compose heirarchy">
 
         </article>
 
@@ -43,11 +45,17 @@
 
             <nav id="main-nav">
                 <dl>
+                    <dt><a href="setup.html">
+                        <span class="material-symbols-outlined">settings</span>
+                        Setup a Compose Project
+                    </a></dt>
+                    <dd>Creating a Compose MP project in IntelliJ IDEA</dd>
+
                     <dt><a href="app.html">
                         <span class="material-symbols-outlined">web_asset</span>
                         Application Windows
                     </a></dt>
-                    <dd>Creating a Compose MP project and main window</dd>
+                    <dd>Creating a main UI window as the basis of a GUI</dd>
 
                     <dt><a href="layout.html">
                         <span class="material-symbols-outlined">dashboard</span>
@@ -115,7 +123,7 @@
 
         <!-- ----------------------------------------------------------------------------------- -->
 
-        <article>
+        <article class="show-code">
             <h2>Example</h2>
 
             <pre><code class="language-kotlin">

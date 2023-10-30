@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compose UI - Setting Up a Project</title>
+
+    <link rel="icon" href="images/jetpack-icon.png" type="image/png">
+    <link rel="icon" href="images/jetpack-icon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/compose.js"></script>
+</head>
+
+<body>
+
+    <include src="includes/header.html" data-sub-title="Setting Up a Project"></include>
+
+    <main>
+
+        <h1>Compose Multi-Platform Project Setup</h1>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Compose MP Project in IntelliJ IDEA</h2>
+
+            <div class="description">
+                <p>In IntelliJ IDEA, create a new project, and select <strong>Compose for Desktop</strong> as the generator.</p>
+
+                <h3>Configure the Project</h3>
+
+                <ul>
+                    <li><em>Name</em> - Pick a suitable name for your app / project</li>
+                    <li><em>Location</em> - The folder you use for your coding</li>
+                    <li><em>Group</em> - <strong>nz.school.waimea.</strong>yourusername</li>
+                    <li><em>JDK</em> - Version <strong>18</strong> seems to work best</li>
+                </ul>
+
+                <img class="example" src="images/new-project.png" alt="IntelliJ IDEA project setup">
+            </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Get the Latest Versions of Everything</h2>
+
+            <div class="description">
+                <h3>Update Your Gradle Build Settings</h3>
+
+                <p>In your project, open <strong>gradle.properties</strong> and set the version numbers for Kotlin, Compose and the Andorid Gradle Plugin (AGP). As of writing, these are:</p>
+
+                <pre class="show-inline"><code class="language-kotlin">
+                    kotlin.version  = 1.9.10
+                    compose.version = 1.5.1
+                    agp.version     = 8.1.1
+                </code></pre>
+
+                <p>Note: you can find the latest versions of Kotlin and Compose listed <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility">here</a> (most recent at the bottom of the table), and the latest version of the AGP listed <a target="_blank" href="https://developer.android.com/reference/tools/gradle-api">here</a>.</p>
+            </div>
+
+        </article>
+
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+
+    </main>
+
+    <script src="scripts/prism.js"></script>
+
+</body>
+
+</html>
+

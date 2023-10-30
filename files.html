@@ -51,33 +51,32 @@
             <h2>Adding the Kotlin Serialization Library</h2>
 
             <div class="description">
-                <p>In your IntelliJ IDEA project, you need to make sure that you're using the most recent version of Kotlin and the Compose library, and also add in the serialization library.</p>
+                <p>In your IntelliJ IDEA project, you need to make sure that you're using the most recent version of Kotlin and the Compose library. You can find the latest versions listed <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility">here</a> (most recent at the bottom of the table).</p>
 
-                <p>Update the following configuration files to specify the libraries and versions. As of writing, these are:</p>
+                <p>Edit the <strong>gradle.properties</strong> configuration file:</p>
 
-                <h4>gradle.properties</h4>
+                <p>(As of writing thes are the latest versions)</p>
 
                 <pre><code class="language-kotlin">
-                    kotlin.version=1.9.10
-                    compose.version=1.5.1
+                    kotlin.version = 1.9.10
+                    compose.version = 1.5.1
                 </code></pre>
 
-                <h4>build.gradle.kts</h4>
+                <p>You also need to add the serialization library to your build.</p>
+
+                <p>Edit the <strong>build.gradle.kts</strong> configuration file, adding the following lines to the existing plugins and dependencies sections:</p>
 
                 <pre><code class="language-kotlin">
                     plugins {
-                        kotlin("jvm")
+                        ...
                         kotlin("plugin.serialization") version "1.9.10"
-                        id("org.jetbrains.compose")
                     }
 
                     dependencies {
-                        implementation(compose.desktop.currentOs)
+                        ...
                         implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
                     }
                 </code></pre>
-
-                <p>Note: you can find the latest versions of Kotlin and Compose listed <a target="_blank" href="https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility">here</a> (most recent at the bottom of the table).</p>
 
             </div>
 
@@ -110,6 +109,10 @@
 
             <div class="description">
                 <p><a target="_blank" href="https://kotlinlang.org/docs/data-classes.html">Data Classes</a> come with useful, built-in functionality, such as a pre-configured <strong>.toString()</strong> function, a <strong>.copy()</strong> function, etc.</p>
+
+                <h4>Note: Date / Time Properties</h4>
+
+                <p>If you are using <strong>dates</strong> (via the <strong>LocalDate</strong> class), things are a little more complex. See the <em>Serializing Dates</em> section below.</p>
             </div>
 
         </article>
@@ -127,15 +130,15 @@
 
             <pre><code class="language-kotlin"><!--
                 /**
-                * Save a list of objects to a given file in JSON format
+                * Load object data from a given JSON file into a list
                 */
                 inline fun <reified T : Any> MutableList<T>.loadFromFile(): Boolean {
                     return try {
                         val dataFile = File(dataFilePath)
                         val jsonString = dataFile.readText()
-                        val peopleData = Json.decodeFromString<List<T>>(jsonString)
+                        val listItems = Json.decodeFromString<List<T>>(jsonString)
                         this.clear()
-                        this.addAll(peopleData)
+                        this.addAll(listItems)
                         true
                     } catch (e: Exception) {
                         // File is missing or corrupt
@@ -144,7 +147,7 @@
                 }
 
                 /**
-                * Load object data from a given JSON file into a list
+                * Save a list of objects to a given file in JSON format
                 */
                 inline fun <reified T : Any> MutableList<T>.saveToFile(): Boolean {
                     val jsonBuild = Json { prettyPrint = true }
@@ -165,8 +168,9 @@
             </div>
 
             <pre><code class="language-kotlin"><!--
+                // Setup where to store the data file
                 val homeFolder = System.getenv("HOMEPATH")
-                val dataFilePath = homeHolder + "/users.json"
+                val dataFilePath = homeFolder + "/users.json"
 
                 // Save the list to a file
                 users.saveToFile()
@@ -254,6 +258,106 @@
             <div class="description">
                 <p>Note that you could chose to wait until the application is closing before you save any of your data, but this risks data loss if the application crashes.</p>
             </div>
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Serializing Dates</h2>
+
+            <div class="description">
+                <p>If you are using <strong>dates</strong> via the <em>LocalDate</em> class, the Kotlin Serialization library does not serialize these at present.</p>
+
+                <p>So, we have to:</p>
+
+                <ol>
+                    <li>Define our own serializer with:<br><code class="language-kotlin">@Serializer(forClass = LocalDate::class)</code></li>
+                    <li>Label LocalDate objects in our data class with:<br><code class="language-kotlin">@Serializable(with = DateSerializer::class)</code></li>
+                </ol>
+
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                // Create a new serializer for LocalDate objects
+                // From: https://stackoverflow.com/questions/75862837/
+                @Serializer(forClass = LocalDate::class)
+                object DateSerializer : KSerializer<LocalDate> {
+                    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+
+                    override fun serialize(encoder: Encoder, value: LocalDate) {
+                        encoder.encodeString(value.format(formatter))
+                    }
+
+                    override fun deserialize(decoder: Decoder): LocalDate {
+                        return LocalDate.parse(decoder.decodeString(), formatter)
+                    }
+                }
+
+
+                @Serializable
+                data class Person(
+                    val name: String,
+                    val height: Double,
+                    val admin: Boolean,
+
+                    @Serializable(with = DateSerializer::class)
+                    val dateOfBirth: LocalDate
+                )
+            --></code></pre>
+
+
+
+        </article>
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+
+        <article>
+            <h2>Serializing Date/Times</h2>
+
+            <div class="description">
+                <p>If you are using <strong>date/times</strong> via the <em>LocalDateTime</em> classes, the Kotlin Serialization library does not serialize these at present.</p>
+
+                <p>So, we have to:</p>
+
+                <ol>
+                    <li>Define our own serializer with:<br><code class="language-kotlin">@Serializer(forClass = LocalDateTime::class)</code></li>
+                    <li>Label LocalDateTime objects in our data class with:<br><code class="language-kotlin">@Serializable(with = DateTimeSerializer::class)</code></li>
+                </ol>
+
+            </div>
+
+            <pre><code class="language-kotlin"><!--
+                // Create a new serializer for LocalDateTime objects
+                // From: https://stackoverflow.com/questions/75862837/
+                @Serializer(forClass = LocalDateTime::class)
+                object DateTimeSerializer : KSerializer<LocalDateTime> {
+                    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+
+                    override fun serialize(encoder: Encoder, value: LocalDateTime) {
+                        encoder.encodeString(value.format(formatter))
+                    }
+
+                    override fun deserialize(decoder: Decoder): LocalDateTime {
+                        return LocalDateTime.parse(decoder.decodeString(), formatter)
+                    }
+                }
+
+
+                @Serializable
+                data class Order(
+                    val id: Int,
+                    val orderedBy: Person,
+                    val products: ListOf<Product>,
+
+                    @Serializable(with = DateTimeSerializer::class)
+                    val created: LocalDateTime
+                )
+            --></code></pre>
+
+
 
         </article>
 

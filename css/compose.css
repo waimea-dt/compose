@@ -71,6 +71,7 @@ article .info {
     display: flex;
     flex-direction: column;
     gap: var(--padding-v-large);
+    flex: 1;
 }
 
 article .info h3 {
@@ -93,15 +94,15 @@ dl.code-list dd {
 /* CODE PREVIEW
 *************************************************************/
 
-label.toggle-code {
-    /* order: 4; */
+button.show-code,
+button.hide-code {
     text-align: center;
     align-self: center;
+    border: none;
 }
 
-label.toggle-code span.open {
+button.show-code {
     font-size: 0.8em;
-    display: inline-block;
     padding: 0.3em 1em 0.4em;
     background-color: var(--button-back-col);
     color: var(--button-text-col);
@@ -110,30 +111,12 @@ label.toggle-code span.open {
     cursor: pointer;
 }
 
-label.toggle-code span.open:hover {
+button.show-code:hover {
     background-color: var(--button-back-high-col);
     color: var(--button-text-high-col);
 }
 
-label.toggle-code span.close {
-    display: none;
-    line-height: 1;
-    font-size: 1.5rem;
-    position: fixed;
-    top: 0.5rem;
-    right: 0.5rem;
-    z-index: 9999;
-}
-
-label.toggle-code input {
-    display: none;
-}
-
-label.toggle-code pre {
-    display: none;
-}
-
-article:has(input.toggle-code:checked) {
+article.open {
     position: fixed;
     bottom: 50%;
     right: 50%;
@@ -150,23 +133,40 @@ article:has(input.toggle-code:checked) {
     max-width: unset;
 }
 
-label.toggle-code input.toggle-code:checked ~ pre {
+article:not(.show-code) > pre {
+    display: none;
+}
+
+article:not(.show-code).open > pre {
     display: block;
     max-height: 85vh;
+    max-width: 60vw;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-label.toggle-code input.toggle-code:checked ~ span.open {
+article.open button.show-code {
     display: none;
 }
 
-label.toggle-code input.toggle-code:checked ~ span.close {
+button.hide-code {
+    display: none;
+    line-height: 1;
+    font-size: 1.5rem;
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 9999;
+    background-color: transparent;
+    color: var(--text-col);
+}
+
+article.open button.hide-code {
     display: block;
     opacity: 0.5;
 }
 
-label.toggle-code input.toggle-code:checked ~ span.close:hover {
+article.open button.hide-code:hover {
     opacity: 1.0;
 }
 
@@ -405,6 +405,7 @@ window button {
     justify-content: center;
     gap: var(--padding-small);
     min-width: 1.5em;
+    line-height: 1;
 }
 
 window button img[icon] {
@@ -448,6 +449,11 @@ window input[type=checkbox] {
     width: 0;
     height: 1.5em;
     margin-right: 2.5em;
+
+    /* Annoying bodges for Firefox */
+    -moz-appearance:unset;
+    -moz-margin-end: 0;
+    border: none;
 }
 
 window input[type=checkbox]::before {

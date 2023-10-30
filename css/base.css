@@ -312,7 +312,7 @@ article header {
     align-items: center;
 }
 
-article :is(h1, h2, h3, p, ul) {
+article :is(h1, h2, h3, p, ul, ol) {
     margin: 0;
 }
 
@@ -366,3 +366,6 @@ article div.description {
     gap: var(--padding-small);
 }
 
+article li:not(:last-of-type) {
+    margin-bottom: var(--padding-small);
+}

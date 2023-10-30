@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="995px" height="432px" viewBox="0 0 995 432" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M995 0L995 0L995 432L0 432L0 0L995 0Z" id="path_1" />
+    <clipPath id="clip_1">
+      <use xlink:href="#path_1" clip-rule="evenodd" fill-rule="evenodd" />
+    </clipPath>
+  </defs>
+  <g id="Frame">
+    <path d="M995 0L995 0L995 432L0 432L0 0L995 0Z" id="Frame" fill="none" stroke="none" />
+    <path d="M708.732 58.0241L724.278 222.704" id="Line-9" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M708.732 58.0241L724.278 222.704" id="Line-9" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M710.953 51.8678L589.918 219.626" id="Line" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M710.953 51.8678L589.918 219.626" id="Line" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M707.622 47.2507L858.638 219.626" id="Line-2" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M707.622 47.2507L858.638 219.626" id="Line-2" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M588.808 222.704L494.423 399.696" id="Line-3" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M588.808 222.704L494.423 399.696" id="Line-3" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M587.697 222.704L587.697 396.618" id="Line-4" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M587.697 222.704L587.697 396.618" id="Line-4" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M589.918 221.165L679.862 393.54" id="Line-5" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M589.918 221.165L679.862 393.54" id="Line-5" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M860.859 221.165L773.136 382.767" id="Line-6" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M860.859 221.165L773.136 382.767" id="Line-6" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M860.859 219.626L865.301 379.689" id="Line-7" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M860.859 219.626L865.301 379.689" id="Line-7" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M859.749 219.626L954.134 381.228" id="Line-8" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M859.749 219.626L954.134 381.228" id="Line-8" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip_1)" />
+    <path d="M532.177 178.071L647.131 178.071L647.131 246.246L532.177 246.246L532.177 178.071Z" id="Rectangle-11" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M532.177 178.071L647.131 178.071L647.131 246.246L532.177 246.246L532.177 178.071Z" id="Rectangle-11" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M690.633 211.071C690.633 192.846 705.299 178.071 723.39 178.071C741.481 178.071 756.147 192.846 756.147 211.071C756.147 229.297 741.481 244.071 723.39 244.071C705.299 244.071 690.633 229.297 690.633 211.071Z" id="Oval" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M690.633 211.071C690.633 192.846 705.299 178.071 723.39 178.071C741.481 178.071 756.147 192.846 756.147 211.071C756.147 229.297 741.481 244.071 723.39 244.071C705.299 244.071 690.633 229.297 690.633 211.071Z" id="Oval" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M802.34 178.071L916.533 178.071L916.533 246.246L802.34 246.246L802.34 178.071Z" id="Rectangle-12" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M802.34 178.071L916.533 178.071L916.533 246.246L802.34 246.246L802.34 178.071Z" id="Rectangle-12" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M460 350.306L534.788 350.306L534.788 413L460 413L460 350.306Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M460 350.306L534.788 350.306L534.788 413L460 413L460 350.306Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M551.773 350.306L626.562 350.306L626.562 413L551.773 413L551.773 350.306Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M551.773 350.306L626.562 350.306L626.562 413L551.773 413L551.773 350.306Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M642.827 349.052L717.615 349.052L717.615 411.746L642.827 411.746L642.827 349.052Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M642.827 349.052L717.615 349.052L717.615 411.746L642.827 411.746L642.827 349.052Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M737.603 359.316L810.89 359.316L810.89 395.729L737.603 395.729L737.603 359.316Z" id="Rectangle-13" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M737.603 359.316L810.89 359.316L810.89 395.729L737.603 395.729L737.603 359.316Z" id="Rectangle-13" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M826.436 358.142L899.723 358.142L899.723 394.554L826.436 394.554L826.436 358.142Z" id="Rectangle-14" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M826.436 358.142L899.723 358.142L899.723 394.554L826.436 394.554L826.436 358.142Z" id="Rectangle-14" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M916.713 358.142L990 358.142L990 394.554L916.713 394.554L916.713 358.142Z" id="Rectangle-15" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M916.713 358.142L990 358.142L990 394.554L916.713 394.554L916.713 358.142Z" id="Rectangle-15" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M4 4L411 4L411 428L4 428L4 4Z" id="Rectangle" fill="#59ADFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M4 4L411 4L411 428L4 428L4 4Z" id="Rectangle" fill="#59ADFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M16 16L399 16L399 333L16 333L16 16Z" id="Rectangle-5" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M16 16L399 16L399 333L16 333L16 16Z" id="Rectangle-5" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M30 32L384 32L384 116.565L30 116.565L30 32Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M30 32L384 32L384 116.565L30 116.565L30 32Z" id="Rectangle-2" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M30 132.718L384 132.718L384 217.282L30 217.282L30 132.718Z" id="Rectangle-3" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M30 132.718L384 132.718L384 217.282L30 217.282L30 132.718Z" id="Rectangle-3" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M16.4 351L399.4 351L399.4 413L16.4 413L16.4 351Z" id="Rectangle-6" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M16.4 351L399.4 351L399.4 413L16.4 413L16.4 351Z" id="Rectangle-6" fill="#AAD5FF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M278.078 366L384.4 366L384.4 397L278.078 397L278.078 366Z" id="Rectangle-7" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M278.078 366L384.4 366L384.4 397L278.078 397L278.078 366Z" id="Rectangle-7" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M154.739 367L261.061 367L261.061 398L154.739 398L154.739 367Z" id="Rectangle-8" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M154.739 367L261.061 367L261.061 398L154.739 398L154.739 367Z" id="Rectangle-8" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M31.378 367L137.7 367L137.7 398L31.378 398L31.378 367Z" id="Rectangle-9" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M31.378 367L137.7 367L137.7 398L31.378 398L31.378 367Z" id="Rectangle-9" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M624.341 23.4296L797.565 23.4296L797.565 93.4226L624.341 93.4226L624.341 23.4296Z" id="Rectangle-10" fill="#59ADFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M624.341 23.4296L797.565 23.4296L797.565 93.4226L624.341 93.4226L624.341 23.4296Z" id="Rectangle-10" fill="#59ADFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 48L371 48L371 58L43 58L43 48Z" id="Rectangle-16" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 48L371 48L371 58L43 58L43 48Z" id="Rectangle-16" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 70L371 70L371 80L43 80L43 70Z" id="Rectangle-17" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 70L371 70L371 80L43 80L43 70Z" id="Rectangle-17" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 93L193 93L193 103L43 103L43 93Z" id="Rectangle-18" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 93L193 93L193 103L43 103L43 93Z" id="Rectangle-18" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M42 147.4L370 147.4L370 157.4L42 157.4L42 147.4Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M42 147.4L370 147.4L370 157.4L42 157.4L42 147.4Z" id="Rectangle-19" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M42 169.4L370 169.4L370 179.4L42 179.4L42 169.4Z" id="Rectangle-20" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M42 169.4L370 169.4L370 179.4L42 179.4L42 169.4Z" id="Rectangle-20" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M42 192.4L322 192.4L322 202.4L42 202.4L42 192.4Z" id="Rectangle-21" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M42 192.4L322 192.4L322 202.4L42 202.4L42 192.4Z" id="Rectangle-21" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M30 233.435L384 233.435L384 318L30 318L30 233.435Z" id="Rectangle-4" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M30 233.435L384 233.435L384 318L30 318L30 233.435Z" id="Rectangle-4" fill="#E88BFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 293L193 293L193 303L43 303L43 293Z" id="Rectangle-24" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 293L193 293L193 303L43 303L43 293Z" id="Rectangle-24" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 270L371 270L371 280L43 280L43 270Z" id="Rectangle-23" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 270L371 270L371 280L43 280L43 270Z" id="Rectangle-23" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 248L371 248L371 258L43 258L43 248Z" id="Rectangle-22" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M43 248L371 248L371 258L43 258L43 248Z" id="Rectangle-22" fill="#FFFFFF" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M333.4 312.5C333.4 296.208 346.608 283 362.9 283C379.192 283 392.4 296.208 392.4 312.5C392.4 328.792 379.192 342 362.9 342C346.608 342 333.4 328.792 333.4 312.5Z" id="Oval" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M333.4 312.5C333.4 296.208 346.608 283 362.9 283C379.192 283 392.4 296.208 392.4 312.5C392.4 328.792 379.192 342 362.9 342C346.608 342 333.4 328.792 333.4 312.5Z" id="Oval" fill="#B032E7" fill-rule="evenodd" stroke="none" clip-path="url(#clip_1)" />
+    <path d="M363 297L363 327" id="Line" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" clip-path="url(#clip_1)" />
+    <path d="M363 297L363 327" id="Line" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" clip-path="url(#clip_1)" />
+    <path d="M348 312L378 312" id="Line-10" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" clip-path="url(#clip_1)" />
+    <path d="M348 312L378 312" id="Line-10" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" clip-path="url(#clip_1)" />
+  </g>
+</svg>

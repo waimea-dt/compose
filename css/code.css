@@ -53,6 +53,14 @@ pre[class*="language-"] {
     border: 1px solid var(--border-col);
 }
 
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    white-space: nowrap;
+}
+
+
+/* Console blocks */
+
 .token.comment {
     font-style: normal;
     color: var(--code-comment-col);

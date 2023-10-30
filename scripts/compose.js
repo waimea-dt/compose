@@ -33,12 +33,20 @@ function addStructure(article) {
 
     const codeBlocks = article.querySelectorAll('pre:not(.show-inline)');
     if (codeBlocks.length) {
-        const toggle = document.createElement('label');
-        toggle.className = 'toggle-code';
-        toggle.innerHTML = '<input type="checkbox" class="toggle-code"><span class="open">See Code</span><span class="close">🗙</span>';
+        const openCode = document.createElement('button');
+        openCode.className = 'show-code';
+        openCode.innerHTML = 'See Code';
+        openCode.addEventListener('click', function() { this.parentElement.classList.add('open'); });
 
-        toggle.append(codeBlocks[0]);
-        article.append(toggle);
+        const hideCode = document.createElement('button');
+        hideCode.className = 'hide-code';
+        hideCode.innerHTML = '🗙';
+        hideCode.addEventListener('click', function() { this.parentElement.classList.remove('open'); });
+
+        article.append(openCode);
+        article.append(hideCode);
+
+        article.append(codeBlocks[0]);
     }
 }
 
@@ -201,7 +209,7 @@ function addLabels(window) {
 
 function addValidation(window) {
     // Get all containers that might contain inputs and buttons
-    const groups = window.querySelectorAll(':is(box, row, column):has(:is(input[text-only], input[number-only]))');
+    const groups = window.querySelectorAll(':is(box, row, column)');
 
     for (const group of groups) {
         const inputs = group.querySelectorAll('input[text-only], input[number-only]');

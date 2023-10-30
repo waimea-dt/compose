@@ -221,7 +221,7 @@
             </window>
 
             <div class="description">
-                <p>The <strong>Icon</strong> element can be used to display icons from the <a target="_blank" href="https://fonts.google.com/icons">Material Design icon set</a>.</p>
+                <p>The <strong>Icon</strong> element can be used to display icons from the <a target="_blank" href="https://fonts.google.com/icons?icon.style=Outlined">Material Design icon set</a>.</p>
 
                 <p>More display and styling options can be found <a target="_blank" href="https://developer.android.com/reference/kotlin/androidx/compose/material/icons/package-summary">here</a>.</p>
             </div>
@@ -474,8 +474,9 @@
 
             <window width="400" height="250" title="Clickable Text">
 
-                <column padding="20" fill-max-size vert-center horiz-center hide-highlight>
-                    <text font-size="30" animate-click animate-delay="1500" animate-interval="3000" hide-info>Hello World!</text>
+                <column padding="20" fill-max-size vert-center vert-spaced-by="20" horiz-center hide-highlight>
+                    <text font-size="30" animate-click animate-delay="1000" animate-interval="4000" hide-info>Hello World!</text>
+                    <text font-size="30" color="magenta" animate-click animate-delay="3000" animate-interval="4000" hide-info>Like ❤</text>
                 </column>
 
             </window>
@@ -501,6 +502,14 @@
                         ClickableText(
                             text = buildAnnotatedString { append("Hello World!") },
                             onClick = {...}
+                        )
+
+                        ClickableText(
+                            text = buildAnnotatedString { append("Like ❤") },
+                            onClick = {...},
+                            style = TextStyle(
+                                color = Color.Magenta
+                            )
                         )
                     }
                 }
